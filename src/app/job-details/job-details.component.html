@@ -1,0 +1,54 @@
+
+<mat-card class="color">
+    <mat-card-content>
+        <div>
+            <h3><strong>Job Title:</strong> {{jobDetail.jobTitle}}</h3>
+        </div>
+        <div>
+            <strong>Job ID:</strong> {{jobDetail.jobId}}
+        </div>
+         <div>
+            <strong>Employer ID:</strong> {{jobDetail.employerId}}
+        </div>
+        <div>
+            <strong>Employer Name:</strong> {{jobDetail.employerName}}
+        </div>
+        <div>
+            <strong>Employer Profile ID:</strong> {{jobDetail.employerProfileId}}
+        </div>
+        <div>
+            <strong>Employer Profile Name:</strong> {{jobDetail.employerProfileName}}
+        </div>
+        <div>
+            <strong>Location:</strong> {{jobDetail.locationName}}
+        </div>
+        
+        
+
+
+        <div>
+            <strong>Minimum Salary (£):</strong> {{jobDetail.minimumSalary}}
+        </div>
+        <div>
+            <strong>Maximum Salary (£):</strong> {{jobDetail.maximumSalary}}
+        </div>
+        <div>
+            <strong>Currency:</strong> {{jobDetail.currency}}
+        </div>
+        <div>
+            <strong>Expiration Date:</strong> {{jobDetail.expirationDate}}
+        </div>
+        <div>
+            <strong>Date:</strong> {{jobDetail.date}}
+        </div>
+        <div>
+            <strong>Job Description:</strong> {{jobDetail.jobDescription}}
+        </div>
+        <div>
+            <strong>Applications:</strong> {{jobDetail.applications}}
+        </div>
+        <div>
+            <strong>Job URL:</strong> <a [href]="jobDetail.jobUrl">Click here</a>
+        </div>
+    </mat-card-content>
+</mat-card>

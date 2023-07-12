@@ -1,0 +1,30 @@
+<h1>Job Finder</h1>
+
+<mat-slide-toggle (toggleChange)="showMyContainer=!showMyContainer">Search a job</mat-slide-toggle>
+
+  <!-- <form class="example-form">
+    <mat-form-field class="example-full-width">
+      <h3>Job Search:</h3>
+      <input matInput placeholder="Accountant" name="title">
+    </mat-form-field>
+  </form> -->
+<div *ngIf="showMyContainer">
+  <div class="container">
+    <div class="row">
+
+      <div class="column">
+        <button mat-raised-button color="primary" (click)="onSubmit()">Submit</button>
+
+          <app-reactive-form (jobSearchEntered)="jobSearchEnteredSubmit($event)"></app-reactive-form>
+      </div>
+
+      <div class="column">
+        <div *ngFor="let jobDetail of jobResults">
+          <app-job-details [jobDetail]="jobDetail"></app-job-details>
+          <strong><hr></strong>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
