@@ -16,13 +16,15 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSliderModule } from '@angular/material/slider';
+import { JobTableComponent } from './job-table/job-table.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     JobDetailsComponent,
-    ReactiveFormComponent
+    ReactiveFormComponent,
+    JobTableComponent
   ],
   imports: [
     FormsModule,

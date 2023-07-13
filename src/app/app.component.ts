@@ -11,7 +11,7 @@ export class AppComponent {
   title = 'JobSearch';
   jobSearchData: JobSearch = {};
   jobResults: JobDetails[] = [];
-  showMyContainer: boolean = false;
+  showMyContainer: boolean = true;
 
   constructor(public jobSearchService: JobSearchService){}
 
@@ -20,6 +20,7 @@ export class AppComponent {
  this.jobSearchService.searchJob(this.jobSearchData).subscribe(jobs => {
       console.log(JSON.stringify(jobs));
       this.jobResults = jobs;
+      this.showMyContainer = false;
     })
 
     }

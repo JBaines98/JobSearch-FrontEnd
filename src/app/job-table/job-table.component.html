@@ -1,0 +1,22 @@
+<table>
+  <tr class="header">
+    <td>Job Title</td>
+    <td>Employer Name</td>
+    <td>Minimum Salary (£)</td>
+    <td>Location</td>
+    <td>Link</td>
+  </tr>
+  <!-- <tr *ngFor="let jobDetail of jobResults; let i = index" [class]="displayRow(i)" > -->
+  <!-- <tr *ngFor="let jobDetail of jobResults; let i = index" [class]="i % 2 === 0 ? 'evenRow': 'oddRow'" > -->
+  <tr *ngFor="let jobDetail of jobResults; let i = index" 
+    [class.evenRow]="i % 2 === 0" 
+    [class.oddRow]="i % 2 !== 0"
+    [class.boldRow]="jobDetail.locationName === 'Cardiff'"
+     >
+    <td>{{ jobDetail.jobTitle }}</td>
+    <td>{{ jobDetail.employerName }}</td>
+    <td>{{ jobDetail.minimumSalary }}</td>
+    <td>{{ jobDetail.locationName }}</td>
+    <td><a [href]="jobDetail.jobUrl" target="_blank">Click here</a></td>
+  </tr>
+</table>

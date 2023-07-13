@@ -1,0 +1,23 @@
+.border {
+    border: 1px solid;
+}
+.header {
+ background-color: deepskyblue;
+ text-align: center;
+}
+.row {
+ background-color: aqua;
+}
+th, td {
+ border: 1px solid;
+ text-align: center;
+}
+.oddRow {
+ background-color: lightskyblue;
+}
+.evenRow{
+ background-color: lightgreen;
+}
+.boldRow{
+    font-weight: bold;
+   }

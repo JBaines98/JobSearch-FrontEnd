@@ -8,22 +8,26 @@
       <input matInput placeholder="Accountant" name="title">
     </mat-form-field>
   </form> -->
-<div *ngIf="showMyContainer">
+<div>
   <div class="container">
     <div class="row">
 
-      <div class="column">
+      <div *ngIf="showMyContainer" class="column">
         <button mat-raised-button color="primary" (click)="onSubmit()">Submit</button>
 
           <app-reactive-form (jobSearchEntered)="jobSearchEnteredSubmit($event)"></app-reactive-form>
       </div>
 
       <div class="column">
+          <app-job-table [jobResults]="jobResults"></app-job-table>
+      </div>
+
+      <!-- <div class="column">
         <div *ngFor="let jobDetail of jobResults">
           <app-job-details [jobDetail]="jobDetail"></app-job-details>
           <strong><hr></strong>
         </div>
-      </div>
+      </div> -->
 
     </div>
   </div>
