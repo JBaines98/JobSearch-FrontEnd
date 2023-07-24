@@ -17,6 +17,11 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSliderModule } from '@angular/material/slider';
 import { JobTableComponent } from './job-table/job-table.component';
+import { AgGridComponent } from './ag-grid/ag-grid.component';
+import { AgGridModule } from 'ag-grid-angular';
+import { MyCellComponent } from './my-cell/my-cell.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MyCellMapComponent } from './my-cell-map/my-cell-map.component';
 
 
 @NgModule({
@@ -24,7 +29,10 @@ import { JobTableComponent } from './job-table/job-table.component';
     AppComponent,
     JobDetailsComponent,
     ReactiveFormComponent,
-    JobTableComponent
+    JobTableComponent,
+    AgGridComponent,
+    MyCellComponent,
+    MyCellMapComponent
   ],
   imports: [
     FormsModule,
@@ -39,7 +47,10 @@ import { JobTableComponent } from './job-table/job-table.component';
     MatRadioModule,
     MatCardModule,
     MatSlideToggleModule,
-    MatSliderModule
+    MatSliderModule,
+    AgGridModule,
+    MatDialogModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

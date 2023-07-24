@@ -15,11 +15,13 @@
       <div *ngIf="showMyContainer" class="column">
         <button mat-raised-button color="primary" (click)="onSubmit()">Submit</button>
 
+        
           <app-reactive-form (jobSearchEntered)="jobSearchEnteredSubmit($event)"></app-reactive-form>
       </div>
 
       <div class="column">
-          <app-job-table [jobResults]="jobResults"></app-job-table>
+          <!-- <app-job-table [jobResults]="jobResults"></app-job-table> -->
+          <app-ag-grid [jobResults]="jobResults"></app-ag-grid>
       </div>
 
       <!-- <div class="column">
