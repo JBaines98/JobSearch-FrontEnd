@@ -1,6 +1,15 @@
-<h1>Job Finder</h1>
+<div class="bold">Job Finder<span class="fa-solid fa-magnifying-glass"></span></div>
 
-<mat-slide-toggle (toggleChange)="showMyContainer=!showMyContainer">Search a job</mat-slide-toggle>
+<br>
+
+<span class="row">
+    <app-number-of-jobs></app-number-of-jobs>
+    <mat-slide-toggle (toggleChange)="showMyContainer=!showMyContainer">Search a job</mat-slide-toggle>
+    <button mat-raised-button color="warn" (click)="onClear()">Clear Job Table</button>
+    <button mat-raised-button color="primary" (click)="openSavedJobs()">Open Saved Jobs</button>
+</span>
+
+<br>
 
   <!-- <form class="example-form">
     <mat-form-field class="example-full-width">
@@ -21,7 +30,7 @@
 
       <div class="column">
           <!-- <app-job-table [jobResults]="jobResults"></app-job-table> -->
-          <app-ag-grid [jobResults]="jobResults"></app-ag-grid>
+          <app-ag-grid></app-ag-grid>
       </div>
 
       <!-- <div class="column">
@@ -32,5 +41,8 @@
       </div> -->
 
     </div>
+
+
+
   </div>
 </div>

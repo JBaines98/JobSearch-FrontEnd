@@ -3,7 +3,7 @@ import { MatCardModule } from '@angular/material/card';
 import { JobDetails } from 'src/models/job-search.model';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-
+import { JobSearchService } from '../job-search.service'
 
 @Component({
   selector: 'app-job-details',
@@ -16,7 +16,8 @@ export class JobDetailsComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<JobDetailsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: JobDetails) {}
+    @Inject(MAT_DIALOG_DATA) public data: JobDetails,
+    public jobSearchService: JobSearchService) {}
 
   ngOnInit(): void {
     this.jobDetail=this.data;

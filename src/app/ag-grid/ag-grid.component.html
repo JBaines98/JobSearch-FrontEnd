@@ -1,4 +1,6 @@
 <ag-grid-angular 
+    (selectionChanged)="isSelected()"
+    (gridReady)="gridReady($event)"
     style="width: 100%; height: 500px;" 
     class="ag-theme-material"
     [rowData]="jobResults" 
@@ -8,3 +10,8 @@
     >
     
 </ag-grid-angular>
+
+<span>
+    <button mat-raised-button color="primary" (click)="onSelectedDelete()">Delete selected jobs</button>
+    <button mat-raised-button color="primary" (click)="onSelectedSave()">Save selected jobs</button>
+</span>

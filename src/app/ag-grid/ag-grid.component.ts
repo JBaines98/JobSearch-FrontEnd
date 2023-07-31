@@ -1,50 +1,108 @@
-import { Component, Input } from '@angular/core';
-import { GridOptions } from 'ag-grid-community';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { GridApi, GridOptions, GridReadyEvent } from 'ag-grid-community';
 import { JobDetails } from 'src/models/job-search.model';
 import { MyCellComponent } from '../my-cell/my-cell.component';
 import { JobDetailsComponent } from '../job-details/job-details.component';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MyCellMapComponent } from '../my-cell-map/my-cell-map.component';
+import { JobSearchService } from '../job-search.service'
+import { Subject, takeUntil, tap } from 'rxjs';
+import { DeleteMyCellComponent } from '../delete-my-cell/delete-my-cell.component';
+import { JobStorageService } from '../job-storage.service';
 
 @Component({
   selector: 'app-ag-grid',
   templateUrl: './ag-grid.component.html',
   styleUrls: ['./ag-grid.component.css'],
 })
-export class AgGridComponent {
-  @Input() jobResults: JobDetails[] = [];
+export class AgGridComponent implements OnInit, OnDestroy {
+   jobResults: JobDetails[] = [];
+   destroyed$ = new Subject();
+   public selectedJobs: JobDetails[]=[];
+   
+   gridApi: GridApi | undefined;
 
-  constructor(public dialog: MatDialog){}
+  constructor(public dialog: MatDialog,
+     public jobSearchService: JobSearchService,
+     public jobStorageService: JobStorageService){ }
+
+  ngOnInit(): void {
+    this.jobSearchService.searchResults$
+    .pipe(
+      tap(results => this.jobResults = results),
+      takeUntil(this.destroyed$)
+    )
+    .subscribe();
+    
+  }
+  ngOnDestroy(): void {
+    this.destroyed$.next(this.destroyed$);
+    this.destroyed$.complete();
+  }
+  onSelectedDelete(){
+    this.jobSearchService.deleteSelectedJobs(this.selectedJobs);
+  }
+  isSelected(){
+    this.selectedJobs = this.gridApi!.getSelectedRows();
+  }
+
+  gridReady(event: GridReadyEvent){
+    this.gridApi = event.api;
+  }
+  onSelectedSave(){
+    this.jobStorageService.saveMyJobs(this.selectedJobs);
+  }
 
   gridOptions: GridOptions = {
     rowClass: 'jacks-row',
+    rowSelection: 'multiple',
     // colResizeDefault: true,
     defaultColDef: {
       resizable: true,
       filter: true,
+      
     },
+    
     components: {
       buttonRenderer: MyCellComponent,
       buttonRendererMap: MyCellMapComponent,
-      
+      deleteButtonRenderer: DeleteMyCellComponent, 
     },
     
   };
 
   columnDefs: any[] = [
+
+    {
+    HeaderName: 'Check Box',
+    field: 'checkBox',
+    sortable: true,
+    resizable: true,
+    checkboxSelection: true,
+    rowMultiSelectWithClick: true,
+    cellRendererParams: {
+      clicked: (jobDetail: JobDetails) => {
+        this.selectedJobs.push(jobDetail);
+      }
+    }
+  },
+    
+    
     { headerName: 'Job Title', field: 'jobTitle', sortable: true, resizable: true },
     { headerName: 'Employer Name', field: 'employerName', sortable: true, resizable: true },
     {
       headerName: 'Minimum Salary (£)',
       field: 'minimumSalary',
       sortable: true,
-      resizable: true
+      resizable: true,
+      rowDrag: true,
     },
 
     { headerName: 'Location',
      field: 'locationName',
      sortable: true, 
      resizable: true,
+     rowDrag: true,
      cellRenderer: 'buttonRendererMap',
      cellRendererParams: {
       function(params: { data: {locationName: any}}){
@@ -60,6 +118,7 @@ export class AgGridComponent {
       field: 'JobDetail',
       sortable: true,
       resizable: true,
+      rowDrag: true,
       cellRenderer: 'buttonRenderer',
       cellRendererParams: {
         clicked: (jobDetail: any) => {
@@ -94,12 +153,29 @@ export class AgGridComponent {
       headerName: 'Link',
       field: 'jobUrl',
       resizable: true,
+      rowDrag: true,
       cellRenderer: 'buttonRenderer',
-      function(params: { data: { jobUrl: any } }) {
-        let keyData = params.data.jobUrl;
-        let newLink = `<a href="${keyData}"      target="_blank">Click here</a>`;
-        return newLink;
-      },
+      cellRendererParams: {
+        function(params: { data: { jobUrl: any } }) {
+          let keyData = params.data.jobUrl;
+          let newLink = `<a href="${keyData}"      target="_blank">Click here</a>`;
+          return newLink;
+        },
+      }
+
+    },
+    {
+      headerName: 'Delete Job',
+      field: 'deleteJob',
+      resizable: true,
+      rowDrag: true,
+      cellRenderer: 'deleteButtonRenderer',
+      cellRendererParams: {
+        clicked: (jobDetail: any) => {
+          this.jobSearchService.deleteJob(jobDetail);
+        },
+      }
+
     },
   ];
 }

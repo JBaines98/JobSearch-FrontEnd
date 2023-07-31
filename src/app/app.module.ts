@@ -22,6 +22,8 @@ import { AgGridModule } from 'ag-grid-angular';
 import { MyCellComponent } from './my-cell/my-cell.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MyCellMapComponent } from './my-cell-map/my-cell-map.component';
+import { NumberOfJobsComponent } from './number-of-jobs/number-of-jobs.component';
+import { DeleteMyCellComponent } from './delete-my-cell/delete-my-cell.component';
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import { MyCellMapComponent } from './my-cell-map/my-cell-map.component';
     JobTableComponent,
     AgGridComponent,
     MyCellComponent,
-    MyCellMapComponent
+    MyCellMapComponent,
+    NumberOfJobsComponent,
+    DeleteMyCellComponent
   ],
   imports: [
     FormsModule,
