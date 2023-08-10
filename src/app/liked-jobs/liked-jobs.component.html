@@ -1,0 +1,29 @@
+<span *ngIf="jobLikedOrDisliked === undefined">
+    <button mat-raised-button  color="primary" (click)="showThumbs(true)">
+        <i class="fa-regular fa-thumbs-up"></i>
+    </button>
+    <button mat-raised-button color="primary" (click)="showThumbs(false)">
+        <i class="fa-regular fa-thumbs-down"></i>
+    </button>
+</span>
+
+
+<span *ngIf="jobLikedOrDisliked === true">
+    <button mat-raised-button color="primary" (click)="showThumbs(true)">
+        <i class="fa-solid fa-thumbs-up"></i>
+    </button>
+    <button mat-raised-button color="primary" (click)="showThumbs(false)">
+        <i class="fa-regular fa-thumbs-down"></i>
+    </button>
+</span>
+
+<span *ngIf="jobLikedOrDisliked === false">
+    <button mat-raised-button color="primary" (click)="showThumbs(true)">
+        <i class="fa-regular fa-thumbs-up"></i>
+    </button>
+    <button mat-raised-button color="primary" (click)="showThumbs(false)">
+        <i class="fa-solid fa-thumbs-down"></i>
+    </button>
+</span>
+
+

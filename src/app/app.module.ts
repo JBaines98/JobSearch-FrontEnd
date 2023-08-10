@@ -24,6 +24,17 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MyCellMapComponent } from './my-cell-map/my-cell-map.component';
 import { NumberOfJobsComponent } from './number-of-jobs/number-of-jobs.component';
 import { DeleteMyCellComponent } from './delete-my-cell/delete-my-cell.component';
+import { SavedJobsComponent } from './saved-jobs/saved-jobs.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { JobRatingComponent } from './job-rating/job-rating.component';
+import { RatingCellComponent } from './rating-cell/rating-cell.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatIconModule } from '@angular/material/icon';
+import { NumberOfJobsSavedComponent } from './number-of-jobs-saved/number-of-jobs-saved.component';
+import { MatChipsModule } from '@angular/material/chips';
+import { LikedJobsComponent } from './liked-jobs/liked-jobs.component';
+import { LikedCellComponent } from './liked-cell/liked-cell.component';
+
 
 
 @NgModule({
@@ -36,13 +47,20 @@ import { DeleteMyCellComponent } from './delete-my-cell/delete-my-cell.component
     MyCellComponent,
     MyCellMapComponent,
     NumberOfJobsComponent,
-    DeleteMyCellComponent
+    DeleteMyCellComponent,
+    SavedJobsComponent,
+    JobRatingComponent,
+    RatingCellComponent,
+    NumberOfJobsSavedComponent,
+    LikedJobsComponent,
+    LikedCellComponent
   ],
   imports: [
     FormsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    MatTooltipModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
@@ -50,10 +68,13 @@ import { DeleteMyCellComponent } from './delete-my-cell/delete-my-cell.component
     ReactiveFormsModule,
     MatRadioModule,
     MatCardModule,
+    MatChipsModule,
     MatSlideToggleModule,
     MatSliderModule,
     AgGridModule,
     MatDialogModule,
+    MatSidenavModule,
+    MatIconModule,
     
   ],
   providers: [],

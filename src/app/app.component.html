@@ -1,48 +1,82 @@
-<div class="bold">Job Finder<span class="fa-solid fa-magnifying-glass"></span></div>
+<div class="backGroundng">
+  <br>
 
-<br>
-
-<span class="row">
-    <app-number-of-jobs></app-number-of-jobs>
-    <mat-slide-toggle (toggleChange)="showMyContainer=!showMyContainer">Search a job</mat-slide-toggle>
-    <button mat-raised-button color="warn" (click)="onClear()">Clear Job Table</button>
-    <button mat-raised-button color="primary" (click)="openSavedJobs()">Open Saved Jobs</button>
-</span>
-
-<br>
-
-  <!-- <form class="example-form">
-    <mat-form-field class="example-full-width">
-      <h3>Job Search:</h3>
-      <input matInput placeholder="Accountant" name="title">
-    </mat-form-field>
-  </form> -->
-<div>
-  <div class="container">
-    <div class="row">
-
-      <div *ngIf="showMyContainer" class="column">
-        <button mat-raised-button color="primary" (click)="onSubmit()">Submit</button>
-
+  <div class="row">
+    <div>
+      
+        <span class="bold">Job Finder
+        <span class="fa-solid fa-magnifying-glass">
+        </span>
+        </span>
         
-          <app-reactive-form (jobSearchEntered)="jobSearchEnteredSubmit($event)"></app-reactive-form>
-      </div>
+        <app-number-of-jobs></app-number-of-jobs>
+        <app-number-of-jobs-saved></app-number-of-jobs-saved>
+    
+    </div>
+  </div>
 
-      <div class="column">
-          <!-- <app-job-table [jobResults]="jobResults"></app-job-table> -->
-          <app-ag-grid></app-ag-grid>
-      </div>
 
-      <!-- <div class="column">
-        <div *ngFor="let jobDetail of jobResults">
-          <app-job-details [jobDetail]="jobDetail"></app-job-details>
-          <strong><hr></strong>
+
+  <!-- <div class="row">
+
+    <span class="bold">Job Finder</span>
+      <span class="fa-solid fa-magnifying-glass">
+        <app-number-of-jobs></app-number-of-jobs>
+        <app-number-of-jobs-saved></app-number-of-jobs-saved>
+      </span>
+
+  </div> -->
+
+    <br>
+
+  <span class="row">
+
+      <mat-slide-toggle (toggleChange)="showMyContainer=!showMyContainer">Search a job</mat-slide-toggle>
+      <mat-slide-toggle (toggleChange)="showMySavedJobs=!showMySavedJobs">Load saved jobs</mat-slide-toggle>
+      <button mat-raised-button color="warn" (click)="onClear()">Clear Job Table</button>
+      <button mat-raised-button color="primary" (click)="displayDialog()">Open Saved Jobs</button>
+  </span>
+
+  <br>
+
+  <div *ngIf="showMySavedJobs">
+    <app-saved-jobs></app-saved-jobs>
+  </div>
+
+    <!-- <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <h3>Job Search:</h3>
+        <input matInput placeholder="Accountant" name="title">
+      </mat-form-field>
+    </form> -->
+  <div>
+    <div class="container">
+      <div class="row">
+
+        <div *ngIf="showMyContainer" class="column">
+          <button mat-raised-button color="primary" (click)="onSubmit()">Submit</button>
+
+          
+            <app-reactive-form (jobSearchEntered)="jobSearchEnteredSubmit($event)"></app-reactive-form>
         </div>
-      </div> -->
+
+        <div class="column">
+            <!-- <app-job-table [jobResults]="jobResults"></app-job-table> -->
+            <app-ag-grid></app-ag-grid>
+        </div>
+
+        <!-- <div class="column">
+          <div *ngFor="let jobDetail of jobResults">
+            <app-job-details [jobDetail]="jobDetail"></app-job-details>
+            <strong><hr></strong>
+          </div>
+        </div> -->
+
+      </div>
+
+
 
     </div>
-
-
 
   </div>
 </div>

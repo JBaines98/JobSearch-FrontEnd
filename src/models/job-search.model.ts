@@ -15,6 +15,9 @@ export interface JobDetails {
     applications?: number;
     jobUrl?: string;
     isSelected?: boolean;
+    jobRating?: number;
+    jobLiked?: boolean;
+    
 }
 export interface JobSearch {
     employerID?: number;

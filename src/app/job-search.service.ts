@@ -14,6 +14,14 @@ export class JobSearchService {
 
   public searchResults$ = this.behaviorSearchResults$.asObservable();
 
+  private behaviorRatingResults$ = new BehaviorSubject<JobDetails>({});
+
+  public ratingResults$ = this.behaviorRatingResults$.asObservable();
+
+  private behaviourLikedResults$ = new BehaviorSubject<JobDetails>({});
+
+  public likedResults$ = this.behaviourLikedResults$.asObservable();
+
 
   constructor(public http: HttpClient) { }
 
@@ -29,6 +37,18 @@ export class JobSearchService {
   deleteSelectedJobs(selectedJobs: JobDetails[]){
 
     this.jobArray = this.jobArray.filter((el) => !selectedJobs.includes(el));
+    this.behaviorSearchResults$.next(this.jobArray);
+  }
+  jobRating(job: JobDetails, rating: number){
+    let foundJob = this.jobArray.find(x => x.jobId === job.jobId);
+    foundJob!.jobRating = rating;
+    this.behaviorRatingResults$.next(foundJob!);
+    this.behaviorSearchResults$.next(this.jobArray);
+  }
+  jobLiked(job: JobDetails, liked: boolean){
+    let foundJob = this.jobArray.find(x => x.jobId === job.jobId);
+    foundJob!.jobLiked = liked;
+    this.behaviourLikedResults$.next(foundJob!);
     this.behaviorSearchResults$.next(this.jobArray);
   }
 

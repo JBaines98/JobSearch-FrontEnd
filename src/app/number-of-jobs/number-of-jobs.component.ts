@@ -12,7 +12,7 @@ import { MatCardModule } from '@angular/material/card';
 })
 export class NumberOfJobsComponent {
 
-jobCount: number=0;
+ public jobCount: number=0;
 
   constructor(public jobSearchService: JobSearchService){
   }

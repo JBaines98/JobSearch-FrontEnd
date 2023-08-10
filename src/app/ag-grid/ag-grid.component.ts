@@ -9,6 +9,8 @@ import { JobSearchService } from '../job-search.service'
 import { Subject, takeUntil, tap } from 'rxjs';
 import { DeleteMyCellComponent } from '../delete-my-cell/delete-my-cell.component';
 import { JobStorageService } from '../job-storage.service';
+import { RatingCellComponent } from '../rating-cell/rating-cell.component';
+import { LikedCellComponent } from '../liked-cell/liked-cell.component';
 
 @Component({
   selector: 'app-ag-grid',
@@ -66,7 +68,9 @@ export class AgGridComponent implements OnInit, OnDestroy {
     components: {
       buttonRenderer: MyCellComponent,
       buttonRendererMap: MyCellMapComponent,
-      deleteButtonRenderer: DeleteMyCellComponent, 
+      deleteButtonRenderer: DeleteMyCellComponent,
+      ratingButtonRenderer: RatingCellComponent, 
+      likedButtonRenderer: LikedCellComponent,
     },
     
   };
@@ -123,7 +127,7 @@ export class AgGridComponent implements OnInit, OnDestroy {
       cellRendererParams: {
         clicked: (jobDetail: any) => {
             const dialogRef = this.dialog.open(JobDetailsComponent,{
-              width: '250px',
+              width: 'fit-content',
               data: jobDetail
         })
             }}
@@ -163,6 +167,25 @@ export class AgGridComponent implements OnInit, OnDestroy {
         },
       }
 
+    },
+    {
+      headerName: 'Rating',
+      field: 'jobRating',
+      resizable: true,
+      rowDrawg: true,
+      width: 500,
+      cellRenderer: 'ratingButtonRenderer',
+      cellRendererParams: {
+        
+      }
+    },
+    {
+      headerName: 'Liked',
+      field: 'jobLiked',
+      resizable: true,
+      rowDrawg: true,
+      cellRenderer: 'likedButtonRenderer',
+      
     },
     {
       headerName: 'Delete Job',

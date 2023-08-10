@@ -7,6 +7,15 @@
         <div>
             <strong>Job ID:</strong> {{jobDetail.jobId}}
         </div>
+        <div>
+            <strong>Job Rating (Out of 5 stars)</strong> {{jobDetail.jobRating}} Stars     <mat-icon></mat-icon>
+        </div>
+        <div *ngIf="jobDetail.jobLiked === true">
+            <strong>Job Liked  </strong> <i class="fa-solid fa-thumbs-up"></i>
+        </div>
+        <div *ngIf="jobDetail.jobLiked === false">
+            <strong>Job Disliked  </strong> <i class="fa-solid fa-thumbs-down"></i>
+        </div>
          <div>
             <strong>Employer ID:</strong> {{jobDetail.employerId}}
         </div>
@@ -42,7 +51,7 @@
             <strong>Date:</strong> {{jobDetail.date}}
         </div>
         <div>
-            <strong>Job Description:</strong> {{jobDetail.jobDescription}}
+            <strong>Job Description:</strong> <button (click)="showJobDescription(jobDetail)">Show Description</button>
         </div>
         <div>
             <strong>Applications:</strong> {{jobDetail.applications}}
