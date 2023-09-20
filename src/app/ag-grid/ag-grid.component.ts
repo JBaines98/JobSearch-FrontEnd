@@ -78,7 +78,7 @@ export class AgGridComponent implements OnInit, OnDestroy {
   columnDefs: any[] = [
 
     {
-    HeaderName: 'Check Box',
+    headerName: 'Check Box',
     field: 'checkBox',
     sortable: true,
     resizable: true,
@@ -183,7 +183,7 @@ export class AgGridComponent implements OnInit, OnDestroy {
       headerName: 'Liked',
       field: 'jobLiked',
       resizable: true,
-      rowDrawg: true,
+      rowDrag: true,
       cellRenderer: 'likedButtonRenderer',
       
     },

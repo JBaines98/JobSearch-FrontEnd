@@ -2,6 +2,7 @@ import { NgFor } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map, tap, } from 'rxjs';
 import { JobDetails, JobSearch } from 'src/models/job-search.model';
+import { LoggerService } from './logger.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class JobStorageService {
 
   public savedResults$ = this.behaviorSavedResults$.asObservable();
 
-  constructor() {
+  constructor(public loggerService: LoggerService) {
     
     const data = localStorage.getItem("savedArray");
       if (data){
@@ -31,10 +32,12 @@ export class JobStorageService {
     let runningJobCount = 0;
     for (const loopJob of savedJobs) {
       if (this.savedArray.includes(loopJob)) {
+        this.loggerService.logInfo(this.loggerService.ALREADY_SAVED_MESSAGE, savedJobs);
         console.log('This job has already been saved.')
       }else{
         this.savedArray.push(loopJob);
         runningJobCount = runningJobCount++;
+        this.loggerService.logInfo(this.loggerService.SAVED_MESSAGE, savedJobs);
         console.log(`savedJob ID: ${runningJobCount}`)
       }
     }
@@ -47,6 +50,7 @@ export class JobStorageService {
   removeJob(jobToRemove: JobDetails){
     this.savedArray = this.savedArray.filter( job => job.jobId !== jobToRemove.jobId);
     this.behaviorSavedResults$.next(this.savedArray);
+    this.loggerService.logInfo(this.loggerService.REMOVED_MESSAGE, jobToRemove);
   }
 
 }

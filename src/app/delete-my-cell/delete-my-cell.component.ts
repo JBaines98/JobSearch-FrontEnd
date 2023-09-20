@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { ICellRendererParams } from 'ag-grid-community';
+import { LoggerService } from '../logger.service';
 
 @Component({
   selector: 'app-delete-my-cell',
@@ -11,6 +12,8 @@ import { ICellRendererParams } from 'ag-grid-community';
   ]
 })
 export class DeleteMyCellComponent implements OnInit, ICellRendererAngularComp{
+
+  constructor(public loggerService: LoggerService){}
 
   private parms: any;
 
@@ -25,5 +28,6 @@ export class DeleteMyCellComponent implements OnInit, ICellRendererAngularComp{
   }
   deleteClickedHandler(event: any){
     this.parms.clicked(this.parms.data);
+    this.loggerService.logInfo(this.loggerService.DELETED_SUCCESS_MESSAGE);
   }
 }

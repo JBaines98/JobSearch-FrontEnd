@@ -5,6 +5,7 @@ import { JobStorageService } from './job-storage.service';
 import { Observable, map, tap, } from 'rxjs';
 import { SavedJobsComponent } from './saved-jobs/saved-jobs.component';
 import { MatDialog } from '@angular/material/dialog';
+import { LoggerService } from './logger.service';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +23,7 @@ export class AppComponent {
   constructor(
     public jobSearchService: JobSearchService,
     public jobStorageService: JobStorageService,
+    public loggerService: LoggerService,
     public dialog: MatDialog,
     ){}
 
@@ -29,14 +31,17 @@ export class AppComponent {
 
      this.jobSearchService.searchJob(this.jobSearchData);
     this.showMyContainer = false;
+    this.loggerService.logInfo(this.loggerService.SUBMITTED_MESSAGE);
     }
   
   jobSearchEnteredSubmit(inputDetails: JobSearch){
     this.jobSearchData = inputDetails;
+    // this.loggerService.logInfo(this.loggerService.SUBMITTED_MESSAGE);
   }
   onClear(){
     this.jobSearchService.clearArray();
     this.showMyContainer = true;
+    this.loggerService.logInfo(this.loggerService.CLEAR_SUCCESS_MESSAGE);
   }
   openSavedJobs(){
     this.jobStorageService.savedResults$.pipe(
@@ -45,11 +50,13 @@ export class AppComponent {
       })
     ).subscribe();
     console.log(this.savedJobs);
+    this.loggerService.logInfo(this.loggerService.SUCCESS_MESSAGE);
     alert(JSON.stringify(this.savedJobs))
     
     // const dialogRef = this.dialog.open(this.savedJobs)
    }
    displayDialog(){
+    this.loggerService.logInfo(this.loggerService.SUCCESS_MESSAGE);
     const dialogRef = this.dialog.open(SavedJobsComponent,{
       width: '250px',
       data: this.savedJobs

@@ -4,6 +4,7 @@ import { JobStorageService } from '../job-storage.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
 import { JobDetails } from 'src/models/job-search.model';
+import { LoggerService } from '../logger.service';
 // import { MatSnackBar } from '@angular/material/';
 
 export enum StarRatingColor {
@@ -36,6 +37,7 @@ export class JobRatingComponent implements OnInit {
   constructor(
     public jobSearchService: JobSearchService,
     public jobStorageService: JobStorageService,
+    public loggerService: LoggerService,
     // private snackBar: MatSnackBar,
   ){}
 
@@ -53,6 +55,7 @@ export class JobRatingComponent implements OnInit {
     this.rating = rating;
     this.ratingUpdatedHandler(this.jobDetail);
     this.ratingUpdated.emit(this.rating);
+    this.loggerService.logInfo(this.loggerService.RATED_SUCCESS_MESSAGE, this.jobDetail);
     return false;
   }
   showIcon(index:number) {

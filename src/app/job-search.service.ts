@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { BehaviorSubject, Observable, map, tap, } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, map, tap, } from 'rxjs';
 import { JobDetails, JobSearch } from 'src/models/job-search.model';
+import { LoggerService } from './logger.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -23,37 +25,42 @@ export class JobSearchService {
   public likedResults$ = this.behaviourLikedResults$.asObservable();
 
 
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient, public loggerService: LoggerService ) { }
 
   deleteJob(jobToRemove: JobDetails){
     this.jobArray = this.jobArray.filter(item => item !== jobToRemove);
     this.behaviorSearchResults$.next(this.jobArray);
+    this.loggerService.logInfo(this.loggerService.DELETED_SUCCESS_MESSAGE);
   }
 
   clearArray(){
     this.jobArray = [];
     this.behaviorSearchResults$.next(this.jobArray);
+    this.loggerService.logInfo(this.loggerService.CLEAR_SUCCESS_MESSAGE); 
   }
   deleteSelectedJobs(selectedJobs: JobDetails[]){
 
     this.jobArray = this.jobArray.filter((el) => !selectedJobs.includes(el));
     this.behaviorSearchResults$.next(this.jobArray);
+    this.loggerService.logInfo(this.loggerService.DELETED_SUCCESS_MESSAGE, selectedJobs);
   }
   jobRating(job: JobDetails, rating: number){
     let foundJob = this.jobArray.find(x => x.jobId === job.jobId);
     foundJob!.jobRating = rating;
     this.behaviorRatingResults$.next(foundJob!);
     this.behaviorSearchResults$.next(this.jobArray);
+    this.loggerService.logInfo(this.loggerService.RATED_SUCCESS_MESSAGE, job);
   }
   jobLiked(job: JobDetails, liked: boolean){
     let foundJob = this.jobArray.find(x => x.jobId === job.jobId);
     foundJob!.jobLiked = liked;
     this.behaviourLikedResults$.next(foundJob!);
     this.behaviorSearchResults$.next(this.jobArray);
+    this.loggerService.logInfo(this.loggerService.LIKED_SUCCESS_MESSAGE, job);
   }
 
   searchJob(newInput: JobSearch) {
-    let urlBuilder = "http://localhost:3300/api/search?";
+    let urlBuilder = "https://localhost:7059/api/search?";
     if (newInput.jobTitle) {
       urlBuilder = urlBuilder + 'keywords=' + newInput.jobTitle; 
     }
@@ -93,10 +100,16 @@ export class JobSearchService {
       
         )
       .pipe(
+        catchError((err): any=>{
+          this.loggerService.logError(this.loggerService.DATA_ERROR_MESSAGE, err);
+        }),
         tap((apiReturnData) => {
-          console.log(JSON.stringify(apiReturnData.results));
-          this.jobArray= [...apiReturnData.results, ...this.jobArray];
+          console.log(JSON.stringify(apiReturnData));
+          this.jobArray= [...apiReturnData, ...this.jobArray];
           this.behaviorSearchResults$.next(this.jobArray);
+          this.loggerService.logInfo(this.loggerService.SUCCESS_MESSAGE);
+        
+
           // store api return data . results in that array(privcate job results)
                 })
       ).subscribe();
