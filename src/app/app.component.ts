@@ -6,6 +6,7 @@ import { Observable, map, tap, } from 'rxjs';
 import { SavedJobsComponent } from './saved-jobs/saved-jobs.component';
 import { MatDialog } from '@angular/material/dialog';
 import { LoggerService } from './logger.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +26,17 @@ export class AppComponent {
     public jobStorageService: JobStorageService,
     public loggerService: LoggerService,
     public dialog: MatDialog,
-    ){}
+    public _snackBar: MatSnackBar,
+    ){
+      this.loggerService.logMessage$.pipe(
+        tap(message => {
+          this._snackBar.open(message);
+        })
+      ).subscribe();
+    }
+
+
+
 
   onSubmit(){
 

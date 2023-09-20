@@ -1,8 +1,10 @@
 import { NgFor } from '@angular/common';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, map, tap, } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, map, tap, } from 'rxjs';
 import { JobDetails, JobSearch } from 'src/models/job-search.model';
 import { LoggerService } from './logger.service';
+import { HttpClient } from '@angular/common/http';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,35 +20,90 @@ export class JobStorageService {
 
   public savedResults$ = this.behaviorSavedResults$.asObservable();
 
-  constructor(public loggerService: LoggerService) {
+  constructor(public loggerService: LoggerService, public http: HttpClient, public userService: UserService) {
     
-    const data = localStorage.getItem("savedArray");
-      if (data){
-        console.log("data: ", JSON.parse(data));
-        this.savedArray = JSON.parse(data);
-        this.behaviorSavedResults$.next(this.savedArray);
-      }
+    // const data = localStorage.getItem("savedArray");
+    //   if (data){
+    //     console.log("data: ", JSON.parse(data));
+    //     this.savedArray = JSON.parse(data);
+    //     this.behaviorSavedResults$.next(this.savedArray);
+    //   }
   }
 
-  saveMyJobs(savedJobs: JobDetails[]){
-    let runningJobCount = 0;
-    for (const loopJob of savedJobs) {
-      if (this.savedArray.includes(loopJob)) {
-        this.loggerService.logInfo(this.loggerService.ALREADY_SAVED_MESSAGE, savedJobs);
-        console.log('This job has already been saved.')
-      }else{
-        this.savedArray.push(loopJob);
-        runningJobCount = runningJobCount++;
-        this.loggerService.logInfo(this.loggerService.SAVED_MESSAGE, savedJobs);
-        console.log(`savedJob ID: ${runningJobCount}`)
+  // saveMyJobs(savedJobs: JobDetails[]){
+  //   let runningJobCount = 0;
+  //   for (const loopJob of savedJobs) {
+  //     if (this.savedArray.includes(loopJob)) {
+  //       this.loggerService.logInfo(this.loggerService.ALREADY_SAVED_MESSAGE, savedJobs);
+  //       console.log('This job has already been saved.')
+  //     }else{
+  //       this.savedArray.push(loopJob);
+  //       runningJobCount = runningJobCount++;
+  //       this.loggerService.logInfo(this.loggerService.SAVED_MESSAGE, savedJobs);
+  //       console.log(`savedJob ID: ${runningJobCount}`)
+  //     }
+  //   }
+  //   this.jobCount = this.savedArray.length;
+  //   alert(`Total number of saved jobs: ${this.jobCount}`);
+  //   this.behaviorSavedResults$.next(this.savedArray);
+  //   localStorage.setItem("savedArray", JSON.stringify(this.savedArray));
+  // }
+
+  saveMyJobs(savedJobs: JobDetails[]): Observable<any>
+  {
+    this.jobCount = this.jobCount + savedJobs.length;
+    var userName1 = this.userService.user.userName;
+    return this.http.post<any>("https://localhost:7059/api/JobStorage/saveMyJobs?userName=" + userName1,
+    {
+      headers: {
+        'Authorization':
+        'Basic Nzk1YzM0OTktZDc0NS00ZGEyLTg5OTAtZGYwY2M2MjMyOTljOg=='
       }
     }
-    this.jobCount = this.savedArray.length;
-    alert(`Total number of saved jobs: ${this.jobCount}`);
-    this.behaviorSavedResults$.next(this.savedArray);
-    localStorage.setItem("savedArray", JSON.stringify(this.savedArray));
-
+    ).pipe(
+      catchError((err: any): any=>{
+        this.loggerService.logError(this.loggerService.ERROR_MESSAGE, err)
+      }),
+      tap()
+    );
+    // return isTrue = true;
+    
   }
+
+
+
+
+
+
+
+
+
+  getSavedJobs(){
+    var userName1 = this.userService.user.userName;
+    this.http.get<any>("https://localhost:7059/api/JobStorage/getSavedJobs?userName=" + userName1,
+    {
+      headers: {
+        'Authorization':
+        'Basic Nzk1YzM0OTktZDc0NS00ZGEyLTg5OTAtZGYwY2M2MjMyOTljOg=='
+      }
+    }
+    ).pipe(
+      catchError((err: any): any=>{
+        this.loggerService.logError(this.loggerService.DATA_ERROR_MESSAGE, err)
+      }),
+      tap((savedJobsDB: JobDetails[]) => {
+        console.log(JSON.stringify(savedJobsDB));
+        console.log("TEST SUCCESS!!!!!!");
+        this.savedArray = savedJobsDB;
+        this.behaviorSavedResults$.next(this.savedArray);
+        this.loggerService.logInfo(this.loggerService.SUCCESS_MESSAGE);
+        this.jobCount = this.savedArray.length;
+        
+      })
+    ).subscribe();
+  }
+
+
   removeJob(jobToRemove: JobDetails){
     this.savedArray = this.savedArray.filter( job => job.jobId !== jobToRemove.jobId);
     this.behaviorSavedResults$.next(this.savedArray);

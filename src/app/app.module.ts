@@ -34,6 +34,7 @@ import { NumberOfJobsSavedComponent } from './number-of-jobs-saved/number-of-job
 import { MatChipsModule } from '@angular/material/chips';
 import { LikedJobsComponent } from './liked-jobs/liked-jobs.component';
 import { LikedCellComponent } from './liked-cell/liked-cell.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 
@@ -75,6 +76,7 @@ import { LikedCellComponent } from './liked-cell/liked-cell.component';
     MatDialogModule,
     MatSidenavModule,
     MatIconModule,
+    MatSnackBarModule,
     
   ],
   providers: [],

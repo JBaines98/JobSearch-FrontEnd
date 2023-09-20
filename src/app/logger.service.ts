@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +21,10 @@ export class LoggerService {
   public readonly REMOVED_MESSAGE = "Job successfully removed.";
   public readonly SUBMITTED_MESSAGE = "Successfully submitted.";
 
+  public logMessage$ = new Subject<string>();
 
   logError(message: string, err: any){
+    this.logMessage$.next(message);
     console.error(message, err);
   }
 
@@ -45,6 +49,7 @@ export class LoggerService {
   // }
 
   logInfo(message:string, payload?: any){
+    this.logMessage$.next(message);
     console.log(message, payload);
   }
 }

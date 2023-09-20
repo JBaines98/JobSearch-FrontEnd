@@ -18,11 +18,11 @@ import { LikedCellComponent } from '../liked-cell/liked-cell.component';
   styleUrls: ['./ag-grid.component.css'],
 })
 export class AgGridComponent implements OnInit, OnDestroy {
-   jobResults: JobDetails[] = [];
-   destroyed$ = new Subject();
+   public jobResults: JobDetails[] = [];
+   public destroyed$ = new Subject();
    public selectedJobs: JobDetails[]=[];
    
-   gridApi: GridApi | undefined;
+   public gridApi: GridApi | undefined;
 
   constructor(public dialog: MatDialog,
      public jobSearchService: JobSearchService,
@@ -52,7 +52,7 @@ export class AgGridComponent implements OnInit, OnDestroy {
     this.gridApi = event.api;
   }
   onSelectedSave(){
-    this.jobStorageService.saveMyJobs(this.selectedJobs);
+    this.jobStorageService.saveMyJobs(this.selectedJobs).subscribe();
   }
 
   gridOptions: GridOptions = {

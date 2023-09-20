@@ -20,7 +20,11 @@ export class SavedJobsComponent {
         this.savedJobs = bob;
       })
     ).subscribe();
+    
+    this.jobStorageService.getSavedJobs();
   }
+
+
 
 
 }

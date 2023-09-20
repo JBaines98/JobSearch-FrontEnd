@@ -19,6 +19,21 @@ export interface JobDetails {
     jobLiked?: boolean;
     
 }
+
+export interface UserDetails {
+    userId : number;
+    userName: string;
+    firstName: string;
+    lastName?: string;
+    dateJoined?: string;
+    age?: number;
+    addressFirstLine?: string;
+    addressSecondLine?: string;
+    city?: string;
+    county?: string;
+    postcode?: string;
+}
+
 export interface JobSearch {
     employerID?: number;
     employerName?: string;
