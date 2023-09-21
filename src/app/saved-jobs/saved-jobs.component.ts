@@ -12,7 +12,7 @@ export class SavedJobsComponent {
 
   constructor(public jobStorageService: JobStorageService){}
 
-  savedJobs: JobDetails[]=[]
+  savedJobs: JobDetails[]=[];
 
   ngOnInit(){
     this.jobStorageService.savedResults$.pipe(

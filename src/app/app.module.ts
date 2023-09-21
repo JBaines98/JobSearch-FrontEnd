@@ -35,6 +35,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { LikedJobsComponent } from './liked-jobs/liked-jobs.component';
 import { LikedCellComponent } from './liked-cell/liked-cell.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { SavedSearchesComponent } from './saved-searches/saved-searches.component';
+import { NumberOfSearchesSavedComponent } from './number-of-searches-saved/number-of-searches-saved.component';
 
 
 
@@ -54,7 +56,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     RatingCellComponent,
     NumberOfJobsSavedComponent,
     LikedJobsComponent,
-    LikedCellComponent
+    LikedCellComponent,
+    SavedSearchesComponent,
+    NumberOfSearchesSavedComponent
   ],
   imports: [
     FormsModule,

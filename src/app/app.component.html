@@ -1,4 +1,4 @@
-<div class="backGroundng">
+<div class="backGrounding">
   <br>
       
   <div class="row">
@@ -11,6 +11,7 @@
         
         <app-number-of-jobs></app-number-of-jobs>
         <app-number-of-jobs-saved></app-number-of-jobs-saved>
+        <app-number-of-searches-saved></app-number-of-searches-saved>
     
     </div>
   </div>
@@ -35,6 +36,7 @@
       <mat-slide-toggle (toggleChange)="showMySavedJobs=!showMySavedJobs">Load saved jobs</mat-slide-toggle>
       <button mat-raised-button color="warn" (click)="onClear()">Clear Job Table</button>
       <button mat-raised-button color="primary" (click)="displayDialog()">Open Saved Jobs</button>
+      <button mat-raised-button color="primary" (click)="displayJobSearches()">Open saved job searches</button>
   </span>
 
   <br>

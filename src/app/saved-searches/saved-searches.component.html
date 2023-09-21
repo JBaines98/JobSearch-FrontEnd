@@ -1,0 +1,14 @@
+<mat-card class="color">
+    <mat-card-content>
+        <div>
+            <h3><strong>List of saved searches:</strong></h3>
+            <div *ngFor="let jobSearch of savedSearches">
+                Job search name: {{jobSearch.userDetails?.userId}}
+                 
+            </div> 
+        </div>
+    </mat-card-content>
+</mat-card>
+
+
+<!-- <i class="fa-solid fa-xmark" (click)="jobStorageService.removeSearch(jobSearch)"></i> -->

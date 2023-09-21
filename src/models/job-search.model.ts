@@ -17,13 +17,14 @@ export interface JobDetails {
     isSelected?: boolean;
     jobRating?: number;
     jobLiked?: boolean;
+    userDetails?: UserDetails;
     
 }
 
 export interface UserDetails {
-    userId : number;
-    userName: string;
-    firstName: string;
+    userId?: number;
+    userName?: string;
+    firstName?: string;
     lastName?: string;
     dateJoined?: string;
     age?: number;
@@ -55,4 +56,5 @@ export interface JobSearch {
     graduate?: boolean;
     resultsToTake?: any;
     resultsToSkip?: any;
+    userDetails?: UserDetails;
 }

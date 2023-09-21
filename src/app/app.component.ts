@@ -7,6 +7,7 @@ import { SavedJobsComponent } from './saved-jobs/saved-jobs.component';
 import { MatDialog } from '@angular/material/dialog';
 import { LoggerService } from './logger.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SavedSearchesComponent } from './saved-searches/saved-searches.component';
 
 @Component({
   selector: 'app-root',
@@ -73,6 +74,15 @@ export class AppComponent {
       data: this.savedJobs
   })
    }
+
+   displayJobSearches(){
+    this.loggerService.logInfo(this.loggerService.SUCCESS_MESSAGE);
+    this.jobStorageService.getSavedSearches();
+    const dialogRef = this.dialog.open(SavedSearchesComponent, {
+      width: '250px',
+      data: this.jobStorageService.savedSearchResults$
+    }) 
+  }
 
 
 

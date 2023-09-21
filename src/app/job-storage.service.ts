@@ -13,12 +13,20 @@ export class JobStorageService {
 
   private savedArray: JobDetails[]=[];
 
+  private savedSearches: JobSearch[]=[];
+
   private jobCount: number = 0;
+
+  public searchCount: number = 0;
 
 
   private behaviorSavedResults$ = new BehaviorSubject<JobDetails[]>([]);
 
   public savedResults$ = this.behaviorSavedResults$.asObservable();
+
+  private behaviorSearchResults$ = new BehaviorSubject<JobSearch[]>([]);
+
+  public savedSearchResults$ = this.behaviorSearchResults$.asObservable();
 
   constructor(public loggerService: LoggerService, public http: HttpClient, public userService: UserService) {
     
@@ -70,6 +78,30 @@ export class JobStorageService {
     
   }
 
+  getSavedSearches(){
+    var userName = this.userService.user.userName
+    this.http.get<any>("https://localhost:7059/api/JobStorage/getSavedSearch?userName=" + userName,
+    {
+      headers: {
+        'Authorization':
+        'Basic Nzk1YzM0OTktZDc0NS00ZGEyLTg5OTAtZGYwY2M2MjMyOTljOg=='
+      }
+    }
+    ).pipe(
+      catchError((err: any): any=>{
+        this.loggerService.logError(this.loggerService.DATA_ERROR_MESSAGE, err)
+      }),
+      tap((savedSearchesDB: JobSearch[]) => {
+        console.log(JSON.stringify(savedSearchesDB));
+        console.log("TEST SUCCESS!!!!!!!");
+        this.savedSearches = savedSearchesDB;
+        this.behaviorSearchResults$.next(this.savedSearches);
+        this.loggerService.logInfo(this.loggerService.SUCCESS_MESSAGE);
+        this.searchCount = savedSearchesDB.length;
+      })
+    ).subscribe();
+  }
+
 
 
 
@@ -109,5 +141,8 @@ export class JobStorageService {
     this.behaviorSavedResults$.next(this.savedArray);
     this.loggerService.logInfo(this.loggerService.REMOVED_MESSAGE, jobToRemove);
   }
+
+//  removeSearch(JobSearch: JobSearch){
+//  }
 
 }
