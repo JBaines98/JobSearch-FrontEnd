@@ -1,17 +1,21 @@
-<div class="backGrounding">
+
+<div  class="topLevel" [class.lightTheme]="themeName==='light'" [class.darkTheme]="themeName==='dark'" [class.colorfulTheme]="themeName==='colorful'">
   <br>
       
   <div class="row">
     <div>
-      
-        <span class="bold">Job Finder
-        <span class="fa-solid fa-magnifying-glass">
-        </span>
-        </span>
+        <button  class="homeButton" (click)="homeClicked()" [class.lightTheme]="themeName==='light'" [class.darkTheme]="themeName==='dark'" [class.colorfulTheme]="themeName==='colorful'">
+          <span class="bold">Job Finder
+          <span class="fa-solid fa-magnifying-glass">
+          </span>
+          </span>
+        </button>
         
-        <app-number-of-jobs></app-number-of-jobs>
-        <app-number-of-jobs-saved></app-number-of-jobs-saved>
-        <app-number-of-searches-saved></app-number-of-searches-saved>
+        <div class="row">
+          <app-number-of-jobs></app-number-of-jobs>
+          <app-number-of-jobs-saved></app-number-of-jobs-saved>
+          <app-number-of-searches-saved></app-number-of-searches-saved>
+        </div>
     
     </div>
   </div>
@@ -21,10 +25,7 @@
   <!-- <div class="row">
 
     <span class="bold">Job Finder</span>
-      <span class="fa-solid fa-magnifying-glass">
-        <app-number-of-jobs></app-number-of-jobs>
-        <app-number-of-jobs-saved></app-number-of-jobs-saved>
-      </span>
+    <span class="fa-solid fa-magnifying-glass"></span>
 
   </div> -->
 
@@ -37,7 +38,10 @@
       <button mat-raised-button color="warn" (click)="onClear()">Clear Job Table</button>
       <button mat-raised-button color="primary" (click)="displayDialog()">Open Saved Jobs</button>
       <button mat-raised-button color="primary" (click)="displayJobSearches()">Open saved job searches</button>
-  </span>
+      <button class="lightButton" (click)="changeThemeLight()">Light Theme</button>
+      <button class="darkButton" (click)="changeThemeDark()">Dark Theme</button>
+      <button class="colorfulButton" (click)="changeThemeColourful()">Colourful Theme</button>
+    </span>
 
   <br>
 
@@ -57,6 +61,7 @@
 
         <div *ngIf="showMyContainer" class="column">
           <button mat-raised-button color="primary" (click)="onSubmit()">Submit</button>
+          <button mat-raised-button color="primary" (click)="onSaveSearch()">Save Search</button>
 
           
             <app-reactive-form (jobSearchEntered)="jobSearchEnteredSubmit($event)"></app-reactive-form>
@@ -74,6 +79,12 @@
           </div>
         </div> -->
 
+      </div>
+
+      <br>
+
+      <div class="row">
+        <app-other-job-sites></app-other-job-sites>
       </div>
 
 

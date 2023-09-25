@@ -37,6 +37,8 @@ import { LikedCellComponent } from './liked-cell/liked-cell.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SavedSearchesComponent } from './saved-searches/saved-searches.component';
 import { NumberOfSearchesSavedComponent } from './number-of-searches-saved/number-of-searches-saved.component';
+import { OtherJobSitesComponent } from './other-job-sites/other-job-sites.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 
 
@@ -58,7 +60,8 @@ import { NumberOfSearchesSavedComponent } from './number-of-searches-saved/numbe
     LikedJobsComponent,
     LikedCellComponent,
     SavedSearchesComponent,
-    NumberOfSearchesSavedComponent
+    NumberOfSearchesSavedComponent,
+    OtherJobSitesComponent
   ],
   imports: [
     FormsModule,
@@ -81,6 +84,7 @@ import { NumberOfSearchesSavedComponent } from './number-of-searches-saved/numbe
     MatSidenavModule,
     MatIconModule,
     MatSnackBarModule,
+    MatExpansionModule
     
   ],
   providers: [],

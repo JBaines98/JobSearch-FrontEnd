@@ -54,6 +54,9 @@ export class AgGridComponent implements OnInit, OnDestroy {
   onSelectedSave(){
     this.jobStorageService.saveMyJobs(this.selectedJobs).subscribe();
   }
+  onSelectedAdd(){
+    // this.jobStorageService.addMyJobs(this.selectedJobs).subscribe();
+  }
 
   gridOptions: GridOptions = {
     rowClass: 'jacks-row',

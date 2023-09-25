@@ -22,6 +22,10 @@ export class AppComponent {
   showMySavedJobs: boolean = false;
   savedJobs: JobDetails[] = [];
 
+
+  themeName: string = "light";
+
+
   constructor(
     public jobSearchService: JobSearchService,
     public jobStorageService: JobStorageService,
@@ -45,6 +49,12 @@ export class AppComponent {
     this.showMyContainer = false;
     this.loggerService.logInfo(this.loggerService.SUBMITTED_MESSAGE);
     }
+
+  homeClicked(){
+    this.showMyContainer = true;
+    this.showMySavedJobs = false;
+    this.themeName = "light";
+  }
   
   jobSearchEnteredSubmit(inputDetails: JobSearch){
     this.jobSearchData = inputDetails;
@@ -84,6 +94,21 @@ export class AppComponent {
     }) 
   }
 
+  onSaveSearch(){
+    this.jobStorageService.saveMySearch(this.jobSearchData);
+  }
+
+  changeThemeLight(){
+    this.themeName = "light";
+  }
+
+  changeThemeDark(){
+    this.themeName = "dark";
+  }
+
+  changeThemeColourful(){
+    this.themeName = "colorful";
+  }
 
 
 

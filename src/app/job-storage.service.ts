@@ -135,6 +135,10 @@ export class JobStorageService {
     ).subscribe();
   }
 
+  // addMyJobs(selectedJobs: JobDetails[]){
+  //   return this.http.post<any>("https://localhost:7059/api")
+  // }
+
 
   removeJob(jobToRemove: JobDetails){
     this.savedArray = this.savedArray.filter( job => job.jobId !== jobToRemove.jobId);
@@ -142,7 +146,31 @@ export class JobStorageService {
     this.loggerService.logInfo(this.loggerService.REMOVED_MESSAGE, jobToRemove);
   }
 
+  saveMySearch(jobSearchData: JobSearch){
+    if(!jobSearchData.userDetails)
+    {
+      jobSearchData.userDetails = {};
+    }
+    jobSearchData.userDetails.userName = this.userService.user.userName;
+    // this.http.post<JobSearch>("https://localhost:7059/api/JobStorage/saveMySearch?userName=" + userName1,
+    this.http.post<JobSearch>("https://localhost:7059/api/JobStorage/saveMySearch", jobSearchData,
+    {
+      headers: {
+        'Authorization':
+        'Basic Nzk1YzM0OTktZDc0NS00ZGEyLTg5OTAtZGYwY2M2MjMyOTljOg=='
+      }
+    }
+    ).pipe(
+      catchError((err: any): any=>{
+        this.loggerService.logError(this.loggerService.ERROR_MESSAGE, err)
+      }),
+      tap()
+    );
+  } 
+
 //  removeSearch(JobSearch: JobSearch){
 //  }
+
+
 
 }

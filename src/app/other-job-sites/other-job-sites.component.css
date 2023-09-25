@@ -1,0 +1,19 @@
+.row {
+    display: flex;
+    gap: 10px;
+}
+.linkedIn {
+    height: 40px;
+    width: 40px;
+}
+.totalJobs {
+    height: 50px;
+    width: 50px;
+} 
+.reed {
+    height: 50px;
+    width: 70px;
+}
+.border {
+    border: 2px solid black;
+}
