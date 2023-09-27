@@ -52,7 +52,7 @@ export class AgGridComponent implements OnInit, OnDestroy {
     this.gridApi = event.api;
   }
   onSelectedSave(){
-    this.jobStorageService.saveMyJobs(this.selectedJobs).subscribe();
+    this.jobStorageService.saveMyJobs(this.selectedJobs);
   }
   onSelectedAdd(){
     // this.jobStorageService.addMyJobs(this.selectedJobs).subscribe();
@@ -105,11 +105,12 @@ export class AgGridComponent implements OnInit, OnDestroy {
       rowDrag: true,
     },
 
-    { headerName: 'Location',
+    { headerName: 'Location (Google maps)',
      field: 'locationName',
      sortable: true, 
      resizable: true,
      rowDrag: true,
+     width: 230,
      cellRenderer: 'buttonRendererMap',
      cellRendererParams: {
       function(params: { data: {locationName: any}}){
@@ -176,7 +177,7 @@ export class AgGridComponent implements OnInit, OnDestroy {
       field: 'jobRating',
       resizable: true,
       rowDrawg: true,
-      width: 500,
+      width: 290,
       cellRenderer: 'ratingButtonRenderer',
       cellRendererParams: {
         
@@ -187,6 +188,7 @@ export class AgGridComponent implements OnInit, OnDestroy {
       field: 'jobLiked',
       resizable: true,
       rowDrag: true,
+      width: 230,
       cellRenderer: 'likedButtonRenderer',
       
     },

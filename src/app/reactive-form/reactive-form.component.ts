@@ -1,16 +1,24 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
 import { JobSearch } from 'src/models/job-search.model';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { tap } from 'rxjs/operators';
+import { takeUntil, tap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-reactive-form',
   templateUrl: './reactive-form.component.html',
   styleUrls: ['./reactive-form.component.css']
 })
-export class ReactiveFormComponent implements OnInit{
+export class ReactiveFormComponent implements OnInit, OnDestroy{
+
+  public destroyed$ = new Subject();
+
+  ngOnDestroy(): void {
+    this.destroyed$.next(this.destroyed$);
+    this.destroyed$.complete();
+  }
 
   formatLabel(value: number): string {
     if (value >= 1000) {
@@ -42,7 +50,8 @@ export class ReactiveFormComponent implements OnInit{
       this.jobSearchEntered.emit(changes as JobSearch);
       console.log(JSON.stringify(changes));
 
-    })
+    }),
+    takeUntil(this.destroyed$)
    ).subscribe();
    
 

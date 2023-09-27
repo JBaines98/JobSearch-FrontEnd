@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { JobSearchService } from './job-search.service'
 import { JobDetails, JobSearch } from 'src/models/job-search.model';
 import { JobStorageService } from './job-storage.service';
-import { Observable, map, tap, } from 'rxjs';
+import { Observable, Subject, map, takeUntil, tap, } from 'rxjs';
 import { SavedJobsComponent } from './saved-jobs/saved-jobs.component';
 import { MatDialog } from '@angular/material/dialog';
 import { LoggerService } from './logger.service';
@@ -14,13 +14,15 @@ import { SavedSearchesComponent } from './saved-searches/saved-searches.componen
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy{
   title = 'JobSearch';
   jobSearchData: JobSearch = {};
   jobResults: JobDetails[] = [];
   showMyContainer: boolean = true;
   showMySavedJobs: boolean = false;
   savedJobs: JobDetails[] = [];
+
+  destroyed$ = new Subject();
 
 
   themeName: string = "light";
@@ -38,9 +40,16 @@ export class AppComponent {
           this._snackBar.open(message);
         })
       ).subscribe();
+      this.jobStorageService.getSavedJobs();
+      this.jobStorageService.getSavedSearches();
     }
 
 
+
+  ngOnDestroy(): void {
+    this.destroyed$.next(this.destroyed$);
+    this.destroyed$.complete();
+  }
 
 
   onSubmit(){
@@ -69,7 +78,8 @@ export class AppComponent {
     this.jobStorageService.savedResults$.pipe(
       tap((bob) => {
         this.savedJobs = bob;
-      })
+      }),
+      takeUntil(this.destroyed$)
     ).subscribe();
     console.log(this.savedJobs);
     this.loggerService.logInfo(this.loggerService.SUCCESS_MESSAGE);
@@ -94,8 +104,8 @@ export class AppComponent {
     }) 
   }
 
-  onSaveSearch(){
-    this.jobStorageService.saveMySearch(this.jobSearchData);
+  onSaveSearch(jobSearchData: JobSearch){
+    this.jobStorageService.saveMySearch(jobSearchData);
   }
 
   changeThemeLight(){

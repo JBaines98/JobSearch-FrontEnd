@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { BehaviorSubject, Observable, catchError, map, tap, } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, catchError, map, takeUntil, tap, } from 'rxjs';
 import { JobDetails, JobSearch } from 'src/models/job-search.model';
 import { LoggerService } from './logger.service';
 
@@ -8,7 +8,9 @@ import { LoggerService } from './logger.service';
 @Injectable({
   providedIn: 'root'
 })
-export class JobSearchService {
+export class JobSearchService implements OnDestroy {
+
+  public destroyed$ = new Subject();
 
   private jobArray: JobDetails[]=[];
 
@@ -26,6 +28,12 @@ export class JobSearchService {
 
 
   constructor(public http: HttpClient, public loggerService: LoggerService ) { }
+
+
+  ngOnDestroy(): void {
+    this.destroyed$.next(this.destroyed$);
+    this.destroyed$.complete();
+  }
 
   deleteJob(jobToRemove: JobDetails){
     this.jobArray = this.jobArray.filter(item => item !== jobToRemove);
@@ -111,7 +119,8 @@ export class JobSearchService {
         
 
           // store api return data . results in that array(privcate job results)
-                })
+        }),
+        takeUntil(this.destroyed$)
       ).subscribe();
   }
 }

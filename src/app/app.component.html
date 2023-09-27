@@ -61,7 +61,7 @@
 
         <div *ngIf="showMyContainer" class="column">
           <button mat-raised-button color="primary" (click)="onSubmit()">Submit</button>
-          <button mat-raised-button color="primary" (click)="onSaveSearch()">Save Search</button>
+          <button mat-raised-button color="primary" (click)="onSaveSearch(jobSearchData)">Save Search</button>
 
           
             <app-reactive-form (jobSearchEntered)="jobSearchEnteredSubmit($event)"></app-reactive-form>

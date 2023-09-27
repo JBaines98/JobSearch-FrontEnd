@@ -5,6 +5,7 @@
                 <div *ngFor="let JobDetail of savedJobs">
                     Job title: {{JobDetail.jobTitle}}
                     <i class="fa-solid fa-xmark" (click)="jobStorageService.removeJob(JobDetail)"></i>
+                    <hr>
                 </div>
             </div>
         </mat-card-content>

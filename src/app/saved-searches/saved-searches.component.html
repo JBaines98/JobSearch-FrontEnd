@@ -3,8 +3,10 @@
         <div>
             <h3><strong>List of saved searches:</strong></h3>
             <div *ngFor="let jobSearch of savedSearches">
-                Job search name: {{jobSearch.userDetails?.userId}}
-                 
+                <span>Job Title: {{jobSearch.jobTitle}}</span>
+                <span>Job Search Name: {{jobSearch.searchName}}</span>
+                 <i class="fa-solid fa-xmark" (click)="jobStorageService.removeSearch(jobSearch)"></i>
+                 <hr>
             </div> 
         </div>
     </mat-card-content>

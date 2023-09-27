@@ -1,6 +1,6 @@
 import { NgFor } from '@angular/common';
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, catchError, map, tap, } from 'rxjs';
+import { Injectable, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Observable, Subject, catchError, map, takeUntil, tap, } from 'rxjs';
 import { JobDetails, JobSearch } from 'src/models/job-search.model';
 import { LoggerService } from './logger.service';
 import { HttpClient } from '@angular/common/http';
@@ -9,7 +9,7 @@ import { UserService } from './user.service';
 @Injectable({
   providedIn: 'root'
 })
-export class JobStorageService {
+export class JobStorageService implements OnDestroy {
 
   private savedArray: JobDetails[]=[];
 
@@ -18,6 +18,8 @@ export class JobStorageService {
   private jobCount: number = 0;
 
   public searchCount: number = 0;
+
+  public destroyed$ = new Subject();
 
 
   private behaviorSavedResults$ = new BehaviorSubject<JobDetails[]>([]);
@@ -36,6 +38,10 @@ export class JobStorageService {
     //     this.savedArray = JSON.parse(data);
     //     this.behaviorSavedResults$.next(this.savedArray);
     //   }
+  }
+  ngOnDestroy(): void {
+    this.destroyed$.next(this.destroyed$);
+    this.destroyed$.complete();
   }
 
   // saveMyJobs(savedJobs: JobDetails[]){
@@ -57,11 +63,11 @@ export class JobStorageService {
   //   localStorage.setItem("savedArray", JSON.stringify(this.savedArray));
   // }
 
-  saveMyJobs(savedJobs: JobDetails[]): Observable<any>
+  saveMyJobs(savedJobs: JobDetails[])
   {
     this.jobCount = this.jobCount + savedJobs.length;
     var userName1 = this.userService.user.userName;
-    return this.http.post<any>("https://localhost:7059/api/JobStorage/saveMyJobs?userName=" + userName1,
+    this.http.post<any>("https://localhost:7059/api/JobStorage/saveMyJobs?userName=" + userName1, savedJobs,
     {
       headers: {
         'Authorization':
@@ -72,8 +78,12 @@ export class JobStorageService {
       catchError((err: any): any=>{
         this.loggerService.logError(this.loggerService.ERROR_MESSAGE, err)
       }),
-      tap()
-    );
+      tap(),
+      takeUntil(this.destroyed$),
+      
+    ).subscribe();
+
+    alert("SAVE JOBS WORKS")
     // return isTrue = true;
     
   }
@@ -98,15 +108,10 @@ export class JobStorageService {
         this.behaviorSearchResults$.next(this.savedSearches);
         this.loggerService.logInfo(this.loggerService.SUCCESS_MESSAGE);
         this.searchCount = savedSearchesDB.length;
-      })
+      }),
+      takeUntil(this.destroyed$)
     ).subscribe();
   }
-
-
-
-
-
-
 
 
 
@@ -131,7 +136,8 @@ export class JobStorageService {
         this.loggerService.logInfo(this.loggerService.SUCCESS_MESSAGE);
         this.jobCount = this.savedArray.length;
         
-      })
+      }),
+      takeUntil(this.destroyed$)
     ).subscribe();
   }
 
@@ -141,10 +147,50 @@ export class JobStorageService {
 
 
   removeJob(jobToRemove: JobDetails){
-    this.savedArray = this.savedArray.filter( job => job.jobId !== jobToRemove.jobId);
+    
+    var userName1 = this.userService.user.userName;
+    this.http.delete<any>("https://localhost:7059/api/JobStorage/deleteSavedJob?JobDetailId=" + jobToRemove.jobDetailId, 
+    {
+      headers: {
+        'Authorization':
+        'Basic Nzk1YzM0OTktZDc0NS00ZGEyLTg5OTAtZGYwY2M2MjMyOTljOg=='
+      }
+    }
+    ).pipe(
+      catchError((err: any): any=>{
+        this.loggerService.logError(this.loggerService.DATA_ERROR_MESSAGE, err)
+      }),
+      tap(),
+      takeUntil(this.destroyed$)
+    ).subscribe();
+    this.savedArray = this.savedArray.filter( job => job.jobDetailId !== jobToRemove.jobDetailId);
     this.behaviorSavedResults$.next(this.savedArray);
     this.loggerService.logInfo(this.loggerService.REMOVED_MESSAGE, jobToRemove);
   }
+
+  removeSearch(searchToRemove: JobSearch){
+    var userName1 = this.userService.user.userName;
+    this.http.delete<any>("https://localhost:7059/api/JobStorage/deleteSavedSearch?JobSearchId=" + searchToRemove.jobSearchId,
+    {
+      headers: {
+        'Authorization':
+        'Basic Nzk1YzM0OTktZDc0NS00ZGEyLTg5OTAtZGYwY2M2MjMyOTljOg=='
+      }
+    }
+    ).pipe(
+      catchError((err: any): any=>{
+        this.loggerService.logError(this.loggerService.DATA_ERROR_MESSAGE, err)
+      }),
+      tap(),
+      takeUntil(this.destroyed$)
+    ).subscribe();
+    this.savedSearches = this.savedSearches.filter(search => search.jobSearchId !== searchToRemove.jobSearchId);
+    this.behaviorSearchResults$.next(this.savedSearches);
+    this.loggerService.logInfo(this.loggerService.REMOVED_MESSAGE, searchToRemove);
+  }
+
+
+
 
   saveMySearch(jobSearchData: JobSearch){
     if(!jobSearchData.userDetails)
@@ -153,7 +199,7 @@ export class JobStorageService {
     }
     jobSearchData.userDetails.userName = this.userService.user.userName;
     // this.http.post<JobSearch>("https://localhost:7059/api/JobStorage/saveMySearch?userName=" + userName1,
-    this.http.post<JobSearch>("https://localhost:7059/api/JobStorage/saveMySearch", jobSearchData,
+    this.http.post<JobSearch>("https://localhost:7059/api/JobStorage/saveMySearch?userName=" + jobSearchData.userDetails.userName, jobSearchData,
     {
       headers: {
         'Authorization':
@@ -164,8 +210,9 @@ export class JobStorageService {
       catchError((err: any): any=>{
         this.loggerService.logError(this.loggerService.ERROR_MESSAGE, err)
       }),
-      tap()
-    );
+      tap(),
+      takeUntil(this.destroyed$)
+    ).subscribe();
   } 
 
 //  removeSearch(JobSearch: JobSearch){

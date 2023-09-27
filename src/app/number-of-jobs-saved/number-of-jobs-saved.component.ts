@@ -13,11 +13,11 @@ export class NumberOfJobsSavedComponent {
 
   constructor(public jobStorageService: JobStorageService){}
 
-  ngOnInit(){
-    this.jobStorageService.savedResults$.pipe(
-      tap((bob) => {
-        this.jobCount = bob.length;
-      })
-    ).subscribe();
-  }
+  // ngOnInit(){
+  //   this.jobStorageService.savedResults$.pipe(
+  //     tap((bob) => {
+  //       this.jobCount = bob.length;
+  //     })
+  //   ).subscribe();
+  // }
 }

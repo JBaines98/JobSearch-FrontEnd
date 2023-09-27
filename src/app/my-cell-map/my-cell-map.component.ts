@@ -5,10 +5,12 @@ import { ICellRendererParams } from 'ag-grid-community';
 @Component({
   selector: 'app-my-cell-map',
   template: `
+
     <a href="http://www.google.com/maps/search/?api=1&query={{locationName}}" target="_blank">
-      Location
-</a>
+      <img style="height: 35px; width: 40px;" src="assets/GoogleMaps.webp">
+    </a>
   `,
+
   styles: [
   ]
 })

@@ -1,6 +1,7 @@
     
     <mat-card class="cardStyle">
         <mat-card-content class="contentStyle">
-            <strong>Total Number of Saved Jobs: {{jobCount}}</strong>
+            <!-- <strong>Total Number of Saved Jobs: {{jobCount}}</strong> -->
+            <strong>Total Number of Saved Jobs: {{ (jobStorageService.savedResults$ | async)?.length}}</strong>
         </mat-card-content>
     </mat-card>

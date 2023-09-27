@@ -1,4 +1,5 @@
 export interface JobDetails {
+    jobDetailId?: number;
     jobId?: number;
     employerId?: number;
     employerName?: string;
@@ -36,6 +37,8 @@ export interface UserDetails {
 }
 
 export interface JobSearch {
+    jobSearchId?: number;
+    searchName?: string;
     employerID?: number;
     employerName?: string;
     empolyerProfileID?: number;
