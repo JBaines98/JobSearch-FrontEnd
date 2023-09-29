@@ -20,6 +20,7 @@ export class AppComponent implements OnDestroy{
   jobResults: JobDetails[] = [];
   showMyContainer: boolean = true;
   showMySavedJobs: boolean = false;
+  showMySavedSearches: boolean = false;
   savedJobs: JobDetails[] = [];
 
   destroyed$ = new Subject();

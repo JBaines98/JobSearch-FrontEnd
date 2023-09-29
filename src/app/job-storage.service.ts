@@ -1,7 +1,7 @@
 import { NgFor } from '@angular/common';
 import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, catchError, map, takeUntil, tap, } from 'rxjs';
-import { JobDetails, JobSearch } from 'src/models/job-search.model';
+import { JobDetails, JobSearch, UserDetails } from 'src/models/job-search.model';
 import { LoggerService } from './logger.service';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from './user.service';
@@ -20,6 +20,9 @@ export class JobStorageService implements OnDestroy {
   public searchCount: number = 0;
 
   public destroyed$ = new Subject();
+
+  public selectedUserName: UserDetails = {};
+
 
 
   private behaviorSavedResults$ = new BehaviorSubject<JobDetails[]>([]);
@@ -66,8 +69,8 @@ export class JobStorageService implements OnDestroy {
   saveMyJobs(savedJobs: JobDetails[])
   {
     this.jobCount = this.jobCount + savedJobs.length;
-    var userName1 = this.userService.user.userName;
-    this.http.post<any>("https://localhost:7059/api/JobStorage/saveMyJobs?userName=" + userName1, savedJobs,
+    this.selectedUserName = this.userService.selectedUser;
+    this.http.post<any>("https://localhost:7059/api/JobStorage/saveMyJobs?userName=" + this.selectedUserName, savedJobs,
     {
       headers: {
         'Authorization':
@@ -89,8 +92,8 @@ export class JobStorageService implements OnDestroy {
   }
 
   getSavedSearches(){
-    var userName = this.userService.user.userName
-    this.http.get<any>("https://localhost:7059/api/JobStorage/getSavedSearch?userName=" + userName,
+    this.selectedUserName = this.userService.selectedUser;
+    this.http.get<any>("https://localhost:7059/api/JobStorage/getSavedSearch?userName=" + this.selectedUserName,
     {
       headers: {
         'Authorization':
@@ -116,8 +119,8 @@ export class JobStorageService implements OnDestroy {
 
 
   getSavedJobs(){
-    var userName1 = this.userService.user.userName;
-    this.http.get<any>("https://localhost:7059/api/JobStorage/getSavedJobs?userName=" + userName1,
+    this.selectedUserName = this.userService.selectedUser;
+    this.http.get<any>("https://localhost:7059/api/JobStorage/getSavedJobs?userName=" + this.selectedUserName,
     {
       headers: {
         'Authorization':
@@ -148,7 +151,7 @@ export class JobStorageService implements OnDestroy {
 
   removeJob(jobToRemove: JobDetails){
     
-    var userName1 = this.userService.user.userName;
+    this.selectedUserName = this.userService.selectedUser;
     this.http.delete<any>("https://localhost:7059/api/JobStorage/deleteSavedJob?JobDetailId=" + jobToRemove.jobDetailId, 
     {
       headers: {
@@ -169,7 +172,7 @@ export class JobStorageService implements OnDestroy {
   }
 
   removeSearch(searchToRemove: JobSearch){
-    var userName1 = this.userService.user.userName;
+    this.selectedUserName = this.userService.selectedUser;
     this.http.delete<any>("https://localhost:7059/api/JobStorage/deleteSavedSearch?JobSearchId=" + searchToRemove.jobSearchId,
     {
       headers: {
@@ -197,7 +200,7 @@ export class JobStorageService implements OnDestroy {
     {
       jobSearchData.userDetails = {};
     }
-    jobSearchData.userDetails.userName = this.userService.user.userName;
+    jobSearchData.userDetails.userName = this.userService.selectedUser.userName;
     // this.http.post<JobSearch>("https://localhost:7059/api/JobStorage/saveMySearch?userName=" + userName1,
     this.http.post<JobSearch>("https://localhost:7059/api/JobStorage/saveMySearch?userName=" + jobSearchData.userDetails.userName, jobSearchData,
     {

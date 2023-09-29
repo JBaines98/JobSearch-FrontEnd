@@ -20,6 +20,7 @@ export class LoggerService {
   public readonly ALREADY_SAVED_MESSAGE = "Already been saved.";
   public readonly REMOVED_MESSAGE = "Job successfully removed.";
   public readonly SUBMITTED_MESSAGE = "Successfully submitted.";
+  public readonly USER_CHANGED = "User successfully changed.";
 
   public logMessage$ = new Subject<string>();
 

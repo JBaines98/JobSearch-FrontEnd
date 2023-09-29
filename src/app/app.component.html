@@ -15,6 +15,7 @@
           <app-number-of-jobs></app-number-of-jobs>
           <app-number-of-jobs-saved></app-number-of-jobs-saved>
           <app-number-of-searches-saved></app-number-of-searches-saved>
+          <app-current-user></app-current-user>
         </div>
     
     </div>
@@ -33,20 +34,29 @@
 
   <span class="row">
 
-      <mat-slide-toggle (toggleChange)="showMyContainer=!showMyContainer">Search a job</mat-slide-toggle>
-      <mat-slide-toggle (toggleChange)="showMySavedJobs=!showMySavedJobs">Load saved jobs</mat-slide-toggle>
+      <span>
+        <mat-slide-toggle (toggleChange)="showMyContainer=!showMyContainer">Search a job</mat-slide-toggle>
+        <mat-slide-toggle (toggleChange)="showMySavedJobs=!showMySavedJobs">Load saved jobs</mat-slide-toggle>
+        <mat-slide-toggle (toggleChange)="showMySavedSearches=!showMySavedSearches">Load saved searches</mat-slide-toggle>
+      </span>
+
       <button mat-raised-button color="warn" (click)="onClear()">Clear Job Table</button>
       <button mat-raised-button color="primary" (click)="displayDialog()">Open Saved Jobs</button>
       <button mat-raised-button color="primary" (click)="displayJobSearches()">Open saved job searches</button>
+
       <button class="lightButton" (click)="changeThemeLight()">Light Theme</button>
       <button class="darkButton" (click)="changeThemeDark()">Dark Theme</button>
       <button class="colorfulButton" (click)="changeThemeColourful()">Colourful Theme</button>
-    </span>
+  </span>
 
   <br>
 
   <div *ngIf="showMySavedJobs">
     <app-saved-jobs></app-saved-jobs>
+  </div>
+
+  <div *ngIf="showMySavedSearches">
+    <app-saved-searches></app-saved-searches>
   </div>
 
     <!-- <form class="example-form">
@@ -84,8 +94,15 @@
       <br>
 
       <div class="row">
-        <app-other-job-sites></app-other-job-sites>
+        <div>
+          <app-other-job-sites></app-other-job-sites>
+        </div>
+        <div>
+          <app-select-user></app-select-user>
+        </div>
       </div>
+
+      
 
 
 

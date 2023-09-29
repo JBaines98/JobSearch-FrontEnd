@@ -39,7 +39,9 @@ import { SavedSearchesComponent } from './saved-searches/saved-searches.componen
 import { NumberOfSearchesSavedComponent } from './number-of-searches-saved/number-of-searches-saved.component';
 import { OtherJobSitesComponent } from './other-job-sites/other-job-sites.component';
 import { MatExpansionModule } from '@angular/material/expansion';
-
+import { SelectUserComponent } from './select-user/select-user.component';
+import { CurrentUserComponent } from './current-user/current-user.component';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 
 @NgModule({
@@ -61,7 +63,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
     LikedCellComponent,
     SavedSearchesComponent,
     NumberOfSearchesSavedComponent,
-    OtherJobSitesComponent
+    OtherJobSitesComponent,
+    SelectUserComponent,
+    CurrentUserComponent
   ],
   imports: [
     FormsModule,
@@ -84,7 +88,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatSidenavModule,
     MatIconModule,
     MatSnackBarModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatButtonToggleModule
     
   ],
   providers: [],
