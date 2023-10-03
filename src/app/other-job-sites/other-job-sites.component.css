@@ -1,6 +1,7 @@
 .row {
     display: flex;
     gap: 10px;
+    background-color: aqua;
 }
 .linkedIn {
     height: 40px;
@@ -16,4 +17,7 @@
 }
 .border {
     border: 2px solid black;
+    background-color: aqua;
+
+
 }

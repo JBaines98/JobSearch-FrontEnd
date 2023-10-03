@@ -1,27 +1,34 @@
+<div
+  class="topLevel"
+  [class.lightTheme]="themeName === 'light'"
+  [class.darkTheme]="themeName === 'dark'"
+  [class.colorfulTheme]="themeName === 'colorful'"
+>
+  <br />
 
-<div  class="topLevel" [class.lightTheme]="themeName==='light'" [class.darkTheme]="themeName==='dark'" [class.colorfulTheme]="themeName==='colorful'">
-  <br>
-      
   <div class="row">
     <div>
-        <button  class="homeButton" (click)="homeClicked()" [class.lightTheme]="themeName==='light'" [class.darkTheme]="themeName==='dark'" [class.colorfulTheme]="themeName==='colorful'">
-          <span class="bold">Job Finder
-          <span class="fa-solid fa-magnifying-glass">
-          </span>
-          </span>
-        </button>
-        
-        <div class="row">
-          <app-number-of-jobs></app-number-of-jobs>
-          <app-number-of-jobs-saved></app-number-of-jobs-saved>
-          <app-number-of-searches-saved></app-number-of-searches-saved>
-          <app-current-user></app-current-user>
-        </div>
-    
+      <button
+        class="homeButton"
+        (click)="homeClicked()"
+        [class.lightTheme]="themeName === 'light'"
+        [class.darkTheme]="themeName === 'dark'"
+        [class.colorfulTheme]="themeName === 'colorful'"
+      >
+        <span class="bold"
+          >Job Finder
+          <span class="fa-solid fa-magnifying-glass"> </span>
+        </span>
+      </button>
+
+      <div class="row">
+        <app-number-of-jobs></app-number-of-jobs>
+        <app-number-of-jobs-saved></app-number-of-jobs-saved>
+        <app-number-of-searches-saved></app-number-of-searches-saved>
+        <app-current-user></app-current-user>
+      </div>
     </div>
   </div>
-
-
 
   <!-- <div class="row">
 
@@ -30,26 +37,40 @@
 
   </div> -->
 
-    <br>
+  <br />
 
   <span class="row">
+    <span>
+      <!-- <mat-slide-toggle (toggleChange)="showMyContainer=!showMyContainer">Search a job</mat-slide-toggle> -->
+      <mat-slide-toggle (toggleChange)="showMySavedJobs = !showMySavedJobs"
+        >Load saved jobs</mat-slide-toggle
+      >
+      <mat-slide-toggle
+        (toggleChange)="showMySavedSearches = !showMySavedSearches"
+        >Load saved searches</mat-slide-toggle
+      >
+    </span>
 
-      <span>
-        <mat-slide-toggle (toggleChange)="showMyContainer=!showMyContainer">Search a job</mat-slide-toggle>
-        <mat-slide-toggle (toggleChange)="showMySavedJobs=!showMySavedJobs">Load saved jobs</mat-slide-toggle>
-        <mat-slide-toggle (toggleChange)="showMySavedSearches=!showMySavedSearches">Load saved searches</mat-slide-toggle>
-      </span>
+    <button mat-raised-button color="warn" (click)="onClear()">
+      Clear Job Table
+    </button>
+    <button mat-raised-button color="primary" (click)="displayDialog()">
+      Open Saved Jobs
+    </button>
+    <button mat-raised-button color="primary" (click)="displayJobSearches()">
+      Open saved job searches
+    </button>
 
-      <button mat-raised-button color="warn" (click)="onClear()">Clear Job Table</button>
-      <button mat-raised-button color="primary" (click)="displayDialog()">Open Saved Jobs</button>
-      <button mat-raised-button color="primary" (click)="displayJobSearches()">Open saved job searches</button>
-
-      <button class="lightButton" (click)="changeThemeLight()">Light Theme</button>
-      <button class="darkButton" (click)="changeThemeDark()">Dark Theme</button>
-      <button class="colorfulButton" (click)="changeThemeColourful()">Colourful Theme</button>
+    <button class="lightButton" (click)="changeTheme('light')">
+      Light Theme
+    </button>
+    <button class="darkButton" (click)="changeTheme('dark')">Dark Theme</button>
+    <button class="colorfulButton" (click)="changeTheme('colorful')">
+      Colourful Theme
+    </button>
   </span>
 
-  <br>
+  <br />
 
   <div *ngIf="showMySavedJobs">
     <app-saved-jobs></app-saved-jobs>
@@ -59,7 +80,7 @@
     <app-saved-searches></app-saved-searches>
   </div>
 
-    <!-- <form class="example-form">
+  <!-- <form class="example-form">
       <mat-form-field class="example-full-width">
         <h3>Job Search:</h3>
         <input matInput placeholder="Accountant" name="title">
@@ -67,31 +88,53 @@
     </form> -->
   <div>
     <div class="container">
-      <div class="row">
+      <mat-expansion-panel
+        [class.formLight]="themeName === 'light'"
+        [class.formDark]="themeName === 'dark'"
+        [class.formColorful]="themeName === 'colorful'"
+        [(expanded)]="formPanelOpenState"
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title> Job Search form </mat-panel-title>
+          <mat-panel-description>
+            Currently I am {{ formPanelOpenState ? "open" : "closed" }}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>
+          <app-reactive-form
+            (jobSearchEntered)="jobSearchEnteredSubmit($event)"
+          ></app-reactive-form>
+        </p>
+      </mat-expansion-panel>
 
-        <div *ngIf="showMyContainer" class="column">
-          <button mat-raised-button color="primary" (click)="onSubmit()">Submit</button>
-          <button mat-raised-button color="primary" (click)="onSaveSearch(jobSearchData)">Save Search</button>
+      <br />
 
-          
-            <app-reactive-form (jobSearchEntered)="jobSearchEnteredSubmit($event)"></app-reactive-form>
-        </div>
+      <button mat-raised-button color="primary" (click)="onSubmit()">
+        Submit
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="onSaveSearch(jobSearchData)"
+      >
+        Save Search
+      </button>
 
-        <div class="column">
-            <!-- <app-job-table [jobResults]="jobResults"></app-job-table> -->
-            <app-ag-grid></app-ag-grid>
-        </div>
+      <br />
 
-        <!-- <div class="column">
+      <div *ngIf="showAgGrid">
+        <!-- <app-job-table [jobResults]="jobResults"></app-job-table> -->
+        <app-ag-grid></app-ag-grid>
+      </div>
+
+      <!-- <div class="column">
           <div *ngFor="let jobDetail of jobResults">
             <app-job-details [jobDetail]="jobDetail"></app-job-details>
             <strong><hr></strong>
           </div>
         </div> -->
 
-      </div>
-
-      <br>
+      <br />
 
       <div class="row">
         <div>
@@ -103,10 +146,6 @@
       </div>
 
       
-
-
-
     </div>
-
   </div>
 </div>

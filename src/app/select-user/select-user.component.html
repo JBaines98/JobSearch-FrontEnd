@@ -2,10 +2,19 @@
     <span>
         <h4><strong>Please select a user from below: </strong></h4>
         <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-            <mat-button-toggle class="buttonStyle" (click)="clickedJack98()"><strong>Jack98</strong></mat-button-toggle>
-            <mat-button-toggle class="buttonStyle" (click)="clickedDarren9()"><strong>Darren9</strong></mat-button-toggle>
-            <mat-button-toggle class="buttonStyle" (click)="clickedAmanda1()"><strong>Amanda1</strong></mat-button-toggle>
-            <mat-button-toggle class="buttonStyle" (click)="clickedLaura01()"><strong>Laura01</strong></mat-button-toggle>
+
+            <mat-button-toggle [class.lightThemeComponent]="themeName==='light'" [class.darkThemeComponent]="themeName==='dark'" [class.colorfulThemeComponent]="themeName==='colorful'" 
+            (click)="clickedUser(1)">Jack98</mat-button-toggle>
+
+            <mat-button-toggle [class.lightThemeComponent]="themeName==='light'" [class.darkThemeComponent]="themeName==='dark'" [class.colorfulThemeComponent]="themeName==='colorful'"
+            (click)="clickedUser(6)">Darren9</mat-button-toggle>
+
+            <mat-button-toggle [class.lightThemeComponent]="themeName==='light'" [class.darkThemeComponent]="themeName==='dark'" [class.colorfulThemeComponent]="themeName==='colorful'" 
+            (click)="clickedUser(9)">Amanda1</mat-button-toggle>
+
+            <mat-button-toggle [class.lightThemeComponent]="themeName==='light'" [class.darkThemeComponent]="themeName==='dark'" [class.colorfulThemeComponent]="themeName==='colorful'" 
+            (click)="clickedUser(10)">Laura01</mat-button-toggle>
+
         </mat-button-toggle-group>
     </span>
 </div>

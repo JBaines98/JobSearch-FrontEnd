@@ -4,6 +4,7 @@ import { JobDetails } from 'src/models/job-search.model';
 import { Observable, map, tap, } from 'rxjs';
 import { MatCardModule } from '@angular/material/card';
 import { Subject, takeUntil } from 'rxjs';
+import { UserService } from '../user.service';
 
 
 @Component({
@@ -14,9 +15,10 @@ import { Subject, takeUntil } from 'rxjs';
 export class NumberOfJobsComponent implements OnDestroy{
 
  public jobCount: number=0;
+ public themeName: string="light";
  public destroyed$ = new Subject();
 
-  constructor(public jobSearchService: JobSearchService){
+  constructor(public jobSearchService: JobSearchService, public userService: UserService){
   }
   ngOnDestroy(): void {
     this.destroyed$.next(this.destroyed$);
@@ -27,6 +29,13 @@ export class NumberOfJobsComponent implements OnDestroy{
     this.jobSearchService.searchResults$.pipe(
       tap((bob) => {
         this.jobCount = bob.length;
+      }),
+      takeUntil(this.destroyed$)
+    ).subscribe();
+
+    this.userService.themeNameSelected$.pipe(
+      tap(theme => {
+        this.themeName = theme;
       }),
       takeUntil(this.destroyed$)
     ).subscribe();

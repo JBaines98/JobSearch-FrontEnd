@@ -20,7 +20,7 @@ import { JobTableComponent } from './job-table/job-table.component';
 import { AgGridComponent } from './ag-grid/ag-grid.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { MyCellComponent } from './my-cell/my-cell.component';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MyCellMapComponent } from './my-cell-map/my-cell-map.component';
 import { NumberOfJobsComponent } from './number-of-jobs/number-of-jobs.component';
 import { DeleteMyCellComponent } from './delete-my-cell/delete-my-cell.component';
@@ -92,7 +92,10 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     MatButtonToggleModule
     
   ],
-  providers: [],
+  providers: [
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+    { provide: MatDialogRef, useValue: {} }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

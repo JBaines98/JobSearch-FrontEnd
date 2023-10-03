@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { LoggerService } from './logger.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SavedSearchesComponent } from './saved-searches/saved-searches.component';
+import { UserService } from './user.service';
 
 @Component({
   selector: 'app-root',
@@ -18,21 +19,23 @@ export class AppComponent implements OnDestroy{
   title = 'JobSearch';
   jobSearchData: JobSearch = {};
   jobResults: JobDetails[] = [];
-  showMyContainer: boolean = true;
   showMySavedJobs: boolean = false;
   showMySavedSearches: boolean = false;
   savedJobs: JobDetails[] = [];
+  showAgGrid: boolean = false;
+  formPanelOpenState: boolean = true;
 
   destroyed$ = new Subject();
 
 
-  themeName: string = "light";
+  themeName: string = "";
 
 
   constructor(
     public jobSearchService: JobSearchService,
     public jobStorageService: JobStorageService,
     public loggerService: LoggerService,
+    public userService: UserService,
     public dialog: MatDialog,
     public _snackBar: MatSnackBar,
     ){
@@ -41,9 +44,17 @@ export class AppComponent implements OnDestroy{
           this._snackBar.open(message);
         })
       ).subscribe();
+
+      this.userService.themeNameSelected$.pipe(
+        tap(theme => {
+          this.themeName = theme;
+        })
+      ).subscribe();
+      
       this.jobStorageService.getSavedJobs();
       this.jobStorageService.getSavedSearches();
     }
+
 
 
 
@@ -56,14 +67,16 @@ export class AppComponent implements OnDestroy{
   onSubmit(){
 
      this.jobSearchService.searchJob(this.jobSearchData);
-    this.showMyContainer = false;
+    // this.showMyContainer = false;
+    this.showAgGrid = true;
+    this.formPanelOpenState = false;
     this.loggerService.logInfo(this.loggerService.SUBMITTED_MESSAGE);
     }
 
   homeClicked(){
-    this.showMyContainer = true;
+    // this.showMyContainer = true;
     this.showMySavedJobs = false;
-    this.themeName = "light";
+    //this.themeName = "light";
   }
   
   jobSearchEnteredSubmit(inputDetails: JobSearch){
@@ -72,7 +85,7 @@ export class AppComponent implements OnDestroy{
   }
   onClear(){
     this.jobSearchService.clearArray();
-    this.showMyContainer = true;
+    // this.showMyContainer = true;
     this.loggerService.logInfo(this.loggerService.CLEAR_SUCCESS_MESSAGE);
   }
   openSavedJobs(){
@@ -91,8 +104,9 @@ export class AppComponent implements OnDestroy{
    displayDialog(){
     this.loggerService.logInfo(this.loggerService.SUCCESS_MESSAGE);
     const dialogRef = this.dialog.open(SavedJobsComponent,{
+      panelClass: 'jobList',
       width: '250px',
-      data: this.savedJobs
+      data: {usageType: 'popUp'}
   })
    }
 
@@ -109,17 +123,10 @@ export class AppComponent implements OnDestroy{
     this.jobStorageService.saveMySearch(jobSearchData);
   }
 
-  changeThemeLight(){
-    this.themeName = "light";
+  changeTheme(theme: string){
+    this.userService.themeChange(theme);
   }
 
-  changeThemeDark(){
-    this.themeName = "dark";
-  }
-
-  changeThemeColourful(){
-    this.themeName = "colorful";
-  }
 
 
 

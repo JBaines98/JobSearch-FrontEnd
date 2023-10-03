@@ -1,7 +1,15 @@
 
-    <mat-card class="cardStyle">
-        <mat-card-content class="contentStyle">
-            <strong>Total Number of Jobs: {{jobCount}}</strong>
+    <mat-card [class.lightThemeComponent]="themeName==='light'" [class.darkThemeComponent]="themeName==='dark'" [class.colorfulThemeComponent]="themeName==='colorful'">
+        <mat-card-content >
+
+            <span *ngIf="themeName === 'dark'; else strongText">Total Number of Jobs: {{jobCount}}</span>
+
+            <ng-template #strongText>    <strong>Total Number of Jobs: {{jobCount}}</strong> </ng-template>
+            
+
+
+
+
         </mat-card-content>
     </mat-card>
 

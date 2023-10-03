@@ -1,7 +1,10 @@
     
-    <mat-card class="cardStyle">
-        <mat-card-content class="contentStyle">
-            <!-- <strong>Total Number of Saved Jobs: {{jobCount}}</strong> -->
-            <strong>Total Number of Saved Jobs: {{ (jobStorageService.savedResults$ | async)?.length}}</strong>
+    <mat-card [class.lightThemeComponent]="themeName==='light'" [class.darkThemeComponent]="themeName==='dark'" [class.colorfulThemeComponent]="themeName==='colorful'">
+        <mat-card-content>
+
+            <span *ngIf="themeName === 'dark'; else strongText">Total Number of Saved Jobs: {{ (jobStorageService.savedResults$ | async)?.length}}</span>
+            <ng-template #strongText><strong>Total Number of Saved Jobs: {{ (jobStorageService.savedResults$ | async)?.length}}</strong></ng-template>
+
+
         </mat-card-content>
     </mat-card>

@@ -1,6 +1,6 @@
     <mat-card class="color">
         <mat-card-content>
-            <div>
+            <div [class.jobList]="data.usageType === 'popUp'">
                 <h3><strong>List of saved jobs:</strong></h3>
                 <div *ngFor="let JobDetail of savedJobs">
                     Job title: {{JobDetail.jobTitle}}

@@ -1,7 +1,11 @@
 <div>
-    <mat-card class="cardStyle">
-        <mat-card-content class="contentStyle">
-            <strong>Current User: {{selectedUser.userName}}</strong>
+    <mat-card [class.lightThemeComponent]="themeName==='light'" [class.darkThemeComponent]="themeName==='dark'" [class.colorfulThemeComponent]="themeName==='colorful'">
+        <mat-card-content>
+
+            <span *ngIf="themeName === 'dark'; else strongText">Current User: {{selectedUserName}}</span>
+            <ng-template #strongText><strong>Current User: {{selectedUserName}}</strong></ng-template>
+
+
         </mat-card-content>
     </mat-card>
 </div>

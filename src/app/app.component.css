@@ -24,7 +24,6 @@
     gap: 10px;
   }
   .column {
-    background-color: lightgrey;
     padding: 1rem 0;
     flex: 1;
   }
@@ -38,13 +37,36 @@
   }
   .lightTheme {
     background-color: burlywood;
-
+  }
+  .lightThemeComponent {
+    background-color: aqua;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 250px;
+    height: 50px;
+    border: 2px solid black;
   }
   .darkTheme {
     background-color: darkcyan;
   }
+  .darkThemeComponent {
+    background-color: darksalmon;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 250px;
+    height: 50px;
+    border: 2px solid black;
+  }
   .colorfulTheme {
     background-color: greenyellow;
+  }
+  .colorfulThemeComponent {
+    background-color: darksalmon;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 250px;
+    height: 50px;
+    border: 2px solid black;
   }
   .lightButton{
     background-color: rgb(210, 168, 112);
@@ -70,6 +92,24 @@
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
     font-weight: 600;
     padding: 9px 18px;
+  }
+  .formLight {
+    background-color: rgb(185, 150, 104);
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border: 2px solid black;
+  }
+  .formDark {
+    background-color: rgb(7, 102, 102);
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border: 2px solid black;
+  }
+  .formColorful {
+    background-color: palevioletred;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border: 2px solid black;
   }
 
 
