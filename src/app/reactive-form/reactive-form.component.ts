@@ -7,6 +7,7 @@ import { takeUntil, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { UserService } from '../user.service';
 import { LoggerService } from '../logger.service';
+import { UserInterfaceService } from '../user-interface.service';
 
 @Component({
   selector: 'app-reactive-form',
@@ -18,7 +19,7 @@ export class ReactiveFormComponent implements OnInit, OnDestroy{
   public destroyed$ = new Subject();
   public themeName: string = '';
 
-  constructor(public userService: UserService, public loggerService: LoggerService){}
+  constructor(public userService: UserService, public loggerService: LoggerService, public userInterfaceService: UserInterfaceService){}
 
   ngOnDestroy(): void {
     this.destroyed$.next(this.destroyed$);
@@ -59,7 +60,7 @@ export class ReactiveFormComponent implements OnInit, OnDestroy{
     takeUntil(this.destroyed$)
    ).subscribe();
 
-   this.userService.themeNameSelected$.pipe(
+   this.userInterfaceService.themeNameSelected$.pipe(
     tap(theme => {
       this.themeName = theme;
     }),

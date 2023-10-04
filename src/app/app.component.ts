@@ -52,6 +52,13 @@ export class AppComponent implements OnDestroy{
           this.themeName = theme;
         })
       ).subscribe();
+
+      if (this.formPanelOpenState)
+      {
+        this.showAgGrid = false;
+      }else{
+        this.showAgGrid = true;
+      }
       
       this.jobStorageService.getSavedJobs();
       this.jobStorageService.getSavedSearches();
@@ -78,7 +85,7 @@ export class AppComponent implements OnDestroy{
   homeClicked(){
     // this.showMyContainer = true;
     this.showMySavedJobs = false;
-    //this.themeName = "light";
+    this.userInterfaceService.themeChange('light');
   }
   
   jobSearchEnteredSubmit(inputDetails: JobSearch){

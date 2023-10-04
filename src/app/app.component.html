@@ -96,6 +96,8 @@
         [class.formDark]="themeName === 'dark'"
         [class.formColorful]="themeName === 'colorful'"
         [(expanded)]="formPanelOpenState"
+        (opened)="showAgGrid = false"
+        (closed)="showAgGrid = true"
       >
         <mat-expansion-panel-header>
           <mat-panel-title

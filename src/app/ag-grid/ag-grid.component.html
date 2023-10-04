@@ -1,21 +1,23 @@
-<ag-grid-angular 
-    (selectionChanged)="isSelected()"
-    (gridReady)="gridReady($event)"
-    style="width: 100%; height: 500px;" 
-    class="ag-theme-material"
-    [rowData]="jobResults" 
-    [columnDefs]="columnDefs"
-    [gridOptions]="gridOptions"
-    [sideBar]="true"
-    >
-    
-</ag-grid-angular>
+<div *ngIf="!!jobResults">    
+    <ag-grid-angular 
+        (selectionChanged)="isSelected()"
+        (gridReady)="gridReady($event)"
+        style="width: 100%; height: 500px;" 
+        class="ag-theme-material"
+        [rowData]="jobResults" 
+        [columnDefs]="columnDefs"
+        [gridOptions]="gridOptions"
+        [sideBar]="true"
+        >
+        
+    </ag-grid-angular>
 
-<br>
+    <br>
 
-<span>
-    <button mat-raised-button color="primary" (click)="onSelectedDelete()">Delete selected jobs</button>
-    <button mat-raised-button color="primary" (click)="onSelectedSave()">Save selected jobs</button>
-    <!-- <button mat-raised-button color="primary" (click)="onSelectedAdd()">Add selected jobs</button> -->
-    
-</span>
+    <span>
+        <button mat-raised-button color="primary" (click)="onSelectedDelete()">Delete selected jobs</button>
+        <button mat-raised-button color="primary" (click)="onSelectedSave()">Save selected jobs</button>
+        <!-- <button mat-raised-button color="primary" (click)="onSelectedAdd()">Add selected jobs</button> -->
+        
+    </span>
+</div>

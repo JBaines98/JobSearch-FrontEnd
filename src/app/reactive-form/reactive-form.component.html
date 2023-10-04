@@ -25,7 +25,8 @@
         <div>
             <mat-slider min="0" max="100000" step="1000" showTickMarks discrete [displayWith]="formatLabel" class="example-full-width">
                 <mat-label for="minimumSalary">Minimum Salary:</mat-label>
-                <input matSliderThumb formControlName="minimumSalary">
+                <input 
+                [class.matSliderColor]="themeName === 'dark'" matSliderThumb formControlName="minimumSalary">
             </mat-slider>
         </div>
 
