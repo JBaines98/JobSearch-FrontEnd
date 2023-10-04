@@ -42,6 +42,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { SelectUserComponent } from './select-user/select-user.component';
 import { CurrentUserComponent } from './current-user/current-user.component';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatMenuModule } from '@angular/material/menu';
+import { UserMenuComponent } from './user-menu/user-menu.component';
 
 
 @NgModule({
@@ -65,7 +67,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     NumberOfSearchesSavedComponent,
     OtherJobSitesComponent,
     SelectUserComponent,
-    CurrentUserComponent
+    CurrentUserComponent,
+    UserMenuComponent
   ],
   imports: [
     FormsModule,
@@ -89,7 +92,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     MatIconModule,
     MatSnackBarModule,
     MatExpansionModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatMenuModule
     
   ],
   providers: [

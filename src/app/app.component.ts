@@ -9,6 +9,7 @@ import { LoggerService } from './logger.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SavedSearchesComponent } from './saved-searches/saved-searches.component';
 import { UserService } from './user.service';
+import { UserInterfaceService } from './user-interface.service';
 
 @Component({
   selector: 'app-root',
@@ -36,6 +37,7 @@ export class AppComponent implements OnDestroy{
     public jobStorageService: JobStorageService,
     public loggerService: LoggerService,
     public userService: UserService,
+    public userInterfaceService: UserInterfaceService,
     public dialog: MatDialog,
     public _snackBar: MatSnackBar,
     ){
@@ -45,7 +47,7 @@ export class AppComponent implements OnDestroy{
         })
       ).subscribe();
 
-      this.userService.themeNameSelected$.pipe(
+      this.userInterfaceService.themeNameSelected$.pipe(
         tap(theme => {
           this.themeName = theme;
         })
@@ -124,7 +126,7 @@ export class AppComponent implements OnDestroy{
   }
 
   changeTheme(theme: string){
-    this.userService.themeChange(theme);
+    this.userInterfaceService.themeChange(theme);
   }
 
 

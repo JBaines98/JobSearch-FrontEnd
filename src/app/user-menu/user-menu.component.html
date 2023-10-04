@@ -1,0 +1,9 @@
+
+    <button class="span" mat-raised-button color="primary" [matMenuTriggerFor]="menu">User: </button>
+    <mat-menu #menu="matMenu">
+    <button mat-raised-button color="primary" (click)="clickedUser(1)">Jack98</button>
+    <button mat-raised-button color="primary" (click)="clickedUser(6)">Darren9</button>
+    <button mat-raised-button color="primary" (click)="clickedUser(9)">Amanda1</button>
+    <button mat-raised-button color="primary" (click)="clickedUser(10)">Laura01</button>
+    </mat-menu>
+

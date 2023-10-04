@@ -3,6 +3,7 @@ import { UserService } from '../user.service';
 import { UserDetails } from 'src/models/job-search.model';
 import { Subject, takeUntil, tap } from 'rxjs';
 import { LoggerService } from '../logger.service';
+import { UserInterfaceService } from '../user-interface.service';
 
 @Component({
   selector: 'app-current-user',
@@ -15,7 +16,7 @@ export class CurrentUserComponent implements OnDestroy {
   public selectedUserName?: string = '';
   public themeName: string = 'light';
 
-  constructor(public userService: UserService, public loggerService: LoggerService){
+  constructor(public userService: UserService, public loggerService: LoggerService, public userInterfaceService: UserInterfaceService){
 
     this.userService.savedUser$.pipe(
       tap((user) => {
@@ -26,7 +27,7 @@ export class CurrentUserComponent implements OnDestroy {
   }
 
   ngOnInit(){
-    this.userService.themeNameSelected$.pipe(
+    this.userInterfaceService.themeNameSelected$.pipe(
       tap(theme => {
         this.themeName = theme;
       }),

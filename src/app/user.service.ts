@@ -11,7 +11,7 @@ export class UserService {
 
   constructor(public loggerService: LoggerService) { 
     this.onSelectedUser(1);
-    this.themeChange('light');
+    // this.themeChange('light');
   }
 
   private behaviorNowSelectedUser$ = new BehaviorSubject<UserDetails>({});
@@ -22,7 +22,7 @@ export class UserService {
 
   selectedUser: any = {};
 
-  themeName: string = '';
+  // themeName: string = '';
 
 
   users: UserDetails[] = 
@@ -89,10 +89,10 @@ export class UserService {
   }
 
 
-  themeChange(theme: string){
-    this.behaviorThemeNameSelected$.next(theme);
-    this.loggerService.logInfo(this.loggerService.THEME_UPDATED);
-  }
+  // themeChange(theme: string){
+  //   this.behaviorThemeNameSelected$.next(theme);
+  //   this.loggerService.logInfo(this.loggerService.THEME_UPDATED);
+  // }
 
   // onSelectedDarren9(){
   //   var selectedUser = this.users.find(user => user.userId === 6);

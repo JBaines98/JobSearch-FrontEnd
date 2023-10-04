@@ -2,6 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { JobStorageService } from '../job-storage.service';
 import { Subject, takeUntil, tap } from 'rxjs';
 import { UserService } from '../user.service';
+import { UserInterfaceService } from '../user-interface.service';
 
 @Component({
   selector: 'app-number-of-searches-saved',
@@ -14,7 +15,7 @@ export class NumberOfSearchesSavedComponent implements OnDestroy {
   public themeName: string = 'light';
   public destroyed$ = new Subject();
 
-  constructor(public jobStorageService: JobStorageService, public userService: UserService){}
+  constructor(public jobStorageService: JobStorageService, public userService: UserService, public userInterfaceService: UserInterfaceService){}
 
 
   ngOnDestroy(): void {
@@ -31,7 +32,7 @@ export class NumberOfSearchesSavedComponent implements OnDestroy {
       takeUntil(this.destroyed$)
     ).subscribe();
 
-    this.userService.themeNameSelected$.pipe(
+    this.userInterfaceService.themeNameSelected$.pipe(
       tap(theme => {
         this.themeName = theme;
       }),

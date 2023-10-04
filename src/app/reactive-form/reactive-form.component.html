@@ -3,7 +3,7 @@
 
 
 
-<div class="background">
+<div [class.backgroundLight]="themeName==='light'" [class.backgroundDark]="themeName==='dark'" [class.backgroundColorful]="themeName==='colorful'">
 
     <form [formGroup]="reactiveForm" class="example-form">
         

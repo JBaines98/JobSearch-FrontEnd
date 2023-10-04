@@ -5,6 +5,8 @@ import { JobSearch } from 'src/models/job-search.model';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { takeUntil, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { UserService } from '../user.service';
+import { LoggerService } from '../logger.service';
 
 @Component({
   selector: 'app-reactive-form',
@@ -14,6 +16,9 @@ import { Subject } from 'rxjs';
 export class ReactiveFormComponent implements OnInit, OnDestroy{
 
   public destroyed$ = new Subject();
+  public themeName: string = '';
+
+  constructor(public userService: UserService, public loggerService: LoggerService){}
 
   ngOnDestroy(): void {
     this.destroyed$.next(this.destroyed$);
@@ -50,6 +55,13 @@ export class ReactiveFormComponent implements OnInit, OnDestroy{
       this.jobSearchEntered.emit(changes as JobSearch);
       console.log(JSON.stringify(changes));
 
+    }),
+    takeUntil(this.destroyed$)
+   ).subscribe();
+
+   this.userService.themeNameSelected$.pipe(
+    tap(theme => {
+      this.themeName = theme;
     }),
     takeUntil(this.destroyed$)
    ).subscribe();

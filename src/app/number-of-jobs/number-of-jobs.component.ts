@@ -5,6 +5,7 @@ import { Observable, map, tap, } from 'rxjs';
 import { MatCardModule } from '@angular/material/card';
 import { Subject, takeUntil } from 'rxjs';
 import { UserService } from '../user.service';
+import { UserInterfaceService } from '../user-interface.service';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class NumberOfJobsComponent implements OnDestroy{
  public themeName: string="light";
  public destroyed$ = new Subject();
 
-  constructor(public jobSearchService: JobSearchService, public userService: UserService){
+  constructor(public jobSearchService: JobSearchService, public userService: UserService, public userInterfaceService: UserInterfaceService){
   }
   ngOnDestroy(): void {
     this.destroyed$.next(this.destroyed$);
@@ -33,7 +34,7 @@ export class NumberOfJobsComponent implements OnDestroy{
       takeUntil(this.destroyed$)
     ).subscribe();
 
-    this.userService.themeNameSelected$.pipe(
+    this.userInterfaceService.themeNameSelected$.pipe(
       tap(theme => {
         this.themeName = theme;
       }),

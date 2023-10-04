@@ -12,8 +12,15 @@
     width: 100%;
 
   }
-  .background {
+  .backgroundLight {
     background-color: rgb(185, 150, 104);
+  }
+  .backgroundDark {
+    background-color: rgb(7, 102, 102);
+    color: white;
+  }
+  .backgroundColorful {
+    background-color: palevioletred;
   }
 
   

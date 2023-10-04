@@ -104,12 +104,28 @@
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     border: 2px solid black;
+    color: white
   }
   .formColorful {
     background-color: palevioletred;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     border: 2px solid black;
+  }
+  .userMenu {
+    margin-left: 50%;
+  }
+  .matExspansionLight {
+    background-color: rgb(185, 150, 104);
+    color: black;
+  }
+  .matExspansionDark {
+    background-color: rgb(7, 102, 102);
+    color: white;
+  }
+  .matExpansionColorful {
+    background-color: palevioletred;
+    color: black;
   }
 
 

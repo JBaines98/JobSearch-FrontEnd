@@ -7,29 +7,32 @@
   <br />
 
   <div class="row">
-    <div>
-      <button
-        class="homeButton"
-        (click)="homeClicked()"
-        [class.lightTheme]="themeName === 'light'"
-        [class.darkTheme]="themeName === 'dark'"
-        [class.colorfulTheme]="themeName === 'colorful'"
-      >
-        <span class="bold"
-          >Job Finder
-          <span class="fa-solid fa-magnifying-glass"> </span>
-        </span>
-      </button>
 
-      <div class="row">
-        <app-number-of-jobs></app-number-of-jobs>
-        <app-number-of-jobs-saved></app-number-of-jobs-saved>
-        <app-number-of-searches-saved></app-number-of-searches-saved>
-        <app-current-user></app-current-user>
-      </div>
-    </div>
+        <button
+          class="homeButton"
+          (click)="homeClicked()"
+          [class.lightTheme]="themeName === 'light'"
+          [class.darkTheme]="themeName === 'dark'"
+          [class.colorfulTheme]="themeName === 'colorful'"
+        >
+          <span class="bold"
+            >Job Finder
+            <span class="fa-solid fa-magnifying-glass"> </span>
+          </span>
+        </button>
+
+        <div class="userMenu">
+          <app-user-menu></app-user-menu>
+        </div>
+
   </div>
 
+<div class="row">
+  <app-number-of-jobs></app-number-of-jobs>
+  <app-number-of-jobs-saved></app-number-of-jobs-saved>
+  <app-number-of-searches-saved></app-number-of-searches-saved>
+  <app-current-user></app-current-user>
+</div>
   <!-- <div class="row">
 
     <span class="bold">Job Finder</span>
@@ -95,8 +98,16 @@
         [(expanded)]="formPanelOpenState"
       >
         <mat-expansion-panel-header>
-          <mat-panel-title> Job Search form </mat-panel-title>
-          <mat-panel-description>
+          <mat-panel-title
+          [class.matExspansionLight]="themeName === 'light'"
+          [class.matExspansionDark]="themeName === 'dark'"
+          [class.matExpansionColorful]="themeName === 'colorful'"> 
+            Job Search form 
+          </mat-panel-title>
+          <mat-panel-description
+          [class.matExspansionLight]="themeName === 'light'"
+          [class.matExspansionDark]="themeName === 'dark'"
+          [class.matExpansionColorful]="themeName === 'colorful'">
             Currently I am {{ formPanelOpenState ? "open" : "closed" }}
           </mat-panel-description>
         </mat-expansion-panel-header>
@@ -137,15 +148,10 @@
       <br />
 
       <div class="row">
-        <div>
-          <app-other-job-sites></app-other-job-sites>
-        </div>
-        <div>
-          <app-select-user></app-select-user>
-        </div>
+        <app-other-job-sites></app-other-job-sites>  
       </div>
 
-      
+
     </div>
   </div>
 </div>
