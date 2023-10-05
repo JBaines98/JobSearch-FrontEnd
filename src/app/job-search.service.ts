@@ -1,18 +1,24 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { BehaviorSubject, Observable, Subject, catchError, map, takeUntil, tap, } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+  Subject,
+  catchError,
+  map,
+  takeUntil,
+  tap,
+} from 'rxjs';
 import { JobDetails, JobSearch } from 'src/models/job-search.model';
 import { LoggerService } from './logger.service';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class JobSearchService implements OnDestroy {
-
   public destroyed$ = new Subject();
 
-  private jobArray: JobDetails[]=[];
+  private jobArray: JobDetails[] = [];
 
   private behaviorSearchResults$ = new BehaviorSubject<JobDetails[]>([]);
 
@@ -26,101 +32,100 @@ export class JobSearchService implements OnDestroy {
 
   public likedResults$ = this.behaviourLikedResults$.asObservable();
 
-
-  constructor(public http: HttpClient, public loggerService: LoggerService ) { }
-
+  constructor(public http: HttpClient, public loggerService: LoggerService) {}
 
   ngOnDestroy(): void {
     this.destroyed$.next(this.destroyed$);
     this.destroyed$.complete();
   }
 
-  deleteJob(jobToRemove: JobDetails){
-    this.jobArray = this.jobArray.filter(item => item !== jobToRemove);
+  deleteJob(jobToRemove: JobDetails) {
+    this.jobArray = this.jobArray.filter((item) => item !== jobToRemove);
     this.behaviorSearchResults$.next(this.jobArray);
     this.loggerService.logInfo(this.loggerService.DELETED_SUCCESS_MESSAGE);
   }
 
-  clearArray(){
+  clearArray() {
     this.jobArray = [];
     this.behaviorSearchResults$.next(this.jobArray);
-    this.loggerService.logInfo(this.loggerService.CLEAR_SUCCESS_MESSAGE); 
+    this.loggerService.logInfo(this.loggerService.CLEAR_SUCCESS_MESSAGE);
   }
-  deleteSelectedJobs(selectedJobs: JobDetails[]){
-
+  deleteSelectedJobs(selectedJobs: JobDetails[]) {
     this.jobArray = this.jobArray.filter((el) => !selectedJobs.includes(el));
     this.behaviorSearchResults$.next(this.jobArray);
-    this.loggerService.logInfo(this.loggerService.DELETED_SUCCESS_MESSAGE, selectedJobs);
+    this.loggerService.logInfo(
+      this.loggerService.DELETED_SUCCESS_MESSAGE,
+      selectedJobs
+    );
   }
-  jobRating(job: JobDetails, rating: number){
-    let foundJob = this.jobArray.find(x => x.jobId === job.jobId);
+  jobRating(job: JobDetails, rating: number) {
+    let foundJob = this.jobArray.find((x) => x.jobId === job.jobId);
     foundJob!.jobRating = rating;
     this.behaviorRatingResults$.next(foundJob!);
     this.behaviorSearchResults$.next(this.jobArray);
     this.loggerService.logInfo(this.loggerService.RATED_SUCCESS_MESSAGE, job);
   }
-  jobLiked(job: JobDetails, liked: boolean){
-    let foundJob = this.jobArray.find(x => x.jobId === job.jobId);
+  jobLiked(job: JobDetails, liked: boolean) {
+    let foundJob = this.jobArray.find((x) => x.jobId === job.jobId);
     foundJob!.jobLiked = liked;
     this.behaviourLikedResults$.next(foundJob!);
     this.behaviorSearchResults$.next(this.jobArray);
     this.loggerService.logInfo(this.loggerService.LIKED_SUCCESS_MESSAGE, job);
   }
 
-  searchJob(newInput: JobSearch) {
-    let urlBuilder = "https://localhost:7059/api/search?";
+  searchJob(newInput: JobSearch): Observable<JobDetails[]> {
+    let urlBuilder = 'https://localhost:7059/api/search?';
     if (newInput.jobTitle) {
-      urlBuilder = urlBuilder + 'keywords=' + newInput.jobTitle; 
+      urlBuilder = urlBuilder + 'keywords=' + newInput.jobTitle;
     }
     if (newInput.locationName) {
-      urlBuilder = urlBuilder + 'locationName=' + newInput.locationName; 
+      urlBuilder = urlBuilder + 'locationName=' + newInput.locationName;
     }
     if (newInput.distanceFromLocation) {
-      urlBuilder = urlBuilder + 'distanceFromLocation=' + newInput.distanceFromLocation; 
+      urlBuilder =
+        urlBuilder + 'distanceFromLocation=' + newInput.distanceFromLocation;
     }
     if (newInput.minimumSalary) {
-      urlBuilder = urlBuilder + 'minimumSalary=' + newInput.minimumSalary; 
+      urlBuilder = urlBuilder + 'minimumSalary=' + newInput.minimumSalary;
     }
     // if (newInput.jobTitle) {
-    //   urlBuilder = urlBuilder + 'jobTitle=' + newInput.jobTitle; 
+    //   urlBuilder = urlBuilder + 'jobTitle=' + newInput.jobTitle;
     // }
     if (newInput.employerName) {
-      urlBuilder = urlBuilder + 'employerName=' + newInput.employerName; 
+      urlBuilder = urlBuilder + 'employerName=' + newInput.employerName;
     }
     if (newInput.date) {
-      urlBuilder = urlBuilder + 'date=' + newInput.date; 
+      urlBuilder = urlBuilder + 'date=' + newInput.date;
     }
     if (newInput.fullTime) {
-      urlBuilder = urlBuilder + 'fullTime=' + newInput.fullTime; 
+      urlBuilder = urlBuilder + 'fullTime=' + newInput.fullTime;
     }
 
-    this.http
-      .get<any>(
-        urlBuilder
-        ,{
-          
-          headers: {
-            'Authorization':
-            'Basic Nzk1YzM0OTktZDc0NS00ZGEyLTg5OTAtZGYwY2M2MjMyOTljOg=='
-          }
-          
-        }
-      
-        )
+    var returnObs = this.http
+      .get<any>(urlBuilder, {
+        headers: {
+          Authorization:
+            'Basic Nzk1YzM0OTktZDc0NS00ZGEyLTg5OTAtZGYwY2M2MjMyOTljOg==',
+        },
+      })
       .pipe(
-        catchError((err): any=>{
-          this.loggerService.logError(this.loggerService.DATA_ERROR_MESSAGE, err);
+        catchError((err): any => {
+          this.loggerService.logError(
+            this.loggerService.DATA_ERROR_MESSAGE,
+            err
+          );
         }),
         tap((apiReturnData) => {
           console.log(JSON.stringify(apiReturnData));
-          this.jobArray= [...apiReturnData, ...this.jobArray];
+          this.jobArray = [...apiReturnData, ...this.jobArray];
           this.behaviorSearchResults$.next(this.jobArray);
           this.loggerService.logInfo(this.loggerService.SUCCESS_MESSAGE);
-        
 
           // store api return data . results in that array(privcate job results)
         }),
         takeUntil(this.destroyed$)
-      ).subscribe();
+      );
+      returnObs.subscribe();
+    return returnObs;
   }
 }

@@ -18,7 +18,8 @@ import { LikedCellComponent } from '../liked-cell/liked-cell.component';
   styleUrls: ['./ag-grid.component.scss'],
 })
 export class AgGridComponent implements OnInit, OnDestroy {
-   public jobResults: JobDetails[] = [];
+  @Input() jobResults : JobDetails[] = [];
+   // public jobResults: JobDetails[] = [];
    public destroyed$ = new Subject();
    public selectedJobs: JobDetails[]=[];
    
@@ -28,15 +29,15 @@ export class AgGridComponent implements OnInit, OnDestroy {
      public jobSearchService: JobSearchService,
      public jobStorageService: JobStorageService){ }
 
-  ngOnInit(): void {
-    this.jobSearchService.searchResults$
-    .pipe(
-      tap(results => this.jobResults = results),
-      takeUntil(this.destroyed$)
-    )
-    .subscribe();
+   ngOnInit(): void {
+  //   this.jobSearchService.searchResults$
+  //   .pipe(
+  //     tap(results => this.jobResults = results),
+  //     takeUntil(this.destroyed$)
+  //   )
+  //   .subscribe();
     
-  }
+   }
   ngOnDestroy(): void {
     this.destroyed$.next(this.destroyed$);
     this.destroyed$.complete();
