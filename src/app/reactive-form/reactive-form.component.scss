@@ -22,10 +22,12 @@
   .backgroundColorful {
     background-color: palevioletred;
   }
-  .matSliderColor {
-    --mdc-slider-hnadle-color: white;
-    --mdc-slider-focus-handle-color: white;
-
+  mat-slider {
+    --mdc-slider-handle-color: white !important;
+    --mdc-slider-focus-handle-color: white !important;
+    --mdc-slider-active-track-color: white !important;
+    --mdc-slider-focus-track: white !important;
+    --mdc-slider-inactive-track-color: white !important;
 
   }
 
