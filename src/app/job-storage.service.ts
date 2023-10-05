@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, catchError, map, takeUntil, tap, } from 'rxjs';
 import { JobDetails, JobSearch, UserDetails } from 'src/models/job-search.model';
@@ -36,7 +35,7 @@ export class JobStorageService implements OnDestroy {
   constructor(public loggerService: LoggerService, public http: HttpClient, public userService: UserService) {
 
     this.userService.savedUser$.pipe(
-      tap((user) => {
+      tap((user: any) => {
         this.selectedUserName = user.userName;
       }),
       takeUntil(this.destroyed$)
