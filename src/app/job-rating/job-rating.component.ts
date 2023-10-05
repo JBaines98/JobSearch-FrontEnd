@@ -16,7 +16,7 @@ export enum StarRatingColor {
 @Component({
   selector: 'app-job-rating',
   templateUrl: './job-rating.component.html',
-  styleUrls: ['./job-rating.component.css']
+  styleUrls: ['./job-rating.component.scss']
 
 })
 

@@ -8,7 +8,7 @@ import { UserInterfaceService } from '../user-interface.service';
 @Component({
   selector: 'app-current-user',
   templateUrl: './current-user.component.html',
-  styleUrls: ['./current-user.component.css']
+  styleUrls: ['./current-user.component.scss']
 })
 export class CurrentUserComponent implements OnDestroy {
   

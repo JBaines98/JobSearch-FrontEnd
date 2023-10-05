@@ -8,7 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 @Component({
   selector: 'app-liked-jobs',
   templateUrl: './liked-jobs.component.html',
-  styleUrls: ['./liked-jobs.component.css']
+  styleUrls: ['./liked-jobs.component.scss']
 })
 export class LikedJobsComponent implements OnInit, OnDestroy {
 

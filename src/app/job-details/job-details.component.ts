@@ -10,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-job-details',
   templateUrl: './job-details.component.html',
-  styleUrls: ['./job-details.component.css']
+  styleUrls: ['./job-details.component.scss']
 })
 export class JobDetailsComponent implements OnInit {
 

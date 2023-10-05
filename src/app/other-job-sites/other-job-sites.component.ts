@@ -4,7 +4,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 @Component({
   selector: 'app-other-job-sites',
   templateUrl: './other-job-sites.component.html',
-  styleUrls: ['./other-job-sites.component.css']
+  styleUrls: ['./other-job-sites.component.scss']
 })
 export class OtherJobSitesComponent {
   panelOpenState1: boolean = false;

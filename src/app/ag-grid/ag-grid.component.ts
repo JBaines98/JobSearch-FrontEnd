@@ -15,7 +15,7 @@ import { LikedCellComponent } from '../liked-cell/liked-cell.component';
 @Component({
   selector: 'app-ag-grid',
   templateUrl: './ag-grid.component.html',
-  styleUrls: ['./ag-grid.component.css'],
+  styleUrls: ['./ag-grid.component.scss'],
 })
 export class AgGridComponent implements OnInit, OnDestroy {
    public jobResults: JobDetails[] = [];

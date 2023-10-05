@@ -7,7 +7,7 @@ import { Observable, Subject, map, takeUntil, tap, } from 'rxjs';
 @Component({
   selector: 'app-saved-searches',
   templateUrl: './saved-searches.component.html',
-  styleUrls: ['./saved-searches.component.css']
+  styleUrls: ['./saved-searches.component.scss']
 })
 export class SavedSearchesComponent implements OnDestroy {
 

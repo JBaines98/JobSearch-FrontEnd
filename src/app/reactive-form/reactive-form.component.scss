@@ -23,8 +23,10 @@
     background-color: palevioletred;
   }
   .matSliderColor {
-    color: white;
-    background-color: white;
+    --mdc-slider-hnadle-color: white;
+    --mdc-slider-focus-handle-color: white;
+
+
   }
 
   

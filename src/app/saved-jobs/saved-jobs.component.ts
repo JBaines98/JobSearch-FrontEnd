@@ -11,7 +11,7 @@ import {
 @Component({
   selector: 'app-saved-jobs',
   templateUrl: './saved-jobs.component.html',
-  styleUrls: ['./saved-jobs.component.css'],
+  styleUrls: ['./saved-jobs.component.scss'],
 })
 export class SavedJobsComponent implements OnDestroy {
   constructor(

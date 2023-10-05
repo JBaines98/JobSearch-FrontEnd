@@ -11,7 +11,7 @@ import { UserInterfaceService } from '../user-interface.service';
 @Component({
   selector: 'app-number-of-jobs',
   templateUrl: './number-of-jobs.component.html',
-  styleUrls: ['./number-of-jobs.component.css']
+  styleUrls: ['./number-of-jobs.component.scss']
 })
 export class NumberOfJobsComponent implements OnDestroy{
 

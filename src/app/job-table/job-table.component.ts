@@ -5,7 +5,7 @@ import { JobDetails } from 'src/models/job-search.model';
 @Component({
   selector: 'app-job-table',
   templateUrl: './job-table.component.html',
-  styleUrls: ['./job-table.component.css']
+  styleUrls: ['./job-table.component.scss']
 })
 export class JobTableComponent {
 
