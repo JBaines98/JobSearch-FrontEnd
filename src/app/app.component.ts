@@ -84,6 +84,7 @@ export class AppComponent implements OnDestroy {
     this.showAgGrid = true;
     this.formPanelOpenState = false;
     this.reedReturnData = true;
+    this.savedJobsReturnData = false;
     this.loggerService.logInfo(this.loggerService.SUBMITTED_MESSAGE);
   }
 
@@ -130,6 +131,7 @@ export class AppComponent implements OnDestroy {
     )
     .subscribe();
     this.savedJobsReturnData = true;
+    this.reedReturnData = false;
 
   this.jobStorageService.getSavedJobs();
 
