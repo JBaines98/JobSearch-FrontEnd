@@ -8,6 +8,7 @@ import { ICellRendererParams } from 'ag-grid-community';
 
     <a href="http://www.google.com/maps/search/?api=1&query={{locationName}}" target="_blank">
       <img style="height: 35px; width: 40px;" src="assets/GoogleMaps.webp">
+      <i class="fa-solid fa-location-dot"></i>
     </a>
   `,
 

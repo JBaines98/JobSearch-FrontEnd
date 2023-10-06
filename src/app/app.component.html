@@ -7,32 +7,33 @@
   <br />
 
   <div class="row">
+    <button
+      class="homeButton"
+      (click)="homeClicked()"
+      [class.lightTheme]="themeName === 'light'"
+      [class.darkTheme]="themeName === 'dark'"
+      [class.colorfulTheme]="themeName === 'colorful'"
+    >
+      <span class="bold"
+        >Job Finder
+        <span class="fa-solid fa-magnifying-glass"> </span>
+      </span>
+      <span class="house">
+        <i class="fa-solid fa-house"></i>
+      </span>
+    </button>
 
-        <button
-          class="homeButton"
-          (click)="homeClicked()"
-          [class.lightTheme]="themeName === 'light'"
-          [class.darkTheme]="themeName === 'dark'"
-          [class.colorfulTheme]="themeName === 'colorful'"
-        >
-          <span class="bold"
-            >Job Finder
-            <span class="fa-solid fa-magnifying-glass"> </span>
-          </span>
-        </button>
-
-        <div class="userMenu">
-          <app-user-menu></app-user-menu>
-        </div>
-
+    <div class="userMenu">
+      <app-user-menu></app-user-menu>
+    </div>
   </div>
 
-<div class="row">
-  <app-number-of-jobs></app-number-of-jobs>
-  <app-number-of-jobs-saved></app-number-of-jobs-saved>
-  <app-number-of-searches-saved></app-number-of-searches-saved>
-  <app-current-user></app-current-user>
-</div>
+  <div class="row">
+    <app-number-of-jobs></app-number-of-jobs>
+    <app-number-of-jobs-saved></app-number-of-jobs-saved>
+    <app-number-of-searches-saved></app-number-of-searches-saved>
+    <app-current-user></app-current-user>
+  </div>
   <!-- <div class="row">
 
     <span class="bold">Job Finder</span>
@@ -101,15 +102,17 @@
       >
         <mat-expansion-panel-header>
           <mat-panel-title
-          [class.matExspansionLight]="themeName === 'light'"
-          [class.matExspansionDark]="themeName === 'dark'"
-          [class.matExpansionColorful]="themeName === 'colorful'"> 
-            Job Search form 
+            [class.matExspansionLight]="themeName === 'light'"
+            [class.matExspansionDark]="themeName === 'dark'"
+            [class.matExpansionColorful]="themeName === 'colorful'"
+          >
+            Job Search form
           </mat-panel-title>
           <mat-panel-description
-          [class.matExspansionLight]="themeName === 'light'"
-          [class.matExspansionDark]="themeName === 'dark'"
-          [class.matExpansionColorful]="themeName === 'colorful'">
+            [class.matExspansionLight]="themeName === 'light'"
+            [class.matExspansionDark]="themeName === 'dark'"
+            [class.matExpansionColorful]="themeName === 'colorful'"
+          >
             Currently I am {{ formPanelOpenState ? "open" : "closed" }}
           </mat-panel-description>
         </mat-expansion-panel-header>
@@ -122,7 +125,7 @@
 
       <br />
 
-      <span>
+      <div>
         <button mat-raised-button color="primary" (click)="onSubmit()">
           Submit
         </button>
@@ -133,15 +136,14 @@
         >
           Save Search
         </button>
+        <app-grid-title
+          [titleType]="titleContent ? TitleTypes.SavedData : TitleTypes.SearchData"
+        ></app-grid-title>
+        <!-- {{ true ? 'THIS': 'THAT'  }} -->
+      </div>
 
-      
-
-
-        <div *ngIf="showAgGrid">
-          <!-- <app-job-table [jobResults]="jobResults"></app-job-table> -->
-          <app-ag-grid [jobResults]="jobResults" [reedReturnData]="reedReturnData" [savedJobsReturnData]="savedJobsReturnData"></app-ag-grid>
-        </div>
-      </span>
+      <!-- <app-job-table [jobResults]="jobResults"></app-job-table> -->
+      <app-ag-grid *ngIf="showAgGrid" [jobResults]="jobResults"></app-ag-grid>
 
       <!-- <div class="column">
           <div *ngFor="let jobDetail of jobResults">
@@ -153,9 +155,8 @@
       <br />
 
       <div class="row">
-        <app-other-job-sites></app-other-job-sites>  
+        <app-other-job-sites></app-other-job-sites>
       </div>
-
 
     </div>
   </div>

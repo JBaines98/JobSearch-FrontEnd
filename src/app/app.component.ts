@@ -10,6 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { SavedSearchesComponent } from './saved-searches/saved-searches.component';
 import { UserService } from './user.service';
 import { UserInterfaceService } from './user-interface.service';
+import { TitleTypes } from './grid-title/grid-title.component';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,7 @@ import { UserInterfaceService } from './user-interface.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnDestroy {
+  TitleTypes = TitleTypes;
   title = 'JobSearch';
   jobSearchData: JobSearch = {};
   jobResults: JobDetails[] = [];
@@ -25,8 +27,8 @@ export class AppComponent implements OnDestroy {
   savedJobs: JobDetails[] = [];
   showAgGrid: boolean = false;
   formPanelOpenState: boolean = true;
-  reedReturnData: boolean = false;
-  savedJobsReturnData: boolean = false;
+
+  titleContent: boolean = false;
   destroyed$ = new Subject();
 
   themeName: string = '';
@@ -83,8 +85,7 @@ export class AppComponent implements OnDestroy {
     // this.showMyContainer = false;
     this.showAgGrid = true;
     this.formPanelOpenState = false;
-    this.reedReturnData = true;
-    this.savedJobsReturnData = false;
+    this.titleContent = false;
     this.loggerService.logInfo(this.loggerService.SUBMITTED_MESSAGE);
   }
 
@@ -130,8 +131,7 @@ export class AppComponent implements OnDestroy {
       })
     )
     .subscribe();
-    this.savedJobsReturnData = true;
-    this.reedReturnData = false;
+    this.titleContent = true;
 
   this.jobStorageService.getSavedJobs();
 

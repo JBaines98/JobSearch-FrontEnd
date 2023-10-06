@@ -44,6 +44,7 @@ import { CurrentUserComponent } from './current-user/current-user.component';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatMenuModule } from '@angular/material/menu';
 import { UserMenuComponent } from './user-menu/user-menu.component';
+import { GridTitleComponent } from './grid-title/grid-title.component';
 
 
 @NgModule({
@@ -68,7 +69,8 @@ import { UserMenuComponent } from './user-menu/user-menu.component';
     OtherJobSitesComponent,
     SelectUserComponent,
     CurrentUserComponent,
-    UserMenuComponent
+    UserMenuComponent,
+    GridTitleComponent
   ],
   imports: [
     FormsModule,
