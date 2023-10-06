@@ -122,25 +122,26 @@
 
       <br />
 
-      <button mat-raised-button color="primary" (click)="onSubmit()">
-        Submit
-      </button>
-      <button
-        mat-raised-button
-        color="primary"
-        (click)="onSaveSearch(jobSearchData)"
-      >
-        Save Search
-      </button>
+      <span>
+        <button mat-raised-button color="primary" (click)="onSubmit()">
+          Submit
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="onSaveSearch(jobSearchData)"
+        >
+          Save Search
+        </button>
 
       
 
-      <br />
 
-      <div *ngIf="showAgGrid">
-        <!-- <app-job-table [jobResults]="jobResults"></app-job-table> -->
-        <app-ag-grid [jobResults]="jobResults" [reedReturnData]="reedReturnData" [savedJobsReturnData]="savedJobsReturnData"></app-ag-grid>
-      </div>
+        <div *ngIf="showAgGrid">
+          <!-- <app-job-table [jobResults]="jobResults"></app-job-table> -->
+          <app-ag-grid [jobResults]="jobResults" [reedReturnData]="reedReturnData" [savedJobsReturnData]="savedJobsReturnData"></app-ag-grid>
+        </div>
+      </span>
 
       <!-- <div class="column">
           <div *ngFor="let jobDetail of jobResults">
