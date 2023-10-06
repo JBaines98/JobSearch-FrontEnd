@@ -25,7 +25,8 @@ export class AppComponent implements OnDestroy {
   savedJobs: JobDetails[] = [];
   showAgGrid: boolean = false;
   formPanelOpenState: boolean = true;
-
+  reedReturnData: boolean = false;
+  savedJobsReturnData: boolean = false;
   destroyed$ = new Subject();
 
   themeName: string = '';
@@ -82,6 +83,7 @@ export class AppComponent implements OnDestroy {
     // this.showMyContainer = false;
     this.showAgGrid = true;
     this.formPanelOpenState = false;
+    this.reedReturnData = true;
     this.loggerService.logInfo(this.loggerService.SUBMITTED_MESSAGE);
   }
 
@@ -100,21 +102,22 @@ export class AppComponent implements OnDestroy {
     // this.showMyContainer = true;
     this.loggerService.logInfo(this.loggerService.CLEAR_SUCCESS_MESSAGE);
   }
-  openSavedJobs() {
-    this.jobStorageService.savedResults$
-      .pipe(
-        tap((bob) => {
-          this.savedJobs = bob;
-        }),
-        takeUntil(this.destroyed$)
-      )
-      .subscribe();
-    console.log(this.savedJobs);
-    this.loggerService.logInfo(this.loggerService.SUCCESS_MESSAGE);
-    alert(JSON.stringify(this.savedJobs));
+  // openSavedJobs() {
+  //   this.jobStorageService.savedResults$
+  //     .pipe(
+  //       tap((bob) => {
+  //         this.savedJobs = bob;
+  //       }),
+  //       takeUntil(this.destroyed$)
+  //     )
+  //     .subscribe();
+  //   console.log(this.savedJobs);
+  //   this.savedJobsReturnData = true;
+  //   this.loggerService.logInfo(this.loggerService.SUCCESS_MESSAGE);
+  //   alert(JSON.stringify(this.savedJobs));
 
-    // const dialogRef = this.dialog.open(this.savedJobs)
-  }
+  //   // const dialogRef = this.dialog.open(this.savedJobs)
+  // }
   displayDialog() {
     
 
@@ -126,6 +129,7 @@ export class AppComponent implements OnDestroy {
       })
     )
     .subscribe();
+    this.savedJobsReturnData = true;
 
   this.jobStorageService.getSavedJobs();
 

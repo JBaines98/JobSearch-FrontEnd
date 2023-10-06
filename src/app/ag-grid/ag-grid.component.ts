@@ -19,6 +19,8 @@ import { LikedCellComponent } from '../liked-cell/liked-cell.component';
 })
 export class AgGridComponent implements OnInit, OnDestroy {
   @Input() jobResults : JobDetails[] = [];
+  @Input() reedReturnData: boolean = false;
+  @Input() savedJobsReturnData: boolean = false;
    // public jobResults: JobDetails[] = [];
    public destroyed$ = new Subject();
    public selectedJobs: JobDetails[]=[];

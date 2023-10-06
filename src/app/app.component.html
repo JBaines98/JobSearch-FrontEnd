@@ -133,11 +133,13 @@
         Save Search
       </button>
 
+      
+
       <br />
 
       <div *ngIf="showAgGrid">
         <!-- <app-job-table [jobResults]="jobResults"></app-job-table> -->
-        <app-ag-grid [jobResults]="jobResults"></app-ag-grid>
+        <app-ag-grid [jobResults]="jobResults" [reedReturnData]="reedReturnData" [savedJobsReturnData]="savedJobsReturnData"></app-ag-grid>
       </div>
 
       <!-- <div class="column">

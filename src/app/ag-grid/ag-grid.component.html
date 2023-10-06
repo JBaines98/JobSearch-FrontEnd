@@ -1,4 +1,15 @@
-<div *ngIf="!!jobResults">    
+<div *ngIf="!!jobResults">
+
+    <br>
+
+    <div *ngIf="reedReturnData">
+        <h3><strong>Jobs from Reed:</strong></h3>
+    </div>
+
+    <div *ngIf="savedJobsReturnData">
+        <h3><strong>Saved Jobs:</strong></h3>
+    </div>
+
     <ag-grid-angular 
         (selectionChanged)="isSelected()"
         (gridReady)="gridReady($event)"

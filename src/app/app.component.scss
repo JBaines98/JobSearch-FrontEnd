@@ -37,6 +37,7 @@
   }
   .lightTheme {
     background-color: burlywood;
+    cursor: pointer;
   }
   .lightThemeComponent {
     background-color: aqua;
@@ -48,6 +49,7 @@
   }
   .darkTheme {
     background-color: darkcyan;
+    cursor: pointer;
   }
   .darkThemeComponent {
     background-color: darksalmon;
@@ -58,6 +60,7 @@
     border: 2px solid black;
   }
   .colorfulTheme {
+    cursor: pointer;
     background-color: greenyellow;
   }
   .colorfulThemeComponent {
@@ -127,6 +130,7 @@
     background-color: palevioletred;
     color: black;
   }
+
 
 
   
