@@ -74,16 +74,16 @@ export class JobSearchService implements OnDestroy {
     this.behaviorSearchResults$.next(this.jobArray);
     this.loggerService.logInfo(this.loggerService.LIKED_SUCCESS_MESSAGE, job);
   }
-  jobComment(jobDetails: JobDetails, ){
-    const dialogRef = this.dialog.open(CommentComponent,{
-      width: 'fit-content',
-      height: 'fit-content',
-      data: {job: jobDetails}
-    });
-  }
-  closeCommentDialog(){
-    // this.dialogRef.close();
-  }
+  // jobComment(jobDetails: JobDetails, ){
+  //   const dialogRef = this.dialog.open(CommentComponent,{
+  //     width: 'fit-content',
+  //     height: 'fit-content',
+  //     data: {job: jobDetails}
+  //   });
+  // }
+  // closeCommentDialog(){
+  //   // this.dialogRef.close();
+  // }
 
   searchJob(newInput: JobSearch): Observable<JobDetails[]> {
     let urlBuilder = 'https://localhost:7059/api/search?';

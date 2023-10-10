@@ -1,23 +1,27 @@
 <mat-card class="background-color">
     <mat-card-content>
         <div>
-            <h3><strong>Job Title:</strong> {{data.job.jobTitle}}</h3>
+            <h3><strong>Job Title:</strong> {{data.jobDetail.jobTitle}}</h3>
         </div>
         <div>
-            <strong>JobID:</strong> {{data.job.jobId}}
+            <strong>JobID:</strong> {{data.jobDetail.jobId}}
         </div>
+
+        <br>
+        <hr>
+        <br>
         
-            <mat-form-field>
-                <mat-label>
-                    Leave a comment
-                </mat-label>
-                <input [(ngModel)]="data.job.jobComment"  class="input" matInput placeholder="I like this job.">
-            </mat-form-field>
+        <mat-form-field>
+            <mat-label>
+                Leave a comment
+            </mat-label>
+            <input [(ngModel)]="data.jobDetail.jobComment"  class="input" matInput placeholder="I like this job.">
+        </mat-form-field>
         
         <mat-dialog-actions>
             <div>
                 <button mat-raised-button color="primary">Cancel</button>    
-                <button mat-raised-button color="primary" (click)="saveComment(data.job)">Save</button>
+                <button mat-raised-button color="primary" (click)="saveComment(data.jobDetail)">Save</button>
             </div>
         </mat-dialog-actions>
 

@@ -12,6 +12,7 @@ import { JobStorageService } from '../job-storage.service';
 import { RatingCellComponent } from '../rating-cell/rating-cell.component';
 import { LikedCellComponent } from '../liked-cell/liked-cell.component';
 import { CommentCellComponent } from '../comment-cell/comment-cell.component';
+import { CommentComponent } from '../comment/comment.component';
 
 @Component({
   selector: 'app-ag-grid',
@@ -218,7 +219,11 @@ export class AgGridComponent implements OnInit, OnDestroy {
       cellRenderer: 'commentButtonRenderer',
       cellRendererParams: {
         clicked: (jobDetail: any) => {
-          this.jobSearchService.jobComment(jobDetail);
+          const dialogRef = this.dialog.open(CommentComponent,{
+            width: 'fit-content',
+            height: 'fit-content',
+            data: {jobDetail: jobDetail}
+          })
         }
       }
     }

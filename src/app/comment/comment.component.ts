@@ -20,7 +20,7 @@ export class CommentComponent {
   constructor(
     public jobSearchService: JobSearchService, 
     public jobStorageService: JobStorageService,
-    @Inject(MAT_DIALOG_DATA) public data: {job: JobDetails}
+    @Inject(MAT_DIALOG_DATA) public data: {jobDetail: JobDetails}
     ){}
 
 
@@ -32,9 +32,9 @@ export class CommentComponent {
     this.jobStorageService.saveMyComment(jobDetail)
   }
 
-  cancelDialog(){
-    this.jobSearchService.closeCommentDialog();
-  }
+  // cancelDialog(){
+  //   this.jobSearchService.closeCommentDialog();
+  // }
 
 }
 

@@ -233,6 +233,7 @@ export class JobStorageService implements OnDestroy {
       tap(),
       takeUntil(this.destroyed$)
     ).subscribe();
+    this.loggerService.logInfo(this.loggerService.SAVED_MESSAGE);
   }
 
 
