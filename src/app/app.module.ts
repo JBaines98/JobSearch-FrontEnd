@@ -45,6 +45,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatMenuModule } from '@angular/material/menu';
 import { UserMenuComponent } from './user-menu/user-menu.component';
 import { GridTitleComponent } from './grid-title/grid-title.component';
+import { CommentCellComponent } from './comment-cell/comment-cell.component';
+import { CommentComponent } from './comment/comment.component';
 
 
 @NgModule({
@@ -70,7 +72,9 @@ import { GridTitleComponent } from './grid-title/grid-title.component';
     SelectUserComponent,
     CurrentUserComponent,
     UserMenuComponent,
-    GridTitleComponent
+    GridTitleComponent,
+    CommentCellComponent,
+    CommentComponent
   ],
   imports: [
     FormsModule,

@@ -11,6 +11,8 @@ import {
 } from 'rxjs';
 import { JobDetails, JobSearch } from 'src/models/job-search.model';
 import { LoggerService } from './logger.service';
+import { MatDialog } from '@angular/material/dialog';
+import { CommentComponent } from './comment/comment.component';
 
 @Injectable({
   providedIn: 'root',
@@ -32,7 +34,7 @@ export class JobSearchService implements OnDestroy {
 
   public likedResults$ = this.behaviourLikedResults$.asObservable();
 
-  constructor(public http: HttpClient, public loggerService: LoggerService) {}
+  constructor(public http: HttpClient, public loggerService: LoggerService, public dialog: MatDialog) {}
 
   ngOnDestroy(): void {
     this.destroyed$.next(this.destroyed$);
@@ -71,6 +73,16 @@ export class JobSearchService implements OnDestroy {
     this.behaviourLikedResults$.next(foundJob!);
     this.behaviorSearchResults$.next(this.jobArray);
     this.loggerService.logInfo(this.loggerService.LIKED_SUCCESS_MESSAGE, job);
+  }
+  jobComment(jobDetails: JobDetails, ){
+    const dialogRef = this.dialog.open(CommentComponent,{
+      width: 'fit-content',
+      height: 'fit-content',
+      data: {job: jobDetails}
+    });
+  }
+  closeCommentDialog(){
+    // this.dialogRef.close();
   }
 
   searchJob(newInput: JobSearch): Observable<JobDetails[]> {

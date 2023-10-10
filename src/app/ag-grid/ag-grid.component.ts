@@ -11,6 +11,7 @@ import { DeleteMyCellComponent } from '../delete-my-cell/delete-my-cell.componen
 import { JobStorageService } from '../job-storage.service';
 import { RatingCellComponent } from '../rating-cell/rating-cell.component';
 import { LikedCellComponent } from '../liked-cell/liked-cell.component';
+import { CommentCellComponent } from '../comment-cell/comment-cell.component';
 
 @Component({
   selector: 'app-ag-grid',
@@ -77,6 +78,7 @@ export class AgGridComponent implements OnInit, OnDestroy {
       deleteButtonRenderer: DeleteMyCellComponent,
       ratingButtonRenderer: RatingCellComponent, 
       likedButtonRenderer: LikedCellComponent,
+      commentButtonRenderer: CommentCellComponent
     },
     
   };
@@ -208,5 +210,17 @@ export class AgGridComponent implements OnInit, OnDestroy {
       }
 
     },
+    {
+      headerName: 'Comment',
+      field: 'jobComment',
+      resizable: true,
+      rowDrag: true,
+      cellRenderer: 'commentButtonRenderer',
+      cellRendererParams: {
+        clicked: (jobDetail: any) => {
+          this.jobSearchService.jobComment(jobDetail);
+        }
+      }
+    }
   ];
 }

@@ -121,7 +121,7 @@ export class JobStorageService implements OnDestroy {
   }
 
 
-
+ 
   getSavedJobs(){
     this.http.get<any>("https://localhost:7059/api/JobStorage/getSavedJobs?userName=" + this.selectedUserName,
     {
@@ -216,6 +216,24 @@ export class JobStorageService implements OnDestroy {
       takeUntil(this.destroyed$)
     ).subscribe();
   } 
+
+
+  saveMyComment(jobDetails: JobDetails){
+    this.http.post<JobDetails>("https://localhost:7059/api/JobStorage/saveMyComment?userName=" + this.selectedUserName, jobDetails,
+    {
+      headers: {
+        'Authorization':
+        'Basic Nzk1YzM0OTktZDc0NS00ZGEyLTg5OTAtZGYwY2M2MjMyOTljOg=='
+      }
+    }
+    ).pipe(
+      catchError((err: any): any => {
+        this.loggerService.logError(this.loggerService.ERROR_MESSAGE, err)
+      }),
+      tap(),
+      takeUntil(this.destroyed$)
+    ).subscribe();
+  }
 
 
 

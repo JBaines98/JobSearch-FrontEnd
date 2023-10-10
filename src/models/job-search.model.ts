@@ -18,6 +18,7 @@ export interface JobDetails {
     isSelected?: boolean;
     jobRating?: number;
     jobLiked?: boolean;
+    jobComment?: string;
     userDetails?: UserDetails;
     
 }
