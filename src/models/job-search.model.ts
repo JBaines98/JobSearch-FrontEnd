@@ -19,6 +19,7 @@ export interface JobDetails {
     jobRating?: number;
     jobLiked?: boolean;
     jobComment?: string;
+    userId?: number;
     userDetails?: UserDetails;
     
 }
@@ -60,5 +61,6 @@ export interface JobSearch {
     graduate?: boolean;
     resultsToTake?: any;
     resultsToSkip?: any;
+    userId?: number;
     userDetails?: UserDetails;
 }

@@ -20,7 +20,9 @@ export class JobStorageService implements OnDestroy {
 
   public destroyed$ = new Subject();
 
-  public selectedUserName?: string = '';
+  // public selectedUserName?: string = '';
+
+  public selectedUserId?: number = 0;
 
 
 
@@ -36,7 +38,7 @@ export class JobStorageService implements OnDestroy {
 
     this.userService.savedUser$.pipe(
       tap((user: any) => {
-        this.selectedUserName = user.userName;
+        this.selectedUserId = user.userId;
       }),
       takeUntil(this.destroyed$)
     ).subscribe();
@@ -74,8 +76,17 @@ export class JobStorageService implements OnDestroy {
 
   saveMyJobs(savedJobs: JobDetails[])
   {
+    savedJobs.forEach(job =>{
+      if(!job || !job.userDetails)
+      {
+        this.loggerService.logInfo(this.loggerService.ERROR_MESSAGE)
+      }else{
+        job.userDetails.userId = this.selectedUserId;
+        job.userId = this.selectedUserId;
+      }
+    })
     this.jobCount = this.jobCount + savedJobs.length;
-    this.http.post<any>("https://localhost:7059/api/JobStorage/saveMyJobs?userName=" + this.selectedUserName, savedJobs,
+    this.http.post<any>("https://localhost:7059/api/JobStorage/saveMyJobs", savedJobs,
     {
       headers: {
         'Authorization':
@@ -97,7 +108,7 @@ export class JobStorageService implements OnDestroy {
   }
 
   getSavedSearches(){
-    this.http.get<any>("https://localhost:7059/api/JobStorage/getSavedSearch?userName=" + this.selectedUserName,
+    this.http.get<any>("https://localhost:7059/api/JobStorage/getSavedSearch?userId=" + this.selectedUserId,
     {
       headers: {
         'Authorization':
@@ -123,7 +134,7 @@ export class JobStorageService implements OnDestroy {
 
  
   getSavedJobs(){
-    this.http.get<any>("https://localhost:7059/api/JobStorage/getSavedJobs?userName=" + this.selectedUserName,
+    this.http.get<any>("https://localhost:7059/api/JobStorage/getSavedJobs?userId=" + this.selectedUserId,
     {
       headers: {
         'Authorization':
@@ -201,7 +212,8 @@ export class JobStorageService implements OnDestroy {
       jobSearchData.userDetails = {};
     }
     // this.http.post<JobSearch>("https://localhost:7059/api/JobStorage/saveMySearch?userName=" + userName1,
-    this.http.post<JobSearch>("https://localhost:7059/api/JobStorage/saveMySearch?userName=" + this.selectedUserName, jobSearchData,
+    jobSearchData.userId = this.selectedUserId;
+    this.http.post<JobSearch>("https://localhost:7059/api/JobStorage/saveMySearch", jobSearchData,
     {
       headers: {
         'Authorization':
@@ -219,21 +231,28 @@ export class JobStorageService implements OnDestroy {
 
 
   saveMyComment(jobDetails: JobDetails){
-    this.http.post<JobDetails>("https://localhost:7059/api/JobStorage/saveMyComment?userName=" + this.selectedUserName, jobDetails,
+    if(!jobDetails || !jobDetails.userDetails)
     {
-      headers: {
-        'Authorization':
-        'Basic Nzk1YzM0OTktZDc0NS00ZGEyLTg5OTAtZGYwY2M2MjMyOTljOg=='
+        this.loggerService.logInfo(this.loggerService.ERROR_MESSAGE)
+    }else{
+      jobDetails.userDetails.userId = this.selectedUserId;
+      jobDetails.userId = this.selectedUserId;
+      this.http.post<JobDetails>("https://localhost:7059/api/JobStorage/saveMyComment",  jobDetails,
+      {
+        headers: {
+          'Authorization':
+          'Basic Nzk1YzM0OTktZDc0NS00ZGEyLTg5OTAtZGYwY2M2MjMyOTljOg=='
+        }
       }
+      ).pipe(
+        catchError((err: any): any => {
+          this.loggerService.logError(this.loggerService.ERROR_MESSAGE, err)
+        }),
+        tap(),
+        takeUntil(this.destroyed$)
+      ).subscribe();
+      this.loggerService.logInfo(this.loggerService.SAVED_MESSAGE);
     }
-    ).pipe(
-      catchError((err: any): any => {
-        this.loggerService.logError(this.loggerService.ERROR_MESSAGE, err)
-      }),
-      tap(),
-      takeUntil(this.destroyed$)
-    ).subscribe();
-    this.loggerService.logInfo(this.loggerService.SAVED_MESSAGE);
   }
 
 
