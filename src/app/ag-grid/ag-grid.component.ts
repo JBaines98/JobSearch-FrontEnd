@@ -220,10 +220,15 @@ export class AgGridComponent implements OnInit, OnDestroy {
       cellRendererParams: {
         clicked: (jobDetail: any) => {
           const dialogRef = this.dialog.open(CommentComponent,{
-            width: 'fit-content',
-            height: 'fit-content',
+
             data: {jobDetail: jobDetail}
+            
           })
+          // dialogRef.afterClosed().subscribe(comment => {
+          //   console.log('Comment saved: ${comment}');
+          // });
+          // dialogRef.close();
+
         }
       }
     }

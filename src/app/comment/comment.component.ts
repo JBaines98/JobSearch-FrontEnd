@@ -30,6 +30,8 @@ export class CommentComponent {
 
   saveComment(jobDetail: JobDetails){
     this.jobStorageService.saveMyComment(jobDetail)
+
+
   }
 
   // cancelDialog(){
