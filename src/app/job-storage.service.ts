@@ -39,6 +39,8 @@ export class JobStorageService implements OnDestroy {
     this.userService.savedUser$.pipe(
       tap((user: any) => {
         this.selectedUserId = user.userId;
+        this.getSavedJobs();
+        this.getSavedSearches();
       }),
       takeUntil(this.destroyed$)
     ).subscribe();
