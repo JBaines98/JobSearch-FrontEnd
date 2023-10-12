@@ -1,16 +1,15 @@
 import { Component, OnDestroy } from '@angular/core';
-import { JobSearchService } from './job-search.service';
+import { JobSearchService } from './Services/job-search.service';
 import { JobDetails, JobSearch } from 'src/models/job-search.model';
-import { JobStorageService } from './job-storage.service';
+import { JobStorageService } from './Services/job-storage.service';
 import { Observable, Subject, map, takeUntil, tap } from 'rxjs';
-import { SavedJobsComponent } from './saved-jobs/saved-jobs.component';
 import { MatDialog } from '@angular/material/dialog';
-import { LoggerService } from './logger.service';
+import { LoggerService } from './Services/logger.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { SavedSearchesComponent } from './saved-searches/saved-searches.component';
-import { UserService } from './user.service';
-import { UserInterfaceService } from './user-interface.service';
-import { TitleTypes } from './grid-title/grid-title.component';
+import { SavedSearchesComponent } from './Components/saved-searches/saved-searches.component';
+import { UserService } from './Services/user.service';
+import { UserInterfaceService } from './Services/user-interface.service';
+import { TitleTypes } from './Form&Grid-components/grid-title/grid-title.component';
 
 @Component({
   selector: 'app-root',
