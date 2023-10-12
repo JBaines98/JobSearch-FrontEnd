@@ -22,6 +22,12 @@ export class JobSearchService implements OnDestroy {
 
   private jobArray: JobDetails[] = [];
 
+  private jobSearch: JobSearch = {};
+
+  private behaviorSearchParameters$ = new BehaviorSubject<JobSearch>({})
+
+  public searchParameters$ = this.behaviorSearchParameters$.asObservable();
+
   private behaviorSearchResults$ = new BehaviorSubject<JobDetails[]>([]);
 
   public searchResults$ = this.behaviorSearchResults$.asObservable();
@@ -73,6 +79,11 @@ export class JobSearchService implements OnDestroy {
     this.behaviourLikedResults$.next(foundJob!);
     this.behaviorSearchResults$.next(this.jobArray);
     this.loggerService.logInfo(this.loggerService.LIKED_SUCCESS_MESSAGE, job);
+  }
+  jobSearchBinding(jobSearch: JobSearch){
+    this.jobSearch = jobSearch;
+    this.behaviorSearchParameters$.next(this.jobSearch);
+
   }
   // jobComment(jobDetails: JobDetails, ){
   //   const dialogRef = this.dialog.open(CommentComponent,{

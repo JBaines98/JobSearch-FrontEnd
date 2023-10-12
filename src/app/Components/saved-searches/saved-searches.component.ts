@@ -3,6 +3,7 @@ import { JobStorageService } from '../../Services/job-storage.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { JobSearch } from 'src/models/job-search.model';
 import { Observable, Subject, map, takeUntil, tap, } from 'rxjs';
+import { JobSearchService } from 'src/app/Services/job-search.service';
 
 @Component({
   selector: 'app-saved-searches',
@@ -12,7 +13,7 @@ import { Observable, Subject, map, takeUntil, tap, } from 'rxjs';
 export class SavedSearchesComponent implements OnDestroy {
 
 
-  constructor(public jobStorageService: JobStorageService, public dialog: MatDialog){}
+  constructor(public jobStorageService: JobStorageService, public jobSearchService: JobSearchService, public dialog: MatDialog){}
 
   public destroyed$ = new Subject();
 
@@ -33,5 +34,8 @@ export class SavedSearchesComponent implements OnDestroy {
     ).subscribe();
 
     this.jobStorageService.getSavedSearches();
+  }
+  useSearchParamters(jobSearch: JobSearch){
+    this.jobSearchService.jobSearchBinding(jobSearch);
   }
 }

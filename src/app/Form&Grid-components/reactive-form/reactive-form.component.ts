@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, OnDestroy, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
 import { JobSearch } from 'src/models/job-search.model';
@@ -8,6 +8,7 @@ import { Subject } from 'rxjs';
 import { UserService } from '../../Services/user.service';
 import { LoggerService } from '../../Services/logger.service';
 import { UserInterfaceService } from '../../Services/user-interface.service';
+import { JobSearchService } from 'src/app/Services/job-search.service';
 
 @Component({
   selector: 'app-reactive-form',
@@ -16,10 +17,15 @@ import { UserInterfaceService } from '../../Services/user-interface.service';
 })
 export class ReactiveFormComponent implements OnInit, OnDestroy{
 
+  public jobSearch: JobSearch = {};
   public destroyed$ = new Subject();
   public themeName: string = '';
 
-  constructor(public userService: UserService, public loggerService: LoggerService, public userInterfaceService: UserInterfaceService){}
+  constructor(
+    public userService: UserService,
+    public jobSearchService: JobSearchService, 
+    public loggerService: LoggerService,
+    public userInterfaceService: UserInterfaceService){}
 
   ngOnDestroy(): void {
     this.destroyed$.next(this.destroyed$);
@@ -38,17 +44,18 @@ export class ReactiveFormComponent implements OnInit, OnDestroy{
 
 
   reactiveForm = new FormGroup({
-    jobTitle: new FormControl(null),
-    employerName: new FormControl(null),
-    minimumSalary: new FormControl(null),
-    date: new FormControl(null),
+    jobTitle: new FormControl(''),
+    employerName: new FormControl(''),
+    minimumSalary: new FormControl(0),
+    date: new FormControl(new Date()),
 
-    keywords: new FormControl(null),
-    fullTime: new FormControl(null),
-    contract: new FormControl(null)
+    keywords: new FormControl(''),
+    fullTime: new FormControl(false),
+    contract: new FormControl(false)
   });
   
 
+  
   ngOnInit(): void{
     // console.log(this.jobTitle)
    this.reactiveForm.valueChanges.pipe(
@@ -63,6 +70,22 @@ export class ReactiveFormComponent implements OnInit, OnDestroy{
    this.userInterfaceService.themeNameSelected$.pipe(
     tap(theme => {
       this.themeName = theme;
+    }),
+    takeUntil(this.destroyed$)
+   ).subscribe();
+
+   this.jobSearchService.searchParameters$.pipe(
+    tap(searchParameters => {
+      this.jobSearch = searchParameters;
+      this.reactiveForm.setValue({
+        jobTitle: this.jobSearch.jobTitle || '',
+        employerName: this.jobSearch.employerName || '',
+        minimumSalary: this.jobSearch.minimumSalary || 0,
+        date: this.jobSearch.date || null,
+        keywords: this.jobSearch.keywords || '',
+        fullTime: this.jobSearch.fullTime || false,
+        contract: this.jobSearch.contract || false,
+      });
     }),
     takeUntil(this.destroyed$)
    ).subscribe();

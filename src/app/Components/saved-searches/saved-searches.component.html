@@ -6,6 +6,7 @@
                 <span>Job Title: {{jobSearch.jobTitle}}</span>
                 <span>Job Search Name: {{jobSearch.searchName}}</span>
                  <i class="fa-solid fa-xmark" (click)="jobStorageService.removeSearch(jobSearch)"></i>
+                 <button mat-raised-button color="primary" [mat-dialog-close]="true" (click)="useSearchParamters(jobSearch)">Use search parameters</button>
                  <hr>
             </div> 
         </div>

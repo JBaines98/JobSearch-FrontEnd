@@ -257,6 +257,10 @@ export class JobStorageService implements OnDestroy {
     }
   }
 
+  // useSearchParamters(jobSearch: JobSearch){
+  //   this.http.get
+  // }
+
 
 
 
