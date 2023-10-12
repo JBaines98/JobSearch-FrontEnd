@@ -15,6 +15,8 @@ export class CommentComponent {
 
   public jobComment : string = '';
 
+  public displayCommentDialog: boolean = true;
+
 
 
   constructor(
@@ -30,8 +32,10 @@ export class CommentComponent {
 
   saveComment(jobDetail: JobDetails){
     this.jobStorageService.saveMyComment(jobDetail)
+  }
 
-
+  cancelComment(){
+    this.displayCommentDialog = false;
   }
 
   // cancelDialog(){
