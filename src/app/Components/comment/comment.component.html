@@ -1,4 +1,4 @@
-<mat-card *ngIf="displayCommentDialog" class="background-color">
+<mat-card class="background-color">
     <mat-card-content>
         <div>
             <span>
@@ -26,7 +26,7 @@
         
         <mat-dialog-actions>
             <div>
-                <button mat-raised-button color="primary" (click)="cancelComment()">Cancel</button>    
+                <button mat-raised-button color="primary" [mat-dialog-close]="true">Cancel</button>    
                 <button mat-raised-button color="primary" (click)="saveComment(data.jobDetail)">Save</button>
             </div>
         </mat-dialog-actions>

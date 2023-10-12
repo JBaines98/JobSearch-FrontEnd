@@ -3,6 +3,7 @@ import { JobStorageService } from '../../Services/job-storage.service';
 import { JobSearchService } from '../../Services/job-search.service';
 import { JobDetails } from 'src/models/job-search.model';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { LoggerService } from 'src/app/Services/logger.service';
 
 @Component({
   selector: 'app-comment',
@@ -15,13 +16,14 @@ export class CommentComponent {
 
   public jobComment : string = '';
 
-  public displayCommentDialog: boolean = true;
+
 
 
 
   constructor(
     public jobSearchService: JobSearchService, 
     public jobStorageService: JobStorageService,
+    public loggerService: LoggerService,
     @Inject(MAT_DIALOG_DATA) public data: {jobDetail: JobDetails}
     ){}
 
@@ -34,9 +36,7 @@ export class CommentComponent {
     this.jobStorageService.saveMyComment(jobDetail)
   }
 
-  cancelComment(){
-    this.displayCommentDialog = false;
-  }
+
 
   // cancelDialog(){
   //   this.jobSearchService.closeCommentDialog();
