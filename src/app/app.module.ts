@@ -47,6 +47,7 @@ import { UserMenuComponent } from './User-components/user-menu/user-menu.compone
 import { GridTitleComponent } from './Form&Grid-components/grid-title/grid-title.component';
 import { CommentCellComponent } from './cell-renderers/comment-cell/comment-cell.component';
 import { CommentComponent } from './Components/comment/comment.component';
+import { SocialMediaIconsComponent } from './Components/social-media-icons/social-media-icons.component';
 
 
 @NgModule({
@@ -74,7 +75,8 @@ import { CommentComponent } from './Components/comment/comment.component';
     UserMenuComponent,
     GridTitleComponent,
     CommentCellComponent,
-    CommentComponent
+    CommentComponent,
+    SocialMediaIconsComponent
   ],
   imports: [
     FormsModule,
