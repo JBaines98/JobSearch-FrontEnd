@@ -48,6 +48,7 @@ import { GridTitleComponent } from './Form&Grid-components/grid-title/grid-title
 import { CommentCellComponent } from './cell-renderers/comment-cell/comment-cell.component';
 import { CommentComponent } from './Components/comment/comment.component';
 import { SocialMediaIconsComponent } from './Components/social-media-icons/social-media-icons.component';
+import { SearchParameterNameComponent } from './search-parameter-name/search-parameter-name.component';
 
 
 @NgModule({
@@ -76,7 +77,8 @@ import { SocialMediaIconsComponent } from './Components/social-media-icons/socia
     GridTitleComponent,
     CommentCellComponent,
     CommentComponent,
-    SocialMediaIconsComponent
+    SocialMediaIconsComponent,
+    SearchParameterNameComponent
   ],
   imports: [
     FormsModule,

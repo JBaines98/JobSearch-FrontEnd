@@ -209,11 +209,12 @@ export class JobStorageService implements OnDestroy {
 
 
   saveMySearch(jobSearchData: JobSearch){
-    if(!jobSearchData.userDetails)
+    if(!jobSearchData.searchName)
     {
+      this.loggerService.logError(this.loggerService.ERROR_MESSAGE, 'Error: Missing search name.')
       jobSearchData.userDetails = {};
-    }
-    // this.http.post<JobSearch>("https://localhost:7059/api/JobStorage/saveMySearch?userName=" + userName1,
+    }else{
+          // this.http.post<JobSearch>("https://localhost:7059/api/JobStorage/saveMySearch?userName=" + userName1,
     jobSearchData.userId = this.selectedUserId;
     this.http.post<JobSearch>("https://localhost:7059/api/JobStorage/saveMySearch", jobSearchData,
     {
@@ -229,6 +230,9 @@ export class JobStorageService implements OnDestroy {
       tap(),
       takeUntil(this.destroyed$)
     ).subscribe();
+
+    }
+
   } 
 
 

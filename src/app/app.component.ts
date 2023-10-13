@@ -10,6 +10,7 @@ import { SavedSearchesComponent } from './Components/saved-searches/saved-search
 import { UserService } from './Services/user.service';
 import { UserInterfaceService } from './Services/user-interface.service';
 import { TitleTypes } from './Form&Grid-components/grid-title/grid-title.component';
+import { SearchParameterNameComponent } from './search-parameter-name/search-parameter-name.component';
 
 @Component({
   selector: 'app-root',
@@ -120,19 +121,17 @@ export class AppComponent implements OnDestroy {
   //   // const dialogRef = this.dialog.open(this.savedJobs)
   // }
   displayDialog() {
-    
-
     this.jobStorageService.savedResults$
-    .pipe(
-      tap((savedJobs) => {
-        this.showAgGrid = true;
-        this.jobResults = savedJobs;
-      })
-    )
-    .subscribe();
+      .pipe(
+        tap((savedJobs) => {
+          this.showAgGrid = true;
+          this.jobResults = savedJobs;
+        })
+      )
+      .subscribe();
     this.titleContent = true;
 
-  this.jobStorageService.getSavedJobs();
+    this.jobStorageService.getSavedJobs();
 
     // this.loggerService.logInfo(this.loggerService.SUCCESS_MESSAGE);
     // const dialogRef = this.dialog.open(SavedJobsComponent, {
@@ -152,7 +151,10 @@ export class AppComponent implements OnDestroy {
   }
 
   onSaveSearch(jobSearchData: JobSearch) {
-    this.jobStorageService.saveMySearch(jobSearchData);
+    const dialogRef = this.dialog.open(SearchParameterNameComponent, {
+      data: { jobSearch: jobSearchData },
+      width: '300px',
+    });
   }
 
   changeTheme(theme: string) {

@@ -1,0 +1,22 @@
+<mat-card class="background-color">
+    <mat-card-content>
+        <div>
+            <h1><strong>Give your search parameters a name: </strong></h1>
+        </div>
+        <hr>
+        <div>
+            <mat-form-field>
+                <mat-label>
+                    Paramter name:
+                </mat-label>
+                <input [(ngModel)]="searchData.searchName" class="input" matInput placeholder="Jack007">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-dialog-actions>
+                <button mat-raised-button color="primary" [mat-dialog-close]="true">Cancel</button>
+                <button mat-raised-button color="primary" [mat-dialog-close]="true" (click)="saveTheseParameters(searchData)">Save</button>
+            </mat-dialog-actions>
+        </div>
+    </mat-card-content>
+</mat-card>
