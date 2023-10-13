@@ -12,3 +12,22 @@
     // padding-left: 10px;
     padding-right: 10px;
 }
+.lightThemeComponent {
+    background-color: rgb(185, 150, 104);
+    width: 100%;
+    width: 100%;
+    border: 2px solid black;
+  }
+  .darkThemeComponent {
+    background-color: rgb(7, 102, 102);
+    width: 100%;
+    width: 100%;
+    border: 2px solid black;
+    color: white;
+  }
+  .colorfulThemeComponent {
+    background-color: palevioletred;
+    width: 100%;
+    width: 100%;
+    border: 2px solid black;
+  }

@@ -1,4 +1,4 @@
-<mat-card class="background-color">
+<mat-card [class.lightThemeComponent]="themeName==='light'" [class.darkThemeComponent]="themeName==='dark'" [class.colorfulThemeComponent]="themeName==='colorful'">
     <mat-card-content>
         <div>
             <span>

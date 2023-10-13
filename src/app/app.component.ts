@@ -45,7 +45,9 @@ export class AppComponent implements OnDestroy {
     this.loggerService.logMessage$
       .pipe(
         tap((message) => {
-          this._snackBar.open(message);
+          this._snackBar.open(message, '', {
+            duration: 3000
+          });
         })
       )
       .subscribe();
