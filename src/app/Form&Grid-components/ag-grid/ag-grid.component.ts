@@ -23,25 +23,17 @@ export class AgGridComponent implements OnInit, OnDestroy {
   @Input() jobResults : JobDetails[] = [];
   @Input() reedReturnData: boolean = false;
   @Input() savedJobsReturnData: boolean = false;
-   // public jobResults: JobDetails[] = [];
+
    public destroyed$ = new Subject();
    public selectedJobs: JobDetails[]=[];
-   
    public gridApi: GridApi | undefined;
 
   constructor(public dialog: MatDialog,
      public jobSearchService: JobSearchService,
      public jobStorageService: JobStorageService){ }
 
-   ngOnInit(): void {
-  //   this.jobSearchService.searchResults$
-  //   .pipe(
-  //     tap(results => this.jobResults = results),
-  //     takeUntil(this.destroyed$)
-  //   )
-  //   .subscribe();
-    
-   }
+  ngOnInit(): void {}
+
   ngOnDestroy(): void {
     this.destroyed$.next(this.destroyed$);
     this.destroyed$.complete();
@@ -59,14 +51,11 @@ export class AgGridComponent implements OnInit, OnDestroy {
   onSelectedSave(){
     this.jobStorageService.saveMyJobs(this.selectedJobs);
   }
-  onSelectedAdd(){
-    // this.jobStorageService.addMyJobs(this.selectedJobs).subscribe();
-  }
+
 
   gridOptions: GridOptions = {
     rowClass: 'jacks-row',
     rowSelection: 'multiple',
-    // colResizeDefault: true,
     defaultColDef: {
       resizable: true,
       filter: true,
@@ -121,8 +110,6 @@ export class AgGridComponent implements OnInit, OnDestroy {
      cellRendererParams: {
       function(params: { data: {locationName: any}}){
         let location = params.data.locationName;
-        // let newMapLink = `<a href="${location}"   target="_blank">Click here</a>`;
-
       }
      },
     },
@@ -139,27 +126,9 @@ export class AgGridComponent implements OnInit, OnDestroy {
             const dialogRef = this.dialog.open(JobDetailsComponent,{
               width: 'fit-content',
               data: jobDetail
-        })
-            }}
+            })
+        }}
         
-
-          // alert(`
-          // Job Title: ${jobDetail.jobTitle}
-          // Job ID: ${jobDetail.jobId}
-          // Employer ID: ${jobDetail.employerID}
-          // Employer Name: ${jobDetail.employerName}
-          // Employer Profile ID: ${jobDetail.employerProfileId}
-          // Employer Profile Name: ${jobDetail.employerProfileName}
-          // Location: ${jobDetail.locationName}
-          // Minimum Salary : ${jobDetail.minimumSalary}
-          // Maximum Salary : ${jobDetail.maximumSalary}
-          // Currency: ${jobDetail.currency}
-          // Expiration Date: ${jobDetail.expirationDate}
-          // Date Posted: ${jobDetail.date}
-          // Number of Applicants: ${jobDetail.applications}
-          // Job Description: ${jobDetail.jobDescription}
-          // `)
-        //  alert(JSON.stringify(jobDetail));
         },
 
 
@@ -222,11 +191,7 @@ export class AgGridComponent implements OnInit, OnDestroy {
           const dialogRef = this.dialog.open(CommentComponent,{
             data: {jobDetail: jobDetail}
           })
-          
-          // dialogRef.afterClosed().subscribe(comment => {
-          //   console.log('Comment saved: ${comment}');
-          // });
-          // dialogRef.close();
+
 
         }
       }

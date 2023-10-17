@@ -5,12 +5,21 @@
         </div>
         <hr>
         <div>
-            <mat-form-field>
-                <mat-label>
-                    Paramter name:
-                </mat-label>
-                <input [(ngModel)]="searchData.searchName" class="input" matInput placeholder="Jack007">
-            </mat-form-field>
+            <form [formGroup]="reactiveFormDialog">
+                <mat-form-field>
+                    <mat-label>
+                        Paramter name:
+                    </mat-label>
+                    <input 
+                        [(ngModel)]="searchData.searchName"
+                        class="input"
+                        matInput
+                        placeholder="Jack007"
+                        id="parameterName"
+                        type="text"
+                        formControlName="parameterName">
+                </mat-form-field>
+            </form>
         </div>
         <div>
             <mat-dialog-actions>

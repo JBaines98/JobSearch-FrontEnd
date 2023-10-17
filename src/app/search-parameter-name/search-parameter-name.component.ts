@@ -5,6 +5,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { JobStorageService } from '../Services/job-storage.service';
 import { UserInterfaceService } from '../Services/user-interface.service';
 import { Observable, Subject, map, takeUntil, tap, } from 'rxjs';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-search-parameter-name',
@@ -28,6 +29,11 @@ export class SearchParameterNameComponent implements OnDestroy {
   ){
     this.searchData = data.jobSearch;
   }
+
+  reactiveFormDialog = new FormGroup({
+    parameterName: new FormControl('')
+  });
+
   ngOnDestroy(): void {
     this.destroyed$.next(this.destroyed$);
     this.destroyed$.complete();

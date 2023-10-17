@@ -57,7 +57,6 @@ export class ReactiveFormComponent implements OnInit, OnDestroy{
 
   
   ngOnInit(): void{
-    // console.log(this.jobTitle)
    this.reactiveForm.valueChanges.pipe(
     tap(changes => {
       this.jobSearchEntered.emit(changes as JobSearch);
@@ -94,19 +93,5 @@ export class ReactiveFormComponent implements OnInit, OnDestroy{
    
   }
 
-  // onChanges(event: any){
-  //   console.log(this.jobSearchEntered);
-  //   let search: JobSearch = {
-  //     keywords: this.reactiveForm.get('keywords')?.value || undefined,
-  //     jobTitle: this.reactiveForm.get('jobTitle')?.value || undefined,
-  //     employerName: this.reactiveForm.get('employerName')?.value || undefined,
-  //     minimumSalary: this.reactiveForm.get('minimumSalary')?.value || undefined,
-  //     date: this.reactiveForm.get('date')?.value || undefined,
-  //     fullTime: this.reactiveForm.get('fulltime')?.value || undefined,
-  //     contract: this.reactiveForm.get('contract')?.value || undefined
-
-  //   };
-  //   this.jobSearchEntered.emit(search);
-  // }
 
 }

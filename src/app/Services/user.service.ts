@@ -11,7 +11,6 @@ export class UserService {
 
   constructor(public loggerService: LoggerService) { 
     this.onSelectedUser(1);
-    // this.themeChange('light');
   }
 
   private behaviorNowSelectedUser$ = new BehaviorSubject<UserDetails>({});
@@ -22,7 +21,6 @@ export class UserService {
 
   selectedUser: any = {};
 
-  // themeName: string = '';
 
 
   users: UserDetails[] = 
@@ -87,42 +85,6 @@ export class UserService {
     this.loggerService.logInfo(this.loggerService.USER_CHANGED);
     }
   }
-
-
-  // themeChange(theme: string){
-  //   this.behaviorThemeNameSelected$.next(theme);
-  //   this.loggerService.logInfo(this.loggerService.THEME_UPDATED);
-  // }
-
-  // onSelectedDarren9(){
-  //   var selectedUser = this.users.find(user => user.userId === 6);
-  //   if (!selectedUser){
-  //     alert("Error")
-  //   }else{
-  //   this.behaviorNowSelectedUser$.next(selectedUser);
-  //   this.loggerService.logInfo(this.loggerService.USER_CHANGED);
-  //   }
-  // }
-
-  // onSelectedAmanda1(){
-  //   var selectedUser = this.users.find(user => user.userId === 9);
-  //   if (!selectedUser){
-  //     alert("Error")
-  //   }else{
-  //   this.behaviorNowSelectedUser$.next(selectedUser);
-  //   this.loggerService.logInfo(this.loggerService.USER_CHANGED);
-  //   }
-  // }
-
-  // onSelectedLaura01(){
-  //   var selectedUser = this.users.find(user => user.userId === 10);
-  //   if (!selectedUser){
-  //     alert("Error")
-  //   }else{
-  //   this.behaviorNowSelectedUser$.next(selectedUser);
-  //   this.loggerService.logInfo(this.loggerService.USER_CHANGED);
-  //   }
-  // }
   
     
 }

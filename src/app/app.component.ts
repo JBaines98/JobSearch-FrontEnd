@@ -84,7 +84,6 @@ export class AppComponent implements OnDestroy {
         })
       )
       .subscribe();
-    // this.showMyContainer = false;
     this.showAgGrid = true;
     this.formPanelOpenState = false;
     this.titleContent = false;
@@ -92,36 +91,18 @@ export class AppComponent implements OnDestroy {
   }
 
   homeClicked() {
-    // this.showMyContainer = true;
     this.showMySavedJobs = false;
     this.userInterfaceService.themeChange('light');
   }
 
   jobSearchEnteredSubmit(inputDetails: JobSearch) {
     this.jobSearchData = inputDetails;
-    // this.loggerService.logInfo(this.loggerService.SUBMITTED_MESSAGE);
   }
   onClear() {
     this.jobSearchService.clearArray();
-    // this.showMyContainer = true;
     this.loggerService.logInfo(this.loggerService.CLEAR_SUCCESS_MESSAGE);
   }
-  // openSavedJobs() {
-  //   this.jobStorageService.savedResults$
-  //     .pipe(
-  //       tap((bob) => {
-  //         this.savedJobs = bob;
-  //       }),
-  //       takeUntil(this.destroyed$)
-  //     )
-  //     .subscribe();
-  //   console.log(this.savedJobs);
-  //   this.savedJobsReturnData = true;
-  //   this.loggerService.logInfo(this.loggerService.SUCCESS_MESSAGE);
-  //   alert(JSON.stringify(this.savedJobs));
 
-  //   // const dialogRef = this.dialog.open(this.savedJobs)
-  // }
   displayDialog() {
     this.jobStorageService.savedResults$
       .pipe(
@@ -135,12 +116,7 @@ export class AppComponent implements OnDestroy {
 
     this.jobStorageService.getSavedJobs();
 
-    // this.loggerService.logInfo(this.loggerService.SUCCESS_MESSAGE);
-    // const dialogRef = this.dialog.open(SavedJobsComponent, {
-    //   panelClass: 'jobList',
-    //   width: '250px',
-    //   data: { usageType: 'popUp' },
-    // });
+
   }
 
   displayJobSearches() {

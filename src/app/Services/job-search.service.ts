@@ -85,16 +85,7 @@ export class JobSearchService implements OnDestroy {
     this.behaviorSearchParameters$.next(this.jobSearch);
 
   }
-  // jobComment(jobDetails: JobDetails, ){
-  //   const dialogRef = this.dialog.open(CommentComponent,{
-  //     width: 'fit-content',
-  //     height: 'fit-content',
-  //     data: {job: jobDetails}
-  //   });
-  // }
-  // closeCommentDialog(){
-  //   // this.dialogRef.close();
-  // }
+
 
   searchJob(newInput: JobSearch): Observable<JobDetails[]> {
     let urlBuilder = 'https://localhost:7059/api/search?';
@@ -144,7 +135,6 @@ export class JobSearchService implements OnDestroy {
           this.behaviorSearchResults$.next(this.jobArray);
           this.loggerService.logInfo(this.loggerService.SUCCESS_MESSAGE);
 
-          // store api return data . results in that array(privcate job results)
         }),
         takeUntil(this.destroyed$)
       );

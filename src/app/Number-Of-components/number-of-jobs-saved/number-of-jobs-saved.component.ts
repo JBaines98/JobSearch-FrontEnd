@@ -31,11 +31,5 @@ export class NumberOfJobsSavedComponent implements OnDestroy{
     ).subscribe();
   }
 
-  // ngOnInit(){
-  //   this.jobStorageService.savedResults$.pipe(
-  //     tap((bob) => {
-  //       this.jobCount = bob.length;
-  //     })
-  //   ).subscribe();
-  // }
+
 }

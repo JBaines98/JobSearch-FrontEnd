@@ -16,8 +16,7 @@ export class JobDetailsComponent implements OnInit {
 
   @Input() jobDetail: JobDetails = {};
 
-  // jobRatingDisplay: number | undefined;
-  // jobLikedOrDisliked: boolean | undefined;
+
 
   constructor(
     public dialogRef: MatDialogRef<JobDetailsComponent>,
@@ -26,16 +25,6 @@ export class JobDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.jobDetail=this.data;
-    // this.jobSearchService.ratingResults$.pipe(
-    //   tap((bob) => {
-    //     this.jobRatingDisplay = bob.jobRating;
-    //   })
-    // ).subscribe();
-    // this.jobSearchService.likedResults$.pipe(
-    //   tap((bob) => {
-    //     this.jobLikedOrDisliked = bob.jobLiked
-    //   })
-    // ).subscribe();
   }
 
   showJobDescription(bob: JobDetails){

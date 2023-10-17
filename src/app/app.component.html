@@ -38,18 +38,12 @@
     <app-number-of-searches-saved></app-number-of-searches-saved>
     <app-current-user></app-current-user>
   </div>
-  <!-- <div class="row">
 
-    <span class="bold">Job Finder</span>
-    <span class="fa-solid fa-magnifying-glass"></span>
- 
-  </div> -->
 
   <br />
 
   <span class="row">
     <span>
-      <!-- <mat-slide-toggle (toggleChange)="showMyContainer=!showMyContainer">Search a job</mat-slide-toggle> -->
       <mat-slide-toggle (toggleChange)="showMySavedJobs = !showMySavedJobs"
         >Load saved jobs</mat-slide-toggle
       >
@@ -88,12 +82,7 @@
     <app-saved-searches></app-saved-searches>
   </div>
 
-  <!-- <form class="example-form">
-      <mat-form-field class="example-full-width">
-        <h3>Job Search:</h3>
-        <input matInput placeholder="Accountant" name="title">
-      </mat-form-field>
-    </form> -->
+
   <div>
     <div class="container">
       <mat-expansion-panel
@@ -139,18 +128,11 @@
         <app-grid-title
           [titleType]="titleContent ? TitleTypes.SavedData : TitleTypes.SearchData"
         ></app-grid-title>
-        <!-- {{ true ? 'THIS': 'THAT'  }} -->
       </div>
 
-      <!-- <app-job-table [jobResults]="jobResults"></app-job-table> -->
       <app-ag-grid *ngIf="showAgGrid" [jobResults]="jobResults"></app-ag-grid>
 
-      <!-- <div class="column">
-          <div *ngFor="let jobDetail of jobResults">
-            <app-job-details [jobDetail]="jobDetail"></app-job-details>
-            <strong><hr></strong>
-          </div>
-        </div> -->
+
 
       <br />
 

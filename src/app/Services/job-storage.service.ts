@@ -20,8 +20,6 @@ export class JobStorageService implements OnDestroy {
 
   public destroyed$ = new Subject();
 
-  // public selectedUserName?: string = '';
-
   public selectedUserId?: number = 0;
 
 
@@ -45,36 +43,14 @@ export class JobStorageService implements OnDestroy {
       takeUntil(this.destroyed$)
     ).subscribe();
     
-    // const data = localStorage.getItem("savedArray");
-    //   if (data){
-    //     console.log("data: ", JSON.parse(data));
-    //     this.savedArray = JSON.parse(data);
-    //     this.behaviorSavedResults$.next(this.savedArray);
-    //   }
+
   }
   ngOnDestroy(): void {
     this.destroyed$.next(this.destroyed$);
     this.destroyed$.complete();
   }
 
-  // saveMyJobs(savedJobs: JobDetails[]){
-  //   let runningJobCount = 0;
-  //   for (const loopJob of savedJobs) {
-  //     if (this.savedArray.includes(loopJob)) {
-  //       this.loggerService.logInfo(this.loggerService.ALREADY_SAVED_MESSAGE, savedJobs);
-  //       console.log('This job has already been saved.')
-  //     }else{
-  //       this.savedArray.push(loopJob);
-  //       runningJobCount = runningJobCount++;
-  //       this.loggerService.logInfo(this.loggerService.SAVED_MESSAGE, savedJobs);
-  //       console.log(`savedJob ID: ${runningJobCount}`)
-  //     }
-  //   }
-  //   this.jobCount = this.savedArray.length;
-  //   alert(`Total number of saved jobs: ${this.jobCount}`);
-  //   this.behaviorSavedResults$.next(this.savedArray);
-  //   localStorage.setItem("savedArray", JSON.stringify(this.savedArray));
-  // }
+
 
   saveMyJobs(savedJobs: JobDetails[])
   {
@@ -105,7 +81,6 @@ export class JobStorageService implements OnDestroy {
     ).subscribe();
 
     alert("SAVE JOBS WORKS")
-    // return isTrue = true;
     
   }
 
@@ -160,9 +135,7 @@ export class JobStorageService implements OnDestroy {
     ).subscribe();
   }
 
-  // addMyJobs(selectedJobs: JobDetails[]){
-  //   return this.http.post<any>("https://localhost:7059/api")
-  // }
+
 
 
   removeJob(jobToRemove: JobDetails){    
@@ -214,7 +187,6 @@ export class JobStorageService implements OnDestroy {
       this.loggerService.logError(this.loggerService.ERROR_MESSAGE, 'Error: Missing search name.')
       jobSearchData.userDetails = {};
     }else{
-          // this.http.post<JobSearch>("https://localhost:7059/api/JobStorage/saveMySearch?userName=" + userName1,
     jobSearchData.userId = this.selectedUserId;
     this.http.post<JobSearch>("https://localhost:7059/api/JobStorage/saveMySearch", jobSearchData,
     {
@@ -261,15 +233,7 @@ export class JobStorageService implements OnDestroy {
     }
   }
 
-  // useSearchParamters(jobSearch: JobSearch){
-  //   this.http.get
-  // }
 
-
-
-
-//  removeSearch(JobSearch: JobSearch){
-//  }
 
 
 

@@ -14,7 +14,6 @@ import { Observable, Subject, map, takeUntil, tap, } from 'rxjs';
 })
 export class CommentComponent implements OnDestroy {
 
-  // public job1: {job: JobDetails} = {job: {}};
 
   public jobComment : string = '';
 
@@ -53,10 +52,6 @@ export class CommentComponent implements OnDestroy {
   }
 
 
-
-  // cancelDialog(){
-  //   this.jobSearchService.closeCommentDialog();
-  // }
 
 }
 

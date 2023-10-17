@@ -30,26 +30,6 @@ export class LoggerService {
     console.error(message, err);
   }
 
-  // logDataError(){
-  //   console.log("Error: No data returned.");
-  // }
-
-  // logJobRated(){
-  //   console.log("")
-  // }
-
-  // logJobLiked(){
-  //   console.log("Job successfully liked/disliked.");
-  // }
-
-  // logDeleteSuccess(){
-  //   console.log("Successfully deleted.");
-  // }
-
-  // logClearSuccess(){
-  //   console.log("Successfully cleared.")
-  // }
-
   logInfo(message:string, payload?: any){
     this.logMessage$.next(message);
     console.log(message, payload);

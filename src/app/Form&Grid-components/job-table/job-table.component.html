@@ -6,8 +6,7 @@
     <td>Location</td>
     <td>Link</td>
   </tr>
-  <!-- <tr *ngFor="let jobDetail of jobResults; let i = index" [class]="displayRow(i)" > -->
-  <!-- <tr *ngFor="let jobDetail of jobResults; let i = index" [class]="i % 2 === 0 ? 'evenRow': 'oddRow'" > -->
+
   <tr *ngFor="let jobDetail of jobResults; let i = index" 
     [class.evenRow]="i % 2 === 0" 
     [class.oddRow]="i % 2 !== 0"
