@@ -10,7 +10,7 @@ import { SavedSearchesComponent } from './Components/saved-searches/saved-search
 import { UserService } from './Services/user.service';
 import { UserInterfaceService } from './Services/user-interface.service';
 import { TitleTypes } from './Form&Grid-components/grid-title/grid-title.component';
-import { SearchParameterNameComponent } from './search-parameter-name/search-parameter-name.component';
+import { SearchParameterNameComponent } from './Components/search-parameter-name/search-parameter-name.component';
 
 @Component({
   selector: 'app-root',

@@ -88,7 +88,7 @@ export class JobSearchService implements OnDestroy {
 
 
   searchJob(newInput: JobSearch): Observable<JobDetails[]> {
-    let urlBuilder = 'https://localhost:7059/api/search?';
+    let urlBuilder = 'https://jobsearchapi-jbaines.azurewebsites.net/api/search?';
     if (newInput.jobTitle) {
       urlBuilder = urlBuilder + 'keywords=' + newInput.jobTitle;
     }

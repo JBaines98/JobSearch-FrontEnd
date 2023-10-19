@@ -64,7 +64,7 @@ export class JobStorageService implements OnDestroy {
       }
     })
     this.jobCount = this.jobCount + savedJobs.length;
-    this.http.post<any>("https://localhost:7059/api/JobStorage/saveMyJobs", savedJobs,
+    this.http.post<any>("https://jobsearchapi-jbaines.azurewebsites.net/api/JobStorage/saveMyJobs", savedJobs,
     {
       headers: {
         'Authorization':
@@ -85,7 +85,7 @@ export class JobStorageService implements OnDestroy {
   }
 
   getSavedSearches(){
-    this.http.get<any>("https://localhost:7059/api/JobStorage/getSavedSearch?userId=" + this.selectedUserId,
+    this.http.get<any>("https://jobsearchapi-jbaines.azurewebsites.net/api/JobStorage/getSavedSearch?userId=" + this.selectedUserId,
     {
       headers: {
         'Authorization':
@@ -111,7 +111,7 @@ export class JobStorageService implements OnDestroy {
 
  
   getSavedJobs(){
-    this.http.get<any>("https://localhost:7059/api/JobStorage/getSavedJobs?userId=" + this.selectedUserId,
+    this.http.get<any>("https://jobsearchapi-jbaines.azurewebsites.net/api/JobStorage/getSavedJobs?userId=" + this.selectedUserId,
     {
       headers: {
         'Authorization':
@@ -139,7 +139,7 @@ export class JobStorageService implements OnDestroy {
 
 
   removeJob(jobToRemove: JobDetails){    
-    this.http.delete<any>("https://localhost:7059/api/JobStorage/deleteSavedJob?JobDetailId=" + jobToRemove.jobDetailId, 
+    this.http.delete<any>("https://jobsearchapi-jbaines.azurewebsites.net/api/JobStorage/deleteSavedJob?JobDetailId=" + jobToRemove.jobDetailId, 
     {
       headers: {
         'Authorization':
@@ -159,7 +159,7 @@ export class JobStorageService implements OnDestroy {
   }
 
   removeSearch(searchToRemove: JobSearch){
-    this.http.delete<any>("https://localhost:7059/api/JobStorage/deleteSavedSearch?JobSearchId=" + searchToRemove.jobSearchId,
+    this.http.delete<any>("https://jobsearchapi-jbaines.azurewebsites.net/api/JobStorage/deleteSavedSearch?JobSearchId=" + searchToRemove.jobSearchId,
     {
       headers: {
         'Authorization':
@@ -188,7 +188,7 @@ export class JobStorageService implements OnDestroy {
       jobSearchData.userDetails = {};
     }else{
     jobSearchData.userId = this.selectedUserId;
-    this.http.post<JobSearch>("https://localhost:7059/api/JobStorage/saveMySearch", jobSearchData,
+    this.http.post<JobSearch>("https://jobsearchapi-jbaines.azurewebsites.net/api/JobStorage/saveMySearch", jobSearchData,
     {
       headers: {
         'Authorization':
@@ -215,7 +215,7 @@ export class JobStorageService implements OnDestroy {
     }else{
       jobDetails.userDetails.userId = this.selectedUserId;
       jobDetails.userId = this.selectedUserId;
-      this.http.post<JobDetails>("https://localhost:7059/api/JobStorage/saveMyComment",  jobDetails,
+      this.http.post<JobDetails>("https://jobsearchapi-jbaines.azurewebsites.net/api/JobStorage/saveMyComment",  jobDetails,
       {
         headers: {
           'Authorization':

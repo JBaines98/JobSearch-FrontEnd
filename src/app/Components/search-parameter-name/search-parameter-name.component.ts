@@ -1,9 +1,9 @@
 import { Component, Inject, OnDestroy } from '@angular/core';
-import { LoggerService } from '../Services/logger.service';
+import { LoggerService } from '../../Services/logger.service';
 import { JobSearch } from 'src/models/job-search.model';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { JobStorageService } from '../Services/job-storage.service';
-import { UserInterfaceService } from '../Services/user-interface.service';
+import { JobStorageService } from '../../Services/job-storage.service';
+import { UserInterfaceService } from '../../Services/user-interface.service';
 import { Observable, Subject, map, takeUntil, tap, } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
