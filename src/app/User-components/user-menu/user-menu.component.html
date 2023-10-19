@@ -1,9 +1,24 @@
+<mat-form-field>
+    <mat-label>Select a user:</mat-label>
+    <mat-select>
 
-    <button class="span" mat-raised-button color="primary" [matMenuTriggerFor]="menu">User: <i class="fa-regular fa-user"></i></button>
+        <mat-option (onSelectionChange)="clickedUser(1)">Jack98</mat-option>
+        <mat-option (onSelectionChange)="clickedUser(6)">Darren9</mat-option>
+        <mat-option (onSelectionChange)="clickedUser(9)">Amanda1</mat-option>
+        <mat-option (onSelectionChange)="clickedUser(10)">Laura01</mat-option>
+
+    </mat-select>
+</mat-form-field>
+
+
+
+
+
+    <!-- <button class="span" mat-raised-button color="primary" [matMenuTriggerFor]="menu">User: <i class="fa-regular fa-user"></i></button>
     <mat-menu #menu="matMenu">
     <button mat-raised-button color="primary" (click)="clickedUser(1)">Jack98</button>
     <button mat-raised-button color="primary" (click)="clickedUser(6)">Darren9</button>
     <button mat-raised-button color="primary" (click)="clickedUser(9)">Amanda1</button>
     <button mat-raised-button color="primary" (click)="clickedUser(10)">Laura01</button>
-    </mat-menu>
+    </mat-menu> -->
 

@@ -49,6 +49,7 @@ import { CommentCellComponent } from './cell-renderers/comment-cell/comment-cell
 import { CommentComponent } from './Components/comment/comment.component';
 import { SocialMediaIconsComponent } from './Components/social-media-icons/social-media-icons.component';
 import { SearchParameterNameComponent } from './Components/search-parameter-name/search-parameter-name.component';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -103,7 +104,8 @@ import { SearchParameterNameComponent } from './Components/search-parameter-name
     MatSnackBarModule,
     MatExpansionModule,
     MatButtonToggleModule,
-    MatMenuModule
+    MatMenuModule,
+    MatSelectModule
     
   ],
   providers: [
