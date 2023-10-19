@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { JobStorageService } from '../../Services/job-storage.service';
 import { JobDetails } from 'src/models/job-search.model';
 import { Observable, Subject, map, tap } from 'rxjs';
@@ -14,6 +14,9 @@ import {
   styleUrls: ['./saved-jobs.component.scss'],
 })
 export class SavedJobsComponent implements OnDestroy {
+
+@Output() closingEvent = new EventEmitter<boolean>();
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { usageType: string },
     public jobStorageService: JobStorageService
@@ -37,5 +40,10 @@ export class SavedJobsComponent implements OnDestroy {
       .subscribe();
 
     this.jobStorageService.getSavedJobs();
+  }
+
+
+  closing(value: boolean){
+    this.closingEvent.emit(value);
   }
 }

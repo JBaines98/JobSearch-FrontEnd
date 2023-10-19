@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
 import { JobStorageService } from '../../Services/job-storage.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { JobSearch } from 'src/models/job-search.model';
@@ -12,6 +12,7 @@ import { JobSearchService } from 'src/app/Services/job-search.service';
 })
 export class SavedSearchesComponent implements OnDestroy {
 
+ @Output() closingSearchesEvent = new EventEmitter<boolean>();
 
   constructor(public jobStorageService: JobStorageService, public jobSearchService: JobSearchService, public dialog: MatDialog){}
 
@@ -37,5 +38,9 @@ export class SavedSearchesComponent implements OnDestroy {
   }
   useSearchParamters(jobSearch: JobSearch){
     this.jobSearchService.jobSearchBinding(jobSearch);
+  }
+
+  closingSearches(value: boolean){
+    this.closingSearchesEvent.emit(value);
   }
 }

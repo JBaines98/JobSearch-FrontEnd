@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { LoggerService } from './Services/logger.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SavedSearchesComponent } from './Components/saved-searches/saved-searches.component';
+import { SavedJobsComponent } from './Components/saved-jobs/saved-jobs.component';
 import { UserService } from './Services/user.service';
 import { UserInterfaceService } from './Services/user-interface.service';
 import { TitleTypes } from './Form&Grid-components/grid-title/grid-title.component';
@@ -137,5 +138,27 @@ export class AppComponent implements OnDestroy {
 
   changeTheme(theme: string) {
     this.userInterfaceService.themeChange(theme);
+  }
+
+  loadSavedJobs(){
+    this.showMySavedJobs = true;
+  }
+  closeSavedJobs(value: boolean){
+    if (value === true){
+      this.showMySavedJobs = false;
+    }else{
+      this.showMySavedJobs = true;
+    }
+  }
+
+  loadSavedSearches(){
+    this.showMySavedSearches = true;
+  }
+  closeSavedSearches(value: boolean){
+    if (value === true){
+      this.showMySavedSearches = false;
+    }else{
+      this.showMySavedSearches = true;
+    }
   }
 }

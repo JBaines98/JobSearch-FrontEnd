@@ -44,13 +44,11 @@
 
   <span class="row">
     <span>
-      <mat-slide-toggle (toggleChange)="showMySavedJobs = !showMySavedJobs"
-        >Load saved jobs</mat-slide-toggle
-      >
-      <mat-slide-toggle
-        (toggleChange)="showMySavedSearches = !showMySavedSearches"
-        >Load saved searches</mat-slide-toggle
-      >
+
+      <button mat-raised-button color="primary" (click)="loadSavedJobs()">Load saved jobs</button>
+
+      <button mat-raised-button color="primary" (click)="loadSavedSearches()">Load saved searches</button>
+
     </span>
 
     <button mat-raised-button color="warn" (click)="onClear()">
@@ -75,11 +73,11 @@
   <br />
 
   <div *ngIf="showMySavedJobs">
-    <app-saved-jobs></app-saved-jobs>
+    <app-saved-jobs (closingEvent)="closeSavedJobs($event)"></app-saved-jobs>
   </div>
 
   <div *ngIf="showMySavedSearches">
-    <app-saved-searches></app-saved-searches>
+    <app-saved-searches (closingSearchesEvent)="closeSavedSearches($event)"></app-saved-searches>
   </div>
 
 

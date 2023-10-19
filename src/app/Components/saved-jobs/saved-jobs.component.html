@@ -1,7 +1,7 @@
     <mat-card class="color">
         <mat-card-content>
             <div [class.jobList]="data.usageType === 'popUp'">
-                <h3><strong>List of saved jobs:</strong></h3>
+                <h3><strong>List of saved jobs:</strong><button mat-raised-button color="primary" class="closeButton" (click)="closing(true)">Close</button></h3>
                 <div *ngFor="let JobDetail of savedJobs">
                     Job title: {{JobDetail.jobTitle}}
                     <i class="fa-solid fa-xmark" (click)="jobStorageService.removeJob(JobDetail)"></i>
