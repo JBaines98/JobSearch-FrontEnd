@@ -1,7 +1,12 @@
 <mat-card class="color">
     <mat-card-content>
         <div>
-            <h3><strong>List of saved searches:</strong><button mat-raised-button color="primary" class="closeButton" (click)="closingSearches(true)">Close</button></h3>
+            <h3>
+                <strong>List of saved searches:</strong>
+                <span class="marginRight">
+                    <i class="fa-solid fa-xmark" mat-dialog-close></i>
+                </span>
+            </h3>
             <div *ngFor="let jobSearch of savedSearches">
                 <span>Job Title: {{jobSearch.jobTitle}}</span>
                 <span>Job Search Name: {{jobSearch.searchName}}</span>

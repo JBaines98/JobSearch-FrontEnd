@@ -105,7 +105,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatExpansionModule,
     MatButtonToggleModule,
     MatMenuModule,
-    MatSelectModule
+    MatSelectModule,
     
   ],
   providers: [

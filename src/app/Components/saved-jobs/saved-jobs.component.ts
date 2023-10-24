@@ -2,11 +2,13 @@ import { Component, EventEmitter, Inject, Input, OnDestroy, OnInit, Output } fro
 import { JobStorageService } from '../../Services/job-storage.service';
 import { JobDetails } from 'src/models/job-search.model';
 import { Observable, Subject, map, tap } from 'rxjs';
+import {MatTooltipModule} from '@angular/material/tooltip';
 import {
   MatDialog,
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
+import { JobDetailsComponent } from '../job-details/job-details.component';
 
 @Component({
   selector: 'app-saved-jobs',
@@ -19,7 +21,8 @@ export class SavedJobsComponent implements OnDestroy {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { usageType: string },
-    public jobStorageService: JobStorageService
+    public jobStorageService: JobStorageService,
+    public dialog: MatDialog,
   ) {}
 
   savedJobs: JobDetails[] = [];
@@ -42,6 +45,12 @@ export class SavedJobsComponent implements OnDestroy {
     this.jobStorageService.getSavedJobs();
   }
 
+  openDetails(job: JobDetails) {
+    const dialogRef = this.dialog.open(JobDetailsComponent, {
+      data: job,
+      width: 'fit-content'
+    });
+  }
 
   closing(value: boolean){
     this.closingEvent.emit(value);

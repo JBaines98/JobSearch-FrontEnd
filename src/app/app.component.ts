@@ -114,6 +114,8 @@ export class AppComponent implements OnDestroy {
       )
       .subscribe();
     this.titleContent = true;
+    this.formPanelOpenState = false;
+    this.loggerService.logInfo(this.loggerService.SAVED_DATA_LOADED);
 
     this.jobStorageService.getSavedJobs();
 
@@ -141,7 +143,13 @@ export class AppComponent implements OnDestroy {
   }
 
   loadSavedJobs(){
-    this.showMySavedJobs = true;
+    const dialogRef = this.dialog.open(SavedJobsComponent, {
+      data: this.jobStorageService.savedResults$,
+      width: '300px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('success');
+    });
   }
   closeSavedJobs(value: boolean){
     if (value === true){
@@ -152,7 +160,10 @@ export class AppComponent implements OnDestroy {
   }
 
   loadSavedSearches(){
-    this.showMySavedSearches = true;
+    const dialogRef = this.dialog.open(SavedSearchesComponent, {
+      data: this.jobStorageService.savedSearchResults$,
+      width: '300px',
+    })
   }
   closeSavedSearches(value: boolean){
     if (value === true){

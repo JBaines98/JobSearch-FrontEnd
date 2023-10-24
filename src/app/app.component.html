@@ -72,13 +72,13 @@
 
   <br />
 
-  <div *ngIf="showMySavedJobs">
+  <!-- <div *ngIf="showMySavedJobs">
     <app-saved-jobs (closingEvent)="closeSavedJobs($event)"></app-saved-jobs>
-  </div>
+  </div> -->
 
-  <div *ngIf="showMySavedSearches">
+  <!-- <div *ngIf="showMySavedSearches">
     <app-saved-searches (closingSearchesEvent)="closeSavedSearches($event)"></app-saved-searches>
-  </div>
+  </div> -->
 
 
   <div>
@@ -99,13 +99,12 @@
           >
             Job Search form
           </mat-panel-title>
-          <mat-panel-description
+          <!-- <mat-panel-description
             [class.matExspansionLight]="themeName === 'light'"
             [class.matExspansionDark]="themeName === 'dark'"
             [class.matExpansionColorful]="themeName === 'colorful'"
-          >
-            Currently I am {{ formPanelOpenState ? "open" : "closed" }}
-          </mat-panel-description>
+          > -->
+          <!-- </mat-panel-description> -->
         </mat-expansion-panel-header>
         <p>
           <app-reactive-form

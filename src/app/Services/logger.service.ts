@@ -22,6 +22,7 @@ export class LoggerService {
   public readonly SUBMITTED_MESSAGE = "Successfully submitted.";
   public readonly USER_CHANGED = "User successfully changed.";
   public readonly THEME_UPDATED = "Theme successfully changed.";
+  public readonly SAVED_DATA_LOADED = "Saved data loaded.";
 
   public logMessage$ = new Subject<string>();
 
