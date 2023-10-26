@@ -1,0 +1,21 @@
+<mat-card class="color">
+    <mat-card-content>
+        <div>
+            <span>
+                <h3>Confirm Action</h3>
+                <i class="fa-solid fa-xmark" mat-dialog-close></i>
+            </span>
+        </div> 
+        <div>
+            {{data.message}}
+        </div>
+        <div>
+            {{data.job.jobTitle}}
+        </div>
+        <br>
+        <span>
+            <button mat-raised-button color="primary" mat-dialog-close (click)="confirmationNo()">No</button>
+            <button mat-raised-button color="primary" class="margin" (click)="confirmationYes()">Yes</button>
+        </span>     
+    </mat-card-content>
+</mat-card>

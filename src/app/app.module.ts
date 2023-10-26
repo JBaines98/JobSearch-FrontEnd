@@ -50,6 +50,8 @@ import { CommentComponent } from './Components/comment/comment.component';
 import { SocialMediaIconsComponent } from './Components/social-media-icons/social-media-icons.component';
 import { SearchParameterNameComponent } from './Components/search-parameter-name/search-parameter-name.component';
 import { MatSelectModule } from '@angular/material/select';
+import { ConfirmationComponent } from './Components/confirmation/confirmation.component';
+import { JobDescriptionComponent } from './Components/job-description/job-description.component';
 
 
 @NgModule({
@@ -79,7 +81,9 @@ import { MatSelectModule } from '@angular/material/select';
     CommentCellComponent,
     CommentComponent,
     SocialMediaIconsComponent,
-    SearchParameterNameComponent
+    SearchParameterNameComponent,
+    ConfirmationComponent,
+    JobDescriptionComponent
   ],
   imports: [
     FormsModule,

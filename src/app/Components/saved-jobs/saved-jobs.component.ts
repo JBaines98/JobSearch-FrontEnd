@@ -9,6 +9,7 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { JobDetailsComponent } from '../job-details/job-details.component';
+import { ConfirmationComponent } from '../confirmation/confirmation.component';
 
 @Component({
   selector: 'app-saved-jobs',
@@ -27,6 +28,8 @@ export class SavedJobsComponent implements OnDestroy {
 
   savedJobs: JobDetails[] = [];
   public destroyed$ = new Subject();
+  public doNotShow: boolean = false;
+  public confirmationDialogResult: boolean = false;
 
   ngOnDestroy(): void {
     this.destroyed$.next(this.destroyed$);
@@ -54,5 +57,22 @@ export class SavedJobsComponent implements OnDestroy {
 
   closing(value: boolean){
     this.closingEvent.emit(value);
+  }
+
+  confirmationDialog(job: JobDetails){
+      const dialogRef = this.dialog.open(ConfirmationComponent, {
+      width: 'fit-content',
+      height: 'fit-content',
+      data: {job: job, message: 'Are you sure you want to delete?'},
+    })
+    dialogRef.afterClosed().subscribe(result => {
+      this.confirmationDialogResult = result;
+      console.log(this.confirmationDialogResult);
+      if (this.confirmationDialogResult === true){
+        this.jobStorageService.removeJob(job);
+      }else{
+        console.log("Job NOT deleted.")
+      }
+    })  
   }
 }

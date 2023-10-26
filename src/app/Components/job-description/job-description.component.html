@@ -1,0 +1,21 @@
+<mat-card [class.matCard]="showDescription===false" [class.showDescription]="showDescription===true">
+    <mat-card-content>
+        <span>
+            <h3>
+                <strong>Job Title:</strong> {{data.jobTitle}}
+                <span class="margin">
+                    <i class="fa-solid fa-xmark" mat-dialog-close></i>
+                </span>
+            </h3>    
+        </span>
+        <div>
+            <span>
+                <strong>Job description:</strong>
+                <!-- <button mat-raised-button color="primary" class="margin" (click)="showAllDescription()">Show all description</button> -->
+            </span>
+        </div>
+        <div>
+            {{data.jobDescription}}
+        </div>
+    </mat-card-content>
+</mat-card>

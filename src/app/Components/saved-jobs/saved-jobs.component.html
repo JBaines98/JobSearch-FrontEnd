@@ -8,8 +8,10 @@
                     </span>
                 </h3>
                 <div *ngFor="let JobDetail of savedJobs">
-                    Job title: {{JobDetail.jobTitle}}
-                    <i class="fa-solid fa-xmark" (click)="jobStorageService.removeJob(JobDetail)" matTooltip="Delete job from saved jobs"></i>
+                    <strong>Job title:</strong> {{JobDetail.jobTitle}}
+                    <span class="marginRight">
+                        <i class="fa-solid fa-xmark" (click)="confirmationDialog(JobDetail)" matTooltip="Delete job from saved jobs"></i>
+                    </span>
                     <span class="magnifying">
                         <i class="fa-solid fa-magnifying-glass" (click)="openDetails(JobDetail)" matTooltip="Job Details"></i>
                     </span>
@@ -18,3 +20,5 @@
             </div>
         </mat-card-content>
     </mat-card>
+
+  

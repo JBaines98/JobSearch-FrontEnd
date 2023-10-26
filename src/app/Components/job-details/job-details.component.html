@@ -31,10 +31,6 @@
         <div>
             <strong>Location:</strong> {{jobDetail.locationName}}
         </div>
-        
-        
-
-
         <div>
             <strong>Minimum Salary (£):</strong> {{jobDetail.minimumSalary}}
         </div>
@@ -51,7 +47,7 @@
             <strong>Date:</strong> {{jobDetail.date}}
         </div>
         <div>
-            <strong>Job Description:</strong> <button (click)="showJobDescription(jobDetail)">Show Description</button>
+            <strong>Job Description:</strong> <button mat-raised-button color="primary" (click)="showJobDescription(jobDetail)">Show Description</button>
         </div>
         <div>
             <strong>Applications:</strong> {{jobDetail.applications}}

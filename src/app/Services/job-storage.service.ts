@@ -4,6 +4,8 @@ import { JobDetails, JobSearch, UserDetails } from 'src/models/job-search.model'
 import { LoggerService } from './logger.service';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from './user.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationComponent } from '../Components/confirmation/confirmation.component';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +34,7 @@ export class JobStorageService implements OnDestroy {
 
   public savedSearchResults$ = this.behaviorSearchResults$.asObservable();
 
-  constructor(public loggerService: LoggerService, public http: HttpClient, public userService: UserService) {
+  constructor(public loggerService: LoggerService, public http: HttpClient, public userService: UserService, public dialog: MatDialog) {
 
     this.userService.savedUser$.pipe(
       tap((user: any) => {
@@ -138,7 +140,7 @@ export class JobStorageService implements OnDestroy {
 
 
 
-  removeJob(jobToRemove: JobDetails){    
+  removeJob(jobToRemove: JobDetails){ 
     this.http.delete<any>("https://jobsearchapi-jbaines.azurewebsites.net/api/JobStorage/deleteSavedJob?JobDetailId=" + jobToRemove.jobDetailId, 
     {
       headers: {
