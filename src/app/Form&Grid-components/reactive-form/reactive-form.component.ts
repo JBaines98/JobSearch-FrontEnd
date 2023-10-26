@@ -9,6 +9,8 @@ import { UserService } from '../../Services/user.service';
 import { LoggerService } from '../../Services/logger.service';
 import { UserInterfaceService } from '../../Services/user-interface.service';
 import { JobSearchService } from 'src/app/Services/job-search.service';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @Component({
   selector: 'app-reactive-form',

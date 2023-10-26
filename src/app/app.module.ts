@@ -52,6 +52,8 @@ import { SearchParameterNameComponent } from './Components/search-parameter-name
 import { MatSelectModule } from '@angular/material/select';
 import { ConfirmationComponent } from './Components/confirmation/confirmation.component';
 import { JobDescriptionComponent } from './Components/job-description/job-description.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 @NgModule({
@@ -110,6 +112,8 @@ import { JobDescriptionComponent } from './Components/job-description/job-descri
     MatButtonToggleModule,
     MatMenuModule,
     MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule
     
   ],
   providers: [

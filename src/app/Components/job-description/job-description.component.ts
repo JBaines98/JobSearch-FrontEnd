@@ -16,8 +16,8 @@ export class JobDescriptionComponent {
     @Inject(MAT_DIALOG_DATA) public data: JobDetails,){}
 
 
-    showAllDescription(){
-      this.showDescription = true;
-    }
+    // showAllDescription(){
+    //   this.showDescription = true;
+    // }
 
 }
