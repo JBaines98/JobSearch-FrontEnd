@@ -23,6 +23,8 @@ export class ReactiveFormComponent implements OnInit, OnDestroy{
   public destroyed$ = new Subject();
   public themeName: string = '';
 
+
+
   constructor(
     public userService: UserService,
     public jobSearchService: JobSearchService, 

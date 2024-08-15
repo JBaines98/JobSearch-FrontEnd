@@ -100,7 +100,6 @@ export class JobStorageService implements OnDestroy {
       }),
       tap((savedSearchesDB: JobSearch[]) => {
         console.log(JSON.stringify(savedSearchesDB));
-        console.log("TEST SUCCESS!!!!!!!");
         this.savedSearches = savedSearchesDB;
         this.behaviorSearchResults$.next(this.savedSearches);
         this.loggerService.logInfo(this.loggerService.SUCCESS_MESSAGE);
@@ -126,7 +125,6 @@ export class JobStorageService implements OnDestroy {
       }),
       tap((savedJobsDB: JobDetails[]) => {
         console.log(JSON.stringify(savedJobsDB));
-        console.log("TEST SUCCESS!!!!!!");
         this.savedArray = savedJobsDB;
         this.behaviorSavedResults$.next(this.savedArray);
         this.loggerService.logInfo(this.loggerService.SUCCESS_MESSAGE);
@@ -204,9 +202,7 @@ export class JobStorageService implements OnDestroy {
       tap(),
       takeUntil(this.destroyed$)
     ).subscribe();
-
     }
-
   } 
 
 

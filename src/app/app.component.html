@@ -36,12 +36,12 @@
     <app-number-of-jobs></app-number-of-jobs>
     <app-number-of-jobs-saved></app-number-of-jobs-saved>
     <app-number-of-searches-saved></app-number-of-searches-saved>
-    <app-current-user></app-current-user>
+  <br />
+   <app-current-user></app-current-user>
   </div>
 
 
-  <br />
-
+ 
   <span class="row">
     <span>
 
@@ -116,10 +116,10 @@
       <br />
 
       <div>
-        <button mat-raised-button color="primary" (click)="onSubmit()">
+        <button mat-raised-button color="primary" (click)="onSubmit()" class="margin">
           Submit
         </button>
-        <button mat-raised-button color="primary" (click)="onSaveSearch(jobSearchData)">
+        <button mat-raised-button color="primary" (click)="onSaveSearch(jobSearchData)" class="margin">
           Save Search
         </button>
         <app-grid-title
@@ -127,7 +127,7 @@
         ></app-grid-title>
       </div>
 
-      <app-ag-grid *ngIf="showAgGrid" [jobResults]="jobResults"></app-ag-grid>
+      <app-ag-grid *ngIf="showAgGrid" [jobResults]="jobResults" [showAGTitle]="showAGTitle"></app-ag-grid>
 
 
 

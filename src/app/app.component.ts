@@ -27,6 +27,7 @@ export class AppComponent implements OnDestroy {
   showMySavedSearches: boolean = false;
   savedJobs: JobDetails[] = [];
   showAgGrid: boolean = false;
+  showAGTitle: boolean = false;
   formPanelOpenState: boolean = true;
 
   titleContent: boolean = false;

@@ -1,32 +1,33 @@
 <span *ngIf="!!jobResults">
+    <span *ngIf="!!showAGTitle">
+        <br>
 
-    <br>
+        <span *ngIf="reedReturnData" class="title-centre">
+            <h1><strong>Jobs from Reed:</strong></h1>
+        </span>
 
-    <span *ngIf="reedReturnData" class="title-centre">
-        <h1><strong>Jobs from Reed:</strong></h1>
-    </span>
+        <span *ngIf="savedJobsReturnData" class="title-centre">
+            <h1><strong>Saved Jobs:</strong></h1>
+        </span>
 
-    <span *ngIf="savedJobsReturnData" class="title-centre">
-        <h1><strong>Saved Jobs:</strong></h1>
-    </span>
-
-    <ag-grid-angular 
-        (selectionChanged)="isSelected()"
-        (gridReady)="gridReady($event)"
-        style="width: 100%; height: 500px;" 
-        class="ag-theme-material"
-        [rowData]="jobResults" 
-        [columnDefs]="columnDefs"
-        [gridOptions]="gridOptions"
-        [sideBar]="true"
+        <ag-grid-angular 
+            (selectionChanged)="isSelected()"
+            (gridReady)="gridReady($event)"
+            style="width: 100%; height: 500px;" 
+            class="ag-theme-material"
+            [rowData]="jobResults" 
+            [columnDefs]="columnDefs"
+            [gridOptions]="gridOptions"
+            [sideBar]="true"
         >
         
-    </ag-grid-angular>
+        </ag-grid-angular>
 
-    <br>
+        <br>
 
-    <span>
-        <button mat-raised-button color="primary" (click)="onSelectedDelete()">Delete selected jobs</button>
-        <button mat-raised-button color="primary" (click)="onSelectedSave()">Save selected jobs</button>        
+        <span>
+            <button mat-raised-button color="primary" (click)="onSelectedDelete()">Delete selected jobs</button>
+            <button mat-raised-button color="primary" (click)="onSelectedSave()">Save selected jobs</button>        
+        </span>
     </span>
 </span>
